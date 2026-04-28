@@ -1,19 +1,8 @@
 <?php
-// Reuse the PHPRunner connection when include/dbcommon.php has been loaded.
-// This keeps custom endpoints on the same database config as the main app.
-if (class_exists('DB')) {
-    $runnerConnection = DB::DefaultConnection();
-    if ($runnerConnection && $runnerConnection->conn instanceof mysqli) {
-        $conn = $runnerConnection->conn;
-        $conn->set_charset('utf8mb4');
-        return;
-    }
-}
-
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_NAME', 'sumsel_ticketing');
+define('DB_HOST', '45.64.1.195');
+define('DB_USER', 'admin_ticketing');
+define('DB_PASS', '#Sentosa26');
+define('DB_NAME', 'ticketing_sumsel_prod');
 
 $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
