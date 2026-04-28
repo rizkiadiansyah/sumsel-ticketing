@@ -1,4 +1,15 @@
 <?php
+// Reuse the PHPRunner connection when include/dbcommon.php has been loaded.
+// This keeps custom endpoints on the same database config as the main app.
+if (class_exists('DB')) {
+    $runnerConnection = DB::DefaultConnection();
+    if ($runnerConnection && $runnerConnection->conn instanceof mysqli) {
+        $conn = $runnerConnection->conn;
+        $conn->set_charset('utf8mb4');
+        return;
+    }
+}
+
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');

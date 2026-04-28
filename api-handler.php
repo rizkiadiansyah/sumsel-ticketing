@@ -508,12 +508,22 @@ if ($action === 'search_penumpang') {
             LIMIT 10";
 
     $rs   = $conn->query($sql);
+    if (!$rs) {
+        http_response_code(500);
+        echo json_encode([
+            'results' => [],
+            'success' => false,
+            'message' => 'Gagal mencari data penumpang'
+        ]);
+        exit;
+    }
+
     $rows = [];
     while ($row = $rs->fetch_assoc()) {
         $rows[] = $row;
     }
 
-    echo json_encode(['results' => $rows]);
+    echo json_encode(['success' => true, 'results' => $rows]);
     exit;
 }
 
