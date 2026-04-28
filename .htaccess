@@ -1,0 +1,11 @@
+RewriteEngine On
+RewriteBase /
+
+RewriteRule ^$ landing.php [R=302,L]
+RewriteRule ^index\.(html|php)$ landing.php [R=302,L]
+
+<FilesMatch "\.(html|php)$">
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "-1"
+</FilesMatch>
