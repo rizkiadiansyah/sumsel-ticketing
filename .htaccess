@@ -1,9 +1,16 @@
+# Force HTTPS + non-www
 RewriteEngine On
-RewriteBase /
 
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^ https://ticketingsumsel.wbs.co.id%{REQUEST_URI} [R=301,L]
+
+# Redirect ke landing.php
+RewriteBase /
 RewriteRule ^$ landing.php [R=302,L]
 RewriteRule ^index\.(html|php)$ landing.php [R=302,L]
 
+# No Cache
 <FilesMatch "\.(html|php)$">
     Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
     Header set Pragma "no-cache"
