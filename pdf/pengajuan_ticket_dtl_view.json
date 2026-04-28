@@ -1,0 +1,333 @@
+
+pdfDocument = {
+{BEGIN backgroundImage}
+	background: {
+		image: {$backgroundImage},
+		{BEGIN bgWidth}
+		imgWidth: {$bgWidth},
+		imgHeight: {$bgHeight},
+		{END bgWidth}
+	},
+{END backgroundImage}
+	styles: {
+				bodycell: {
+			fontSize:12,
+		},
+		headcell: {
+			fontSize:12,
+			bold: true
+		},
+
+	
+	},
+	defaultStyle: {
+		fontSize: 14,
+	},
+	"content": [
+								
+{
+	table: {
+	
+				
+		location: 'top',
+		
+		
+		widths: [
+								"*", 
+					 ],	
+		
+	
+		body: [
+				
+				[
+																{
+	cellId: 'c1',
+	col:0,
+	row:0,
+			
+		
+	//	static colspan/rowspan
+		
+			
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jspagetitlelabel pengajuan_ticket_dtl view}","hidden":"{$item_hide_view_header}","fontSize":30},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+											],
+		
+		]
+	}
+}
+,
+		
+								
+{
+	table: {
+	
+				
+		location: 'above-grid',
+		
+		
+		widths: [
+								"*", 
+											"*", 
+					 ],	
+		
+	
+		body: [
+				
+				[
+																{
+	cellId: 'c1',
+	col:0,
+	row:0,
+			
+		
+	//	static colspan/rowspan
+					colSpan: 2,
+		
+			
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+																		{ 
+				cellId: 'c1',
+				row:  0,
+				col:  1,
+				text: '',
+				compensateColspan: true
+			},
+							],
+		
+		]
+	}
+}
+,
+		
+								
+{
+	table: {
+	
+				tableForm: true,
+				
+		location: 'grid',
+		
+		
+		widths: [
+									{BEGIN col_grid_0}
+						"*", 
+							{END col_grid_0}
+					 ],	
+		
+			heights: [
+								{BEGIN row_grid_0}
+						
+			"%",
+						{END row_grid_0}
+			 
+				],
+	
+		body: [
+				
+				{BEGIN row_grid_0}
+				[
+																{BEGIN cellblock_grid_c3}
+{
+	cellId: 'c3',
+	col:0,
+	row:0,
+			
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"stack": [
+		
+				
+			{"hidden":"{$item_hide_integrated_edit_field}","stack":[{"text":"{$jslabel pengajuan_ticket_dtl id_detail }","bold":true},{"text":{$id_detail_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field1}","stack":[{"text":"{$jslabel pengajuan_ticket_dtl req_id }","bold":true},{"text":{$req_id_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field2}","stack":[{"text":"{$jslabel pengajuan_ticket_dtl nik_penumpang }","bold":true},{"text":{$nik_penumpang_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field3}","stack":[{"text":"{$jslabel pengajuan_ticket_dtl nik_ktp }","bold":true},{"text":{$nik_ktp_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field4}","stack":[{"text":"{$jslabel pengajuan_ticket_dtl nama_penumpang }","bold":true},{"text":{$nama_penumpang_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field5}","stack":[{"text":"{$jslabel pengajuan_ticket_dtl posisi_penumpang }","bold":true},{"text":{$posisi_penumpang_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field6}","stack":[{"text":"{$jslabel pengajuan_ticket_dtl sbu_penumpang }","bold":true},{"text":{$sbu_penumpang_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field7}","stack":[{"text":"{$jslabel pengajuan_ticket_dtl no_telp_penumpang }","bold":true},{"text":{$no_telp_penumpang_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field8}","stack":[{"text":"{$jslabel pengajuan_ticket_dtl gender }","bold":true},{"text":{$gender_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field9}","stack":[{"text":"{$jslabel pengajuan_ticket_dtl tipe_perjalanan }","bold":true},{"text":{$tipe_perjalanan_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field10}","stack":[{"text":"{$jslabel pengajuan_ticket_dtl bandara_asal }","bold":true},{"text":{$bandara_asal_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field11}","stack":[{"text":"{$jslabel pengajuan_ticket_dtl bandara_tujuan }","bold":true},{"text":{$bandara_tujuan_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field12}","stack":[{"text":"{$jslabel pengajuan_ticket_dtl maskapai }","bold":true},{"text":{$maskapai_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field13}","stack":[{"text":"{$jslabel pengajuan_ticket_dtl tanggal_penerbangan }","bold":true},{"text":{$tanggal_penerbangan_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field14}","stack":[{"text":"{$jslabel pengajuan_ticket_dtl waktu_berangkat }","bold":true},{"text":{$waktu_berangkat_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field15}","stack":[{"text":"{$jslabel pengajuan_ticket_dtl waktu_tiba }","bold":true},{"text":{$waktu_tiba_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field16}","stack":[{"text":"{$jslabel pengajuan_ticket_dtl catatan_khusus }","bold":true},{"text":{$catatan_khusus_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field17}","stack":[{"text":"{$jslabel pengajuan_ticket_dtl bandara_asal_p }","bold":true},{"text":{$bandara_asal_p_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field18}","stack":[{"text":"{$jslabel pengajuan_ticket_dtl bandara_tujuan_p }","bold":true},{"text":{$bandara_tujuan_p_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field19}","stack":[{"text":"{$jslabel pengajuan_ticket_dtl maskapai_p }","bold":true},{"text":{$maskapai_p_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field20}","stack":[{"text":"{$jslabel pengajuan_ticket_dtl tanggal_penerbangan_p }","bold":true},{"text":{$tanggal_penerbangan_p_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field21}","stack":[{"text":"{$jslabel pengajuan_ticket_dtl waktu_berangkat_p }","bold":true},{"text":{$waktu_berangkat_p_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field22}","stack":[{"text":"{$jslabel pengajuan_ticket_dtl waktu_tiba_p }","bold":true},{"text":{$waktu_tiba_p_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field23}","stack":[{"text":"{$jslabel pengajuan_ticket_dtl catatan_khusus_p }","bold":true},{"text":{$catatan_khusus_p_pdfvalue}}],"margin":[0,0,0,15]},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_c3}
+											],
+				{END row_grid_0}
+		
+		]
+	}
+}
+,
+		
+								
+{
+	table: {
+	
+				
+		location: 'below-grid',
+		
+		
+		widths: [
+								"*", 
+											"*", 
+					 ],	
+		
+	
+		body: [
+				
+				[
+																{
+	cellId: 'c1',
+	col:0,
+	row:0,
+			
+		
+	//	static colspan/rowspan
+		
+			
+			
+	
+			"text": [
+		
+				
+			{"text":"","hidden":"{$item_hide_view_back_list}"},
+				
+				
+			{"text":"","hidden":"{$item_hide_view_close}"},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+																							{
+	cellId: 'c2',
+	col:0,
+	row:0,
+			
+		
+	//	static colspan/rowspan
+		
+			
+			
+	
+			"text": [
+		
+				
+			{"text":""},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'right',
+     
+      
+      },
+
+											],
+		
+		]
+	}
+}
+,
+			]
+};
+
+pdfFonts = {$pdfFonts};
+  

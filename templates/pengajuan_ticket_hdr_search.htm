@@ -1,0 +1,525 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+				<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{$pagetitle}</title>
+	<link rel="icon" type="image/png" href="images/logo_sbu/SUMSEL%20ARMY.png">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<base href="{$projectPath}">
+		<link REL="stylesheet" href="styles/default.css?{$wizardBuildKey}" type="text/css">
+	{BEGIN rtlCSS}
+	<link REL="stylesheet" href="styles/defaultRTL.css?{$wizardBuildKey}" type="text/css">
+	{END rtlCSS}
+	{BEGIN styleCSSFiles}
+	<link REL="stylesheet" href="{$stylepath}" type="text/css">
+	{END styleCSSFiles}
+			
+	</head>
+
+	<body class="{$stylename} function-search" >
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		{$locking}
+		<div class="r-small-page" 
+			data-body-align="center"
+			data-body-width="standard"
+		>
+							{BEGIN top_block}
+<div class="r-form" data-location="top" id="form_top_{$pageid}" data-makeup="small" {$form_top} data-pageid="{$pageid}"
+		data-v-width="6"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="top_c1" data-pageid="{$pageid}"	{$cell_top_c1}
+	class=" r-ori-vert			col-md-12
+	">
+	 
+		<h2 data-itemtype="search_header" data-itemid="search_header" {$item_search_header} data-pageid="{$pageid}" >{$pagetitlelabel pengajuan_ticket_hdr search}</h2>
+	</div>					</div>
+	</div>		
+{END top_block}
+									{BEGIN above-grid_block}
+<div class="r-form" data-location="above-grid" id="form_above-grid_{$pageid}" data-makeup="small" {$form_above-grid} data-pageid="{$pageid}"
+		data-v-width="6"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c1" data-pageid="{$pageid}"	{$cell_above-grid_c1}
+	class=" r-ori-vert			col-md-12
+	">
+	</div>					</div>
+	</div>		
+{END above-grid_block}
+									{BEGIN grid_block}
+
+
+
+
+ 
+	 
+												<table 
+	data-body-align="center"
+	data-location="grid" id="form_grid_{$pageid}" data-makeup="small" {$form_grid} data-pageid="{$pageid}" 
+	class="r-edit-form" cellpadding="0" cellspacing="0" 
+	{$grid_hiddenattr} 
+		data-form-width="1"
+		
+		data-v-width="6"
+	>
+	<tbody>
+										<tr {$row_grid_0} >
+										
+
+{BEGIN cellblock_grid_c3}
+<td
+	{$cell_grid_c3}
+	class=" r-ori-vert"
+	
+				data-fullwidth
+		
+			data-cellId="grid_c3" data-pageid="{$pageid}"
+		data-v-cell="6"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN req_id_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_req_id}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="req_id{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field" {$item_integrated_search_field} data-pageid="{$pageid}" data-field="req_id" data-fieldname="req_id" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_req_id}">
+		{$label pengajuan_ticket_hdr req_id }	</label>
+	<div class="r-search-option">
+		{$searchtype_req_id}
+	</div>
+	<div class="r-search-field">
+		{$req_id_editcontrol}	</div>
+	<div class="r-search-field">
+		{$req_id_editcontrol1}
+	</div>
+	
+</div>
+
+{END req_id_fieldblock}
+											
+{BEGIN nik_pemesan_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_nik_pemesan}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="nik_pemesan{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field1" {$item_integrated_search_field1} data-pageid="{$pageid}" data-field="nik_pemesan" data-fieldname="nik_pemesan" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_nik_pemesan}">
+		{$label pengajuan_ticket_hdr nik_pemesan }	</label>
+	<div class="r-search-option">
+		{$searchtype_nik_pemesan}
+	</div>
+	<div class="r-search-field">
+		{$nik_pemesan_editcontrol}	</div>
+	<div class="r-search-field">
+		{$nik_pemesan_editcontrol1}
+	</div>
+	
+</div>
+
+{END nik_pemesan_fieldblock}
+											
+{BEGIN nama_pemesan_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_nama_pemesan}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="nama_pemesan{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field2" {$item_integrated_search_field2} data-pageid="{$pageid}" data-field="nama_pemesan" data-fieldname="nama_pemesan" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_nama_pemesan}">
+		{$label pengajuan_ticket_hdr nama_pemesan }	</label>
+	<div class="r-search-option">
+		{$searchtype_nama_pemesan}
+	</div>
+	<div class="r-search-field">
+		{$nama_pemesan_editcontrol}	</div>
+	<div class="r-search-field">
+		{$nama_pemesan_editcontrol1}
+	</div>
+	
+</div>
+
+{END nama_pemesan_fieldblock}
+											
+{BEGIN posisi_pemesan_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_posisi_pemesan}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="posisi_pemesan{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field3" {$item_integrated_search_field3} data-pageid="{$pageid}" data-field="posisi_pemesan" data-fieldname="posisi_pemesan" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_posisi_pemesan}">
+		{$label pengajuan_ticket_hdr posisi_pemesan }	</label>
+	<div class="r-search-option">
+		{$searchtype_posisi_pemesan}
+	</div>
+	<div class="r-search-field">
+		{$posisi_pemesan_editcontrol}	</div>
+	<div class="r-search-field">
+		{$posisi_pemesan_editcontrol1}
+	</div>
+	
+</div>
+
+{END posisi_pemesan_fieldblock}
+											
+{BEGIN sbu_pemesan_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_sbu_pemesan}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="sbu_pemesan{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field4" {$item_integrated_search_field4} data-pageid="{$pageid}" data-field="sbu_pemesan" data-fieldname="sbu_pemesan" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_sbu_pemesan}">
+		{$label pengajuan_ticket_hdr sbu_pemesan }	</label>
+	<div class="r-search-option">
+		{$searchtype_sbu_pemesan}
+	</div>
+	<div class="r-search-field">
+		{$sbu_pemesan_editcontrol}	</div>
+	<div class="r-search-field">
+		{$sbu_pemesan_editcontrol1}
+	</div>
+	
+</div>
+
+{END sbu_pemesan_fieldblock}
+											
+{BEGIN no_telp_pemesan_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_no_telp_pemesan}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="no_telp_pemesan{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field5" {$item_integrated_search_field5} data-pageid="{$pageid}" data-field="no_telp_pemesan" data-fieldname="no_telp_pemesan" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_no_telp_pemesan}">
+		{$label pengajuan_ticket_hdr no_telp_pemesan }	</label>
+	<div class="r-search-option">
+		{$searchtype_no_telp_pemesan}
+	</div>
+	<div class="r-search-field">
+		{$no_telp_pemesan_editcontrol}	</div>
+	<div class="r-search-field">
+		{$no_telp_pemesan_editcontrol1}
+	</div>
+	
+</div>
+
+{END no_telp_pemesan_fieldblock}
+											
+{BEGIN email_pemesan_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_email_pemesan}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="email_pemesan{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field6" {$item_integrated_search_field6} data-pageid="{$pageid}" data-field="email_pemesan" data-fieldname="email_pemesan" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_email_pemesan}">
+		{$label pengajuan_ticket_hdr email_pemesan }	</label>
+	<div class="r-search-option">
+		{$searchtype_email_pemesan}
+	</div>
+	<div class="r-search-field">
+		{$email_pemesan_editcontrol}	</div>
+	<div class="r-search-field">
+		{$email_pemesan_editcontrol1}
+	</div>
+	
+</div>
+
+{END email_pemesan_fieldblock}
+											
+{BEGIN atasan_langsung_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_atasan_langsung}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="atasan_langsung{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field7" {$item_integrated_search_field7} data-pageid="{$pageid}" data-field="atasan_langsung" data-fieldname="atasan_langsung" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_atasan_langsung}">
+		{$label pengajuan_ticket_hdr atasan_langsung }	</label>
+	<div class="r-search-option">
+		{$searchtype_atasan_langsung}
+	</div>
+	<div class="r-search-field">
+		{$atasan_langsung_editcontrol}	</div>
+	<div class="r-search-field">
+		{$atasan_langsung_editcontrol1}
+	</div>
+	
+</div>
+
+{END atasan_langsung_fieldblock}
+											
+{BEGIN jenis_pengajuan_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_jenis_pengajuan}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="jenis_pengajuan{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field8" {$item_integrated_search_field8} data-pageid="{$pageid}" data-field="jenis_pengajuan" data-fieldname="jenis_pengajuan" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_jenis_pengajuan}">
+		{$label pengajuan_ticket_hdr jenis_pengajuan }	</label>
+	<div class="r-search-option">
+		{$searchtype_jenis_pengajuan}
+	</div>
+	<div class="r-search-field">
+		{$jenis_pengajuan_editcontrol}	</div>
+	<div class="r-search-field">
+		{$jenis_pengajuan_editcontrol1}
+	</div>
+	
+</div>
+
+{END jenis_pengajuan_fieldblock}
+											
+{BEGIN alasan_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_alasan}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="alasan{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field9" {$item_integrated_search_field9} data-pageid="{$pageid}" data-field="alasan" data-fieldname="alasan" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_alasan}">
+		{$label pengajuan_ticket_hdr alasan }	</label>
+	<div class="r-search-option">
+		{$searchtype_alasan}
+	</div>
+	<div class="r-search-field">
+		{$alasan_editcontrol}	</div>
+	<div class="r-search-field">
+		{$alasan_editcontrol1}
+	</div>
+	
+</div>
+
+{END alasan_fieldblock}
+											
+{BEGIN beban_sbu_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_beban_sbu}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="beban_sbu{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field10" {$item_integrated_search_field10} data-pageid="{$pageid}" data-field="beban_sbu" data-fieldname="beban_sbu" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_beban_sbu}">
+		{$label pengajuan_ticket_hdr beban_sbu }	</label>
+	<div class="r-search-option">
+		{$searchtype_beban_sbu}
+	</div>
+	<div class="r-search-field">
+		{$beban_sbu_editcontrol}	</div>
+	<div class="r-search-field">
+		{$beban_sbu_editcontrol1}
+	</div>
+	
+</div>
+
+{END beban_sbu_fieldblock}
+											
+{BEGIN status_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_status}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="status{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field11" {$item_integrated_search_field11} data-pageid="{$pageid}" data-field="status" data-fieldname="status" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_status}">
+		{$label pengajuan_ticket_hdr status }	</label>
+	<div class="r-search-option">
+		{$searchtype_status}
+	</div>
+	<div class="r-search-field">
+		{$status_editcontrol}	</div>
+	<div class="r-search-field">
+		{$status_editcontrol1}
+	</div>
+	
+</div>
+
+{END status_fieldblock}
+											
+{BEGIN ket_admin_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_ket_admin}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="ket_admin{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field12" {$item_integrated_search_field12} data-pageid="{$pageid}" data-field="ket_admin" data-fieldname="ket_admin" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_ket_admin}">
+		{$label pengajuan_ticket_hdr ket_admin }	</label>
+	<div class="r-search-option">
+		{$searchtype_ket_admin}
+	</div>
+	<div class="r-search-field">
+		{$ket_admin_editcontrol}	</div>
+	<div class="r-search-field">
+		{$ket_admin_editcontrol1}
+	</div>
+	
+</div>
+
+{END ket_admin_fieldblock}
+											
+{BEGIN created_at_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_created_at}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="created_at{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field13" {$item_integrated_search_field13} data-pageid="{$pageid}" data-field="created_at" data-fieldname="created_at" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_created_at}">
+		{$label pengajuan_ticket_hdr created_at }	</label>
+	<div class="r-search-option">
+		{$searchtype_created_at}
+	</div>
+	<div class="r-search-field">
+		{$created_at_editcontrol}	</div>
+	<div class="r-search-field">
+		{$created_at_editcontrol1}
+	</div>
+	
+</div>
+
+{END created_at_fieldblock}
+											
+{BEGIN create_by_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_create_by}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="create_by{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field14" {$item_integrated_search_field14} data-pageid="{$pageid}" data-field="create_by" data-fieldname="create_by" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_create_by}">
+		{$label pengajuan_ticket_hdr create_by }	</label>
+	<div class="r-search-option">
+		{$searchtype_create_by}
+	</div>
+	<div class="r-search-field">
+		{$create_by_editcontrol}	</div>
+	<div class="r-search-field">
+		{$create_by_editcontrol1}
+	</div>
+	
+</div>
+
+{END create_by_fieldblock}
+											
+{BEGIN updated_at_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_updated_at}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="updated_at{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field15" {$item_integrated_search_field15} data-pageid="{$pageid}" data-field="updated_at" data-fieldname="updated_at" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_updated_at}">
+		{$label pengajuan_ticket_hdr updated_at }	</label>
+	<div class="r-search-option">
+		{$searchtype_updated_at}
+	</div>
+	<div class="r-search-field">
+		{$updated_at_editcontrol}	</div>
+	<div class="r-search-field">
+		{$updated_at_editcontrol1}
+	</div>
+	
+</div>
+
+{END updated_at_fieldblock}
+											
+{BEGIN update_by_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_update_by}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="update_by{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field16" {$item_integrated_search_field16} data-pageid="{$pageid}" data-field="update_by" data-fieldname="update_by" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_update_by}">
+		{$label pengajuan_ticket_hdr update_by }	</label>
+	<div class="r-search-option">
+		{$searchtype_update_by}
+	</div>
+	<div class="r-search-field">
+		{$update_by_editcontrol}	</div>
+	<div class="r-search-field">
+		{$update_by_editcontrol1}
+	</div>
+	
+</div>
+
+{END update_by_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c3}
+								</tr>
+			</tbody></table>
+{END grid_block}
+									{BEGIN below-grid_block}
+<div class="r-form" data-location="below-grid" id="form_below-grid_{$pageid}" data-makeup="small" {$form_below-grid} data-pageid="{$pageid}"
+		data-v-width="6"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="below-grid_c1" data-pageid="{$pageid}"	{$cell_below-grid_c1}
+	class="			col-md-12
+	">
+	 
+		<span data-itemtype="search_search" data-itemid="search_search" {$item_search_search} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-primary   
+	" {$searchbutton_attrs} data-page=undefined >
+							Search			</a>
+</span>
+	 
+		<span data-itemtype="search_reset" data-itemid="search_reset" {$item_search_reset} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" {$resetbutton_attrs} >
+							Reset			</a>
+</span>
+	 
+		{BEGIN back_button}
+<span data-itemtype="search_back_list" data-itemid="search_back_list" {$item_search_back_list} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" {$backbutton_attrs} >
+							Back to list			</a>
+</span>
+{END back_button}
+	 
+		{BEGIN cancel_button}
+<span data-itemtype="search_cancel" data-itemid="search_cancel" {$item_search_cancel} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" id="cancelButton{$id}" >
+							Cancel			</a>
+</span>
+{END cancel_button}
+	</div>					</div>
+	</div>		
+{END below-grid_block}
+			</div>
+		{$footer}
+	{END body}
+	</body>
+</html>

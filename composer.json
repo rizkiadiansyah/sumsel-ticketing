@@ -1,0 +1,17 @@
+{
+    "name": "admin/sumsel-ticketing",
+    "autoload": {
+        "psr-4": {
+            "Admin\\SumselTicketing\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Rizki Adiansyah",
+            "email": "rizkiadiansyah890@gmail.com"
+        }
+    ],
+    "require": {
+        "phpoffice/phpspreadsheet": "^5.6"
+    }
+}

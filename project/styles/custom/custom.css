@@ -1,0 +1,46 @@
+a {
+		color: #6610F2;
+}
+.btn-info {
+		border-color: #6610F2;
+}
+
+.panel-info > .panel-heading .btn.btn-info:not(:hover) {
+		background-color: #6610F2;
+}
+.panel-info {
+		border-color: #6610F2;
+}
+.panel-info > .panel-heading {
+		background-color: #6610F2;
+    border-color: #6610F2;
+}
+.panel-primary > .panel-heading {
+    background-color: #6610F2 !important;
+		border-color: #6610F2;
+}
+.panel-primary{
+		border-color: #6610F2;
+}
+.btn.btn-primary{
+	background:#6610F2 !important;
+	border:none;
+}
+.btn-primary:not(:hover) {
+	background-color: #6610F2 !important;
+}
+
+
+/* warna button Edit, View (saat di-hover)  */
+/*
+.btn-link{
+	color:#6610F2 !important;
+	border:none;
+}
+*/
+/* warna button Edit, View(keadaan default)  */
+/*
+.btn-link:not(:hover) {
+	color: #6610F2 !important;
+}
+*/

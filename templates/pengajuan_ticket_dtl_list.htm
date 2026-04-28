@@ -1,0 +1,2679 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+				<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{$pagetitle}</title>
+	<link rel="icon" type="image/png" href="images/logo_sbu/SUMSEL%20ARMY.png">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<base href="{$projectPath}">
+		<link REL="stylesheet" href="styles/default.css?{$wizardBuildKey}" type="text/css">
+	{BEGIN rtlCSS}
+	<link REL="stylesheet" href="styles/defaultRTL.css?{$wizardBuildKey}" type="text/css">
+	{END rtlCSS}
+	{BEGIN styleCSSFiles}
+	<link REL="stylesheet" href="{$stylepath}" type="text/css">
+	{END styleCSSFiles}
+			
+	</head>
+
+	<body class="{$stylename} function-list"   
+		>
+	{BEGIN body}
+		<style>
+		{$containerCss}
+		</style>
+		<div class="r-vbar-page">
+			<div data-width="250px" data-fixed class="r-left clearfix {$leftbar_class}" >
+								<div data-location="left" id="form_left_{$pageid}" data-makeup="leftbar" {$form_left} data-pageid="{$pageid}">
+{BEGIN left_block}
+ 
+     
+         
+
+			<div data-cellId="left_c0" data-pageid="{$pageid}" data-logo-cell class="clearfix " data-itemid="logo" {$item_logo}>
+				{BEGIN logo_block}
+	<A data-itemtype="logo" data-itemid="logo" {$item_logo} data-pageid="{$pageid}" class="navbar-brand" href="{$home_link}" data-pageid="{$pageid}" {$logo_hiddenattr}>
+		{$logo}
+	</A>
+{END logo_block}
+				<button data-pageid="1" type="button" class="navbar-toggle collapsed" data-runner-toggle="collapse" data-target="[data-mobile-controlled]">	
+					<span class="sr-only">Toggle navigation</span>	
+					<span class="icon-bar"></span>					
+				</button>				
+			</div>
+		
+ 
+
+			<div class="clearfix " data-cellId="left_c0" data-pageid="{$pageid}" data-logo-cell data-itemid="expand_button" {$item_expand_button} data-topcell-item-type="expand_button" >
+				<span data-itemtype="expand_button" data-itemid="expand_button" {$item_expand_button} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="Expand" class="btn btn-link   
+	" href="#" >
+					<span class="glyphicon glyphicon-triangle-right"></span>
+										</a>
+</span>
+			</div>
+		
+     
+     
+         
+
+			<div data-cellId="left_c1" data-pageid="{$pageid}" class="clearfix  r-ori-vert " data-itemtype="menu" data-itemid="menu" {$item_menu} data-pageid="{$pageid}">
+				{BEGIN menuitems_main}
+<ul data-itemtype="menu" data-itemid="menu" {$item_menu} data-pageid="{$pageid}"	class="r-menu nav menu-treelike" 
+	data-menulevel="1"
+>
+
+{BEGIN item_children1}
+<li class="
+	{$item_current}">
+<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline data-menu-top >
+	{$item_separator}
+	<span class="r-menu-link r-menu-expanded "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren2}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren2}
+	</span>
+		<span class="r-menu-collapsed">{$item_collicon}{$item_firstcap}</span>
+	</a>
+{BEGIN item_showchildren2}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="2">
+	{BEGIN item_children2}
+		{BEGIN item_menulink2}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren2}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren2}
+	</span>
+	</a>
+			{BEGIN item_showchildren3}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="3">
+	{BEGIN item_children3}
+		{BEGIN item_menulink3}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren3}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren3}
+	</span>
+	</a>
+			{BEGIN item_showchildren4}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="4">
+	{BEGIN item_children4}
+		{BEGIN item_menulink4}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren4}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren4}
+	</span>
+	</a>
+			{BEGIN item_showchildren5}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="5">
+	{BEGIN item_children5}
+		{BEGIN item_menulink5}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren5}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren5}
+	</span>
+	</a>
+					</li>
+		{END item_menulink5}
+	{END item_children5}
+</ul>
+{END item_showchildren5}
+		</li>
+		{END item_menulink4}
+	{END item_children4}
+</ul>
+{END item_showchildren4}
+		</li>
+		{END item_menulink3}
+	{END item_children3}
+</ul>
+{END item_showchildren3}
+		</li>
+		{END item_menulink2}
+	{END item_children2}
+</ul>
+{END item_showchildren2}
+</li>
+{END item_children1}
+</ul>
+{END menuitems_main}
+			</div>
+		
+ 
+
+			<div class="clearfix  r-ori-vert" data-cellId="left_c1" data-pageid="{$pageid}" data-itemid="search_panel" {$item_search_panel} data-topcell-item-type="search_panel" >
+				<!-- Begin Search panel content -->
+<div class="searchOptions panel panel-primary searchPanelContainer " {$srchOpt_attrs} data-itemtype="search_panel" data-itemid="search_panel" {$item_search_panel} data-pageid="{$pageid}"	 >
+
+	<div class="panel-heading">
+		<div class="btn-group r-sp-addfield" id="addSearchFieldButton{$id}">
+			<button id="showHideControlChooseMenu{$id}" type="button" class="btn btn-default dropdown-toggle btn-sm )" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			Search in			<span class="caret"></span>
+			</button>
+		</div>
+
+
+		<div class="btn-group r-sp-options" id="searchPanelOptions{$id}">
+			<button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<span class="glyphicon glyphicon glyphicon-option-vertical"></span>
+			</button>
+			<ul class="dropdown-menu dropdown-left">
+				<li id="showHideSearchType{$id}" {$showHideCtrlsOpt_attrs}><a>Show options</a></li>
+				<li role="separator" class="divider"></li>
+				<li class="srchCritTop" style="display: none;"><a><input type="radio" name="srchType{$id}" id="radioAll" {$all_checkbox}><label for="radioAll"><span class="glyphicon">&nbsp;</span>all conditions</label></a></li>
+				<li class="srchCritTop" style="display: none;"><a><input type="radio" name="srchType{$id}" id="radioAny" {$any_checkbox}><label for="radioAny"><span class="glyphicon">&nbsp;</span>any condition</label></a></li>
+				<li role="separator" class="divider"></li>
+				<li><a class="close-button"><span class="glyphicon glyphicon-remove">&nbsp;</span>hide</a></li>
+			</ul>
+		</div>
+
+
+		</div>
+	<div class="panel-body controlsBlock" {$bottomSearchButt_attrs} >
+
+
+		
+		{BEGIN searchCtrlBlock}
+		<div class="srchPanelRow form-group" {$filterRow_attrs}>
+			<label>{$fLabel}</label>	{$delCtrlButt}
+				<span class="rnr-searchtype">{$searchtype}</span>
+				<span class="rnr-searchcontrol">{$searchcontrol}</span>
+				<span class="rnr-searchcontrol">{$searchcontrol1}</span>
+		</div>
+		{END searchCtrlBlock}
+																		{BEGIN searchCtrlBlock_bandara_asal}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_bandara_asal}" {$filterRow_attrs_bandara_asal}>
+			<label>{$label pengajuan_ticket_dtl bandara_asal }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_bandara_asal}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_bandara_asal}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_bandara_asal}</span>
+						</div>
+		{END searchCtrlBlock_bandara_asal}
+																{BEGIN searchCtrlBlock_waktu_tiba_p}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_waktu_tiba_p}" {$filterRow_attrs_waktu_tiba_p}>
+			<label>{$label pengajuan_ticket_dtl waktu_tiba_p }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_waktu_tiba_p}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_waktu_tiba_p}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_waktu_tiba_p}</span>
+						</div>
+		{END searchCtrlBlock_waktu_tiba_p}
+																{BEGIN searchCtrlBlock_waktu_tiba}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_waktu_tiba}" {$filterRow_attrs_waktu_tiba}>
+			<label>{$label pengajuan_ticket_dtl waktu_tiba }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_waktu_tiba}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_waktu_tiba}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_waktu_tiba}</span>
+						</div>
+		{END searchCtrlBlock_waktu_tiba}
+																{BEGIN searchCtrlBlock_waktu_berangkat_p}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_waktu_berangkat_p}" {$filterRow_attrs_waktu_berangkat_p}>
+			<label>{$label pengajuan_ticket_dtl waktu_berangkat_p }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_waktu_berangkat_p}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_waktu_berangkat_p}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_waktu_berangkat_p}</span>
+						</div>
+		{END searchCtrlBlock_waktu_berangkat_p}
+																{BEGIN searchCtrlBlock_waktu_berangkat}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_waktu_berangkat}" {$filterRow_attrs_waktu_berangkat}>
+			<label>{$label pengajuan_ticket_dtl waktu_berangkat }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_waktu_berangkat}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_waktu_berangkat}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_waktu_berangkat}</span>
+						</div>
+		{END searchCtrlBlock_waktu_berangkat}
+																{BEGIN searchCtrlBlock_tipe_perjalanan}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_tipe_perjalanan}" {$filterRow_attrs_tipe_perjalanan}>
+			<label>{$label pengajuan_ticket_dtl tipe_perjalanan }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_tipe_perjalanan}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_tipe_perjalanan}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_tipe_perjalanan}</span>
+						</div>
+		{END searchCtrlBlock_tipe_perjalanan}
+																{BEGIN searchCtrlBlock_tanggal_penerbangan_p}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_tanggal_penerbangan_p}" {$filterRow_attrs_tanggal_penerbangan_p}>
+			<label>{$label pengajuan_ticket_dtl tanggal_penerbangan_p }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_tanggal_penerbangan_p}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_tanggal_penerbangan_p}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_tanggal_penerbangan_p}</span>
+						</div>
+		{END searchCtrlBlock_tanggal_penerbangan_p}
+																{BEGIN searchCtrlBlock_tanggal_penerbangan}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_tanggal_penerbangan}" {$filterRow_attrs_tanggal_penerbangan}>
+			<label>{$label pengajuan_ticket_dtl tanggal_penerbangan }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_tanggal_penerbangan}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_tanggal_penerbangan}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_tanggal_penerbangan}</span>
+						</div>
+		{END searchCtrlBlock_tanggal_penerbangan}
+																{BEGIN searchCtrlBlock_sbu_penumpang}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_sbu_penumpang}" {$filterRow_attrs_sbu_penumpang}>
+			<label>{$label pengajuan_ticket_dtl sbu_penumpang }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_sbu_penumpang}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_sbu_penumpang}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_sbu_penumpang}</span>
+						</div>
+		{END searchCtrlBlock_sbu_penumpang}
+																{BEGIN searchCtrlBlock_req_id}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_req_id}" {$filterRow_attrs_req_id}>
+			<label>{$label pengajuan_ticket_dtl req_id }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_req_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_req_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_req_id}</span>
+						</div>
+		{END searchCtrlBlock_req_id}
+																{BEGIN searchCtrlBlock_posisi_penumpang}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_posisi_penumpang}" {$filterRow_attrs_posisi_penumpang}>
+			<label>{$label pengajuan_ticket_dtl posisi_penumpang }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_posisi_penumpang}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_posisi_penumpang}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_posisi_penumpang}</span>
+						</div>
+		{END searchCtrlBlock_posisi_penumpang}
+																{BEGIN searchCtrlBlock_no_telp_penumpang}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_no_telp_penumpang}" {$filterRow_attrs_no_telp_penumpang}>
+			<label>{$label pengajuan_ticket_dtl no_telp_penumpang }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_no_telp_penumpang}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_no_telp_penumpang}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_no_telp_penumpang}</span>
+						</div>
+		{END searchCtrlBlock_no_telp_penumpang}
+																{BEGIN searchCtrlBlock_nik_penumpang}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_nik_penumpang}" {$filterRow_attrs_nik_penumpang}>
+			<label>{$label pengajuan_ticket_dtl nik_penumpang }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_nik_penumpang}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_nik_penumpang}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_nik_penumpang}</span>
+						</div>
+		{END searchCtrlBlock_nik_penumpang}
+																{BEGIN searchCtrlBlock_nik_ktp}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_nik_ktp}" {$filterRow_attrs_nik_ktp}>
+			<label>{$label pengajuan_ticket_dtl nik_ktp }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_nik_ktp}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_nik_ktp}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_nik_ktp}</span>
+						</div>
+		{END searchCtrlBlock_nik_ktp}
+																{BEGIN searchCtrlBlock_nama_penumpang}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_nama_penumpang}" {$filterRow_attrs_nama_penumpang}>
+			<label>{$label pengajuan_ticket_dtl nama_penumpang }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_nama_penumpang}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_nama_penumpang}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_nama_penumpang}</span>
+						</div>
+		{END searchCtrlBlock_nama_penumpang}
+																{BEGIN searchCtrlBlock_maskapai_p}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_maskapai_p}" {$filterRow_attrs_maskapai_p}>
+			<label>{$label pengajuan_ticket_dtl maskapai_p }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_maskapai_p}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_maskapai_p}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_maskapai_p}</span>
+						</div>
+		{END searchCtrlBlock_maskapai_p}
+																{BEGIN searchCtrlBlock_maskapai}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_maskapai}" {$filterRow_attrs_maskapai}>
+			<label>{$label pengajuan_ticket_dtl maskapai }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_maskapai}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_maskapai}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_maskapai}</span>
+						</div>
+		{END searchCtrlBlock_maskapai}
+																{BEGIN searchCtrlBlock_id_detail}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_id_detail}" {$filterRow_attrs_id_detail}>
+			<label>{$label pengajuan_ticket_dtl id_detail }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_id_detail}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_id_detail}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_id_detail}</span>
+						</div>
+		{END searchCtrlBlock_id_detail}
+																{BEGIN searchCtrlBlock_gender}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_gender}" {$filterRow_attrs_gender}>
+			<label>{$label pengajuan_ticket_dtl gender }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_gender}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_gender}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_gender}</span>
+						</div>
+		{END searchCtrlBlock_gender}
+																{BEGIN searchCtrlBlock_catatan_khusus_p}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_catatan_khusus_p}" {$filterRow_attrs_catatan_khusus_p}>
+			<label>{$label pengajuan_ticket_dtl catatan_khusus_p }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_catatan_khusus_p}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_catatan_khusus_p}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_catatan_khusus_p}</span>
+						</div>
+		{END searchCtrlBlock_catatan_khusus_p}
+																{BEGIN searchCtrlBlock_catatan_khusus}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_catatan_khusus}" {$filterRow_attrs_catatan_khusus}>
+			<label>{$label pengajuan_ticket_dtl catatan_khusus }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_catatan_khusus}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_catatan_khusus}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_catatan_khusus}</span>
+						</div>
+		{END searchCtrlBlock_catatan_khusus}
+																{BEGIN searchCtrlBlock_bandara_tujuan_p}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_bandara_tujuan_p}" {$filterRow_attrs_bandara_tujuan_p}>
+			<label>{$label pengajuan_ticket_dtl bandara_tujuan_p }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_bandara_tujuan_p}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_bandara_tujuan_p}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_bandara_tujuan_p}</span>
+						</div>
+		{END searchCtrlBlock_bandara_tujuan_p}
+																{BEGIN searchCtrlBlock_bandara_tujuan}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_bandara_tujuan}" {$filterRow_attrs_bandara_tujuan}>
+			<label>{$label pengajuan_ticket_dtl bandara_tujuan }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_bandara_tujuan}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_bandara_tujuan}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_bandara_tujuan}</span>
+						</div>
+		{END searchCtrlBlock_bandara_tujuan}
+																{BEGIN searchCtrlBlock_bandara_asal_p}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_bandara_asal_p}" {$filterRow_attrs_bandara_asal_p}>
+			<label>{$label pengajuan_ticket_dtl bandara_asal_p }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_bandara_asal_p}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_bandara_asal_p}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_bandara_asal_p}</span>
+						</div>
+		{END searchCtrlBlock_bandara_asal_p}
+		
+
+	</div>
+
+	<div class="panel-footer bottomSearchButt" {$bottomSearchButt_attrs}>
+		<button class="btn btn-primary btn-sm" id="searchButton{$id}" {$searchbutton_attrs}>Search</button>
+
+				<button class="btn btn-default btn-sm" {$showAllCont_attrs} {$showallbutton_attrs}>Show all</button>
+	</div>
+</div>
+<!-- End Search panel content -->
+			</div>
+		
+    {END left_block}
+</div>				</div>
+			<div class="r-content-col" data-resize-left="leftbar">
+				<div data-resize-left="leftbar"  data-fixed class="r-topheader" data-resize-name="topbar">
+									{BEGIN supertop_block}
+<nav class="navbar navbar-default" 
+	data-location="supertop" id="form_supertop_{$pageid}" data-makeup="leftbar" {$form_supertop} data-pageid="{$pageid}" >
+			 
+							 
+				<span class="navbar-form  navbar-header" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="expand_menu_button" {$item_expand_menu_button} data-topcell-item-type="expand_menu_button" >
+				<span data-itemtype="expand_menu_button" data-itemid="expand_menu_button" {$item_expand_menu_button} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="Show menu" class="btn-link   
+	 glyphicon glyphicon-menu-hamburger" href="#" >		
+				
+								</a>
+</span>
+			</span>
+		 
+				<span class="navbar-form  navbar-collapse" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="collapse_button" {$item_collapse_button} data-topcell-item-type="collapse_button" >
+				<span data-itemtype="collapse_button" data-itemid="collapse_button" {$item_collapse_button} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="Collapse" class="btn-link   
+	 glyphicon glyphicon-triangle-left" href="#" >		
+				
+								</a>
+</span>
+			</span>
+		 
+				<span class="navbar-form  navbar-collapse" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="breadcrumb" {$item_breadcrumb} data-topcell-item-type="breadcrumb" >
+				{BEGIN breadcrumb}
+<ol class="breadcrumb" data-itemtype="breadcrumb" data-itemid="breadcrumb" {$item_breadcrumb} data-pageid="{$pageid}">
+<li ><a href="{$crumb_home_link}"><span class="glyphicon glyphicon-home"></span></a>{$crumb_dropdown}</li>
+{BEGIN crumb}
+  <li class="{$crumb_item_class}">
+{BEGIN crumb_title_link}
+	<a {$crumb_attrs}>{$crumb_title}</a>
+{END crumb_title_link}
+{BEGIN crumb_title_span}
+	<span {$crumb_attrs}>{$crumb_title}</span>
+{END crumb_title_span}	
+	{$crumb_dropdown}
+  </li>
+{END crumb}
+</ol>
+{END breadcrumb}			</span>
+							 
+							 
+				<span class="navbar-form r-align-right navbar-collapse" data-cellId="supertop_c2" data-pageid="{$pageid}" data-itemid="simple_search" {$item_simple_search} data-topcell-item-type="simple_search" >
+				<span data-itemtype="simple_search" data-itemid="simple_search" {$item_simple_search} data-pageid="{$pageid}" class="form-group">
+
+<div  class="input-group">
+{BEGIN searchform_text}
+	<input type="search" class="form-control" {$searchfor_attrs} size="25">
+{END searchform_text}
+	<span class="input-group-btn">
+	{BEGIN searchform_showall}
+				<button class="btn btn-default" {$showAllCont_attrs} {$showallbutton_attrs} title="Show all">
+			<span class="glyphicon glyphicon-remove"></span>
+		</button>
+	{END searchform_showall}
+
+	{BEGIN searchform_search}
+	<button {$searchbutton_attrs} class="btn btn-primary" >
+		<span class="glyphicon glyphicon-search"></span>
+	</button>
+	{END searchform_search}
+	</span>
+</div>
+		
+</span>			</span>
+		 
+				<span class="navbar-form r-align-right navbar-collapse" data-cellId="supertop_c2" data-pageid="{$pageid}" data-itemid="list_options" {$item_list_options} data-topcell-item-type="list_options" >
+				<span data-itemtype="list_options" data-itemid="list_options" {$item_list_options} data-pageid="{$pageid}" data-small data-button-item>
+	<span class="dropdown ">
+		<button type="button" title="" class="btn btn-default   dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">		
+										<span class="glyphicon glyphicon-cog"></span>
+												<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu">
+								<li data-itemtype="advsearch_link" data-itemid="advsearch_link" {$item_advsearch_link} data-pageid="{$pageid}" data-small >
+				<a   href="pengajuan_ticket_dtl_search.php{$stateLink_full}" {$advsearchlink_attrs}  title="" >
+				
+		Advanced search		
+		</a>
+	</li>
+							{BEGIN searchPanelTopButtons}
+	<li data-itemtype="show_search_panel" data-itemid="show_search_panel" {$item_show_search_panel} data-pageid="{$pageid}" data-small >
+				<a  id="showOptPanel{$id}"  title="" >
+				
+		Show search panel		
+		</a>
+	</li>
+{END searchPanelTopButtons}
+							{BEGIN searchPanelTopButtons}
+	<li data-itemtype="hide_search_panel" data-itemid="hide_search_panel" {$item_hide_search_panel} data-pageid="{$pageid}" data-small >
+				<a  id="hideOptPanel{$id}"  title="" >
+				
+		Hide search panel		
+		</a>
+	</li>
+{END searchPanelTopButtons}
+					</ul>
+	</span>
+</span>
+			</span>
+		 
+				<span class="navbar-form r-align-right navbar-collapse" data-cellId="supertop_c2" data-pageid="{$pageid}" data-itemid="loginform_login" {$item_loginform_login} data-topcell-item-type="loginform_login" >
+				{BEGIN guestloginbutton}
+<span data-itemtype="loginform_login" data-itemid="loginform_login" {$item_loginform_login} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-primary   
+	" href="#" {$guestloginlink_attrs} >
+							Login			</a>
+</span>
+{END guestloginbutton}
+			</span>
+		 
+				<span class="navbar-form r-align-right navbar-collapse" data-cellId="supertop_c2" data-pageid="{$pageid}" data-itemid="username_button" {$item_username_button} data-topcell-item-type="username_button" >
+				{BEGIN loggedas_message}
+<span data-itemtype="username_button" data-itemid="username_button" {$item_username_button} data-pageid="{$pageid}" data-small data-button-item>
+	<span class="dropdown ">
+		<button type="button" title="" class="btn btn-default   dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">		
+			{BEGIN userbutton_icon}							<span class="glyphicon glyphicon-user"></span>
+						{END userbutton_icon}{$userbutton_image}			{$username}			<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu">
+							{BEGIN userinfo_link}
+	<li data-itemtype="userinfo_link" data-itemid="userinfo_link" {$item_userinfo_link} data-pageid="{$pageid}" data-small >
+				<a  href="userinfo.php"  title="" >
+				
+		User Profile		
+		</a>
+	</li>
+{END userinfo_link}
+							{BEGIN logoutbutton}
+	<li data-itemtype="logout_link" data-itemid="logout_link" {$item_logout_link} data-pageid="{$pageid}" data-small >
+				<a  href="#" {$logoutlink_attrs}  title="" >
+				
+		Log out		
+		</a>
+	</li>
+{END logoutbutton}
+							{BEGIN adminarea_link}
+	<li data-itemtype="adminarea_link" data-itemid="adminarea_link" {$item_adminarea_link} data-pageid="{$pageid}" data-small >
+				<a  href="admin_rights_list.php"  title="" >
+				
+		Admin Area		
+		</a>
+	</li>
+{END adminarea_link}
+							{BEGIN changepwd_link}
+	<li data-itemtype="changepassword_link" data-itemid="changepassword_link" {$item_changepassword_link} data-pageid="{$pageid}" data-small >
+				<a  href="changepwd.php" {$changepwdlink_attrs} id="changePasswordButton{$id}"  title="" >
+				
+		Change password		
+		</a>
+	</li>
+{END changepwd_link}
+					</ul>
+	</span>
+</span>
+{END loggedas_message}
+			</span>
+								</nav>
+{END supertop_block}
+						{$locking}
+				</div>
+				<div class="r-body" data-resize-top="topbar" data-body-width="standard">
+					{$header}
+					<div class="r-top">
+									{BEGIN top_block}
+<div class="r-form" data-location="top" id="form_top_{$pageid}" data-makeup="leftbar" {$form_top} data-pageid="{$pageid}" >		
+	 
+				<div class="row">
+			 
+				<div 
+	data-cellId="top_c2" data-pageid="{$pageid}"	{$cell_top_c2}
+	class=" r-ori-vert			col-md-12
+	
+">
+		 
+		{BEGIN mastertable_block}
+<div data-itemtype="master_info" data-itemid="master_info" {$item_master_info} data-pageid="{$pageid}">
+	{$showmasterfile}
+</div>
+{END mastertable_block}		</div>					</div>
+			</div>		
+{END top_block}
+						</div>
+											<div class="r-above">
+					{BEGIN above-grid_block}
+<div class="r-form" data-location="above-grid" id="form_above-grid_{$pageid}" data-makeup="leftbar" {$form_above-grid} data-pageid="{$pageid}" >		
+	 
+				<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c1" data-pageid="{$pageid}"	{$cell_above-grid_c1}
+	class=" r-ori-vert			col-md-6
+	
+">
+		{BEGIN firstAboveGridCell}
+		 
+		{BEGIN inlineadd_link}
+<span data-itemtype="inline_add" data-itemid="inline_add" {$item_inline_add} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-primary   
+	" {$inlineaddlink_attrs} >
+							Inline Add			</a>
+</span>
+{END inlineadd_link}
+			{END firstAboveGridCell}	
+	</div>			 
+				<div 
+	data-cellId="above-grid_c2" data-pageid="{$pageid}"	{$cell_above-grid_c2}
+	class="r-align-right			col-md-6
+	
+">
+		 
+		<span data-itemtype="details_found" data-itemid="details_found" {$item_details_found} data-pageid="{$pageid}" data-small >
+{$mlp_push}{$mlparam first var first_shown}{$mlparam last var last_shown}{$mlparam total var records_found}{mlang_message DISPLAYING}{$mlp_pop}</span>	 
+		<span data-itemtype="page_size" data-itemid="page_size" {$item_page_size} data-pageid="{$pageid}" >
+		{$recsPerPage}
+</span>		</div>					</div>
+			</div>		
+{END above-grid_block}
+	</div>
+<div class="r-grid">
+	{BEGIN grid_tabs}
+  <ul class="nav nav-tabs bsgrid_tabs">
+	{$grid_tabs_content}
+  </ul>
+{END grid_tabs}
+					{BEGIN grid_block}
+{BEGIN message_block}
+<div data-grid-message data-pageid="{$pageid}" class="alert {$message_class}" role="alert" {$grid_message_attrs}>{$message}</div>
+{END message_block}	<style>
+@media screen and (max-width: 767px) {
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="req_id"]:before {
+		content: "{$label pengajuan_ticket_dtl req_id}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="nik_penumpang"]:before {
+		content: "{$label pengajuan_ticket_dtl nik_penumpang}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="nik_ktp"]:before {
+		content: "{$label pengajuan_ticket_dtl nik_ktp}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="nama_penumpang"]:before {
+		content: "{$label pengajuan_ticket_dtl nama_penumpang}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="posisi_penumpang"]:before {
+		content: "{$label pengajuan_ticket_dtl posisi_penumpang}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="sbu_penumpang"]:before {
+		content: "{$label pengajuan_ticket_dtl sbu_penumpang}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="no_telp_penumpang"]:before {
+		content: "{$label pengajuan_ticket_dtl no_telp_penumpang}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="gender"]:before {
+		content: "{$label pengajuan_ticket_dtl gender}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="tipe_perjalanan"]:before {
+		content: "{$label pengajuan_ticket_dtl tipe_perjalanan}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="bandara_asal"]:before {
+		content: "{$label pengajuan_ticket_dtl bandara_asal}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="bandara_tujuan"]:before {
+		content: "{$label pengajuan_ticket_dtl bandara_tujuan}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="maskapai"]:before {
+		content: "{$label pengajuan_ticket_dtl maskapai}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="tanggal_penerbangan"]:before {
+		content: "{$label pengajuan_ticket_dtl tanggal_penerbangan}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="waktu_berangkat"]:before {
+		content: "{$label pengajuan_ticket_dtl waktu_berangkat}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="waktu_tiba"]:before {
+		content: "{$label pengajuan_ticket_dtl waktu_tiba}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="catatan_khusus"]:before {
+		content: "{$label pengajuan_ticket_dtl catatan_khusus}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="bandara_asal_p"]:before {
+		content: "{$label pengajuan_ticket_dtl bandara_asal_p}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="bandara_tujuan_p"]:before {
+		content: "{$label pengajuan_ticket_dtl bandara_tujuan_p}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="maskapai_p"]:before {
+		content: "{$label pengajuan_ticket_dtl maskapai_p}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="tanggal_penerbangan_p"]:before {
+		content: "{$label pengajuan_ticket_dtl tanggal_penerbangan_p}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="waktu_berangkat_p"]:before {
+		content: "{$label pengajuan_ticket_dtl waktu_berangkat_p}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="waktu_tiba_p"]:before {
+		content: "{$label pengajuan_ticket_dtl waktu_tiba_p}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="catatan_khusus_p"]:before {
+		content: "{$label pengajuan_ticket_dtl catatan_khusus_p}";
+	}
+	}
+</style>
+<table data-location="grid" id="form_grid_{$pageid}" data-makeup="leftbar" {$form_grid} data-pageid="{$pageid}" class=" table table-striped table-bordered r-horizontal-grid  r-flexgrid rnr-b-grid rnr-gridtable"
+	cellpadding="0"
+	data-body-height="1"
+>
+						<thead>
+			{BEGIN grid_header}
+			
+																									<tr {$rowattrs} {$row_grid_0} class="{$rowclass}
+									{$gridHeader_class}
+					
+								r-gridrow
+							">
+									{BEGIN cellblock_grid_headcell_icons}
+	<th
+	
+	{$cell_grid_headcell_icons}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_headcell_icons" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="pengajuan_ticket_dtl_list"		data-control-cell
+	
+	>
+
+	
+	</th>
+	{END cellblock_grid_headcell_icons}
+									{BEGIN cellblock_grid_headcell_checkbox}
+	<th
+	
+	{$cell_grid_headcell_checkbox}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_headcell_checkbox" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="pengajuan_ticket_dtl_list"	
+		data-checkbox-cell
+	>
+
+	 
+		{BEGIN checkbox_column}
+<span data-itemtype="grid_checkbox_head" data-itemid="grid_checkbox_head" {$item_grid_checkbox_head} data-pageid="{$pageid}" data-record-id="{$recId}" >
+	<input type="checkbox" {$checkboxheader_attrs}>
+</span>
+{END checkbox_column}
+	
+	</th>
+	{END cellblock_grid_headcell_checkbox}
+									{BEGIN cellblock_grid_headcell_field}
+	<th
+	
+	{$cell_grid_headcell_field}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$req_id_class}	"
+
+			data-field="req_id"
+	
+	data-cellId="grid_headcell_field" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN req_id_fieldheadercolumn}
+	{BEGIN req_id_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field" {$item_simple_grid_field} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="req_id" data-fieldname="req_id" 
+
+			{$req_id_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label pengajuan_ticket_dtl req_id }</span>
+					{$arrow_icon_req_id}
+			</span>
+	</span>
+	{END req_id_fieldheader}
+{END req_id_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field}
+									{BEGIN cellblock_grid_headcell_field1}
+	<th
+	
+	{$cell_grid_headcell_field1}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$nik_penumpang_class}	"
+
+			data-field="nik_penumpang"
+	
+	data-cellId="grid_headcell_field1" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN nik_penumpang_fieldheadercolumn}
+	{BEGIN nik_penumpang_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field24" {$item_simple_grid_field24} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="nik_penumpang" data-fieldname="nik_penumpang" 
+
+			{$nik_penumpang_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label pengajuan_ticket_dtl nik_penumpang }</span>
+					{$arrow_icon_nik_penumpang}
+			</span>
+	</span>
+	{END nik_penumpang_fieldheader}
+{END nik_penumpang_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field1}
+									{BEGIN cellblock_grid_headcell_field2}
+	<th
+	
+	{$cell_grid_headcell_field2}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$nik_ktp_class}	"
+
+			data-field="nik_ktp"
+	
+	data-cellId="grid_headcell_field2" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN nik_ktp_fieldheadercolumn}
+	{BEGIN nik_ktp_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field25" {$item_simple_grid_field25} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="nik_ktp" data-fieldname="nik_ktp" 
+
+			{$nik_ktp_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label pengajuan_ticket_dtl nik_ktp }</span>
+					{$arrow_icon_nik_ktp}
+			</span>
+	</span>
+	{END nik_ktp_fieldheader}
+{END nik_ktp_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field2}
+									{BEGIN cellblock_grid_headcell_field3}
+	<th
+	
+	{$cell_grid_headcell_field3}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$nama_penumpang_class}	"
+
+			data-field="nama_penumpang"
+	
+	data-cellId="grid_headcell_field3" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN nama_penumpang_fieldheadercolumn}
+	{BEGIN nama_penumpang_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field26" {$item_simple_grid_field26} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="nama_penumpang" data-fieldname="nama_penumpang" 
+
+			{$nama_penumpang_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label pengajuan_ticket_dtl nama_penumpang }</span>
+					{$arrow_icon_nama_penumpang}
+			</span>
+	</span>
+	{END nama_penumpang_fieldheader}
+{END nama_penumpang_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field3}
+									{BEGIN cellblock_grid_headcell_field4}
+	<th
+	
+	{$cell_grid_headcell_field4}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$posisi_penumpang_class}	"
+
+			data-field="posisi_penumpang"
+	
+	data-cellId="grid_headcell_field4" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN posisi_penumpang_fieldheadercolumn}
+	{BEGIN posisi_penumpang_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field27" {$item_simple_grid_field27} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="posisi_penumpang" data-fieldname="posisi_penumpang" 
+
+			{$posisi_penumpang_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label pengajuan_ticket_dtl posisi_penumpang }</span>
+					{$arrow_icon_posisi_penumpang}
+			</span>
+	</span>
+	{END posisi_penumpang_fieldheader}
+{END posisi_penumpang_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field4}
+									{BEGIN cellblock_grid_headcell_field5}
+	<th
+	
+	{$cell_grid_headcell_field5}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$sbu_penumpang_class}	"
+
+			data-field="sbu_penumpang"
+	
+	data-cellId="grid_headcell_field5" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN sbu_penumpang_fieldheadercolumn}
+	{BEGIN sbu_penumpang_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field28" {$item_simple_grid_field28} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="sbu_penumpang" data-fieldname="sbu_penumpang" 
+
+			{$sbu_penumpang_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label pengajuan_ticket_dtl sbu_penumpang }</span>
+					{$arrow_icon_sbu_penumpang}
+			</span>
+	</span>
+	{END sbu_penumpang_fieldheader}
+{END sbu_penumpang_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field5}
+									{BEGIN cellblock_grid_headcell_field6}
+	<th
+	
+	{$cell_grid_headcell_field6}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$no_telp_penumpang_class}	"
+
+			data-field="no_telp_penumpang"
+	
+	data-cellId="grid_headcell_field6" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN no_telp_penumpang_fieldheadercolumn}
+	{BEGIN no_telp_penumpang_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field29" {$item_simple_grid_field29} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="no_telp_penumpang" data-fieldname="no_telp_penumpang" 
+
+			{$no_telp_penumpang_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label pengajuan_ticket_dtl no_telp_penumpang }</span>
+					{$arrow_icon_no_telp_penumpang}
+			</span>
+	</span>
+	{END no_telp_penumpang_fieldheader}
+{END no_telp_penumpang_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field6}
+									{BEGIN cellblock_grid_headcell_field7}
+	<th
+	
+	{$cell_grid_headcell_field7}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$gender_class}	"
+
+			data-field="gender"
+	
+	data-cellId="grid_headcell_field7" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN gender_fieldheadercolumn}
+	{BEGIN gender_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field30" {$item_simple_grid_field30} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="gender" data-fieldname="gender" 
+
+			{$gender_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label pengajuan_ticket_dtl gender }</span>
+					{$arrow_icon_gender}
+			</span>
+	</span>
+	{END gender_fieldheader}
+{END gender_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field7}
+									{BEGIN cellblock_grid_headcell_field8}
+	<th
+	
+	{$cell_grid_headcell_field8}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$tipe_perjalanan_class}	"
+
+			data-field="tipe_perjalanan"
+	
+	data-cellId="grid_headcell_field8" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN tipe_perjalanan_fieldheadercolumn}
+	{BEGIN tipe_perjalanan_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field31" {$item_simple_grid_field31} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="tipe_perjalanan" data-fieldname="tipe_perjalanan" 
+
+			{$tipe_perjalanan_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label pengajuan_ticket_dtl tipe_perjalanan }</span>
+					{$arrow_icon_tipe_perjalanan}
+			</span>
+	</span>
+	{END tipe_perjalanan_fieldheader}
+{END tipe_perjalanan_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field8}
+									{BEGIN cellblock_grid_headcell_field9}
+	<th
+	
+	{$cell_grid_headcell_field9}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$bandara_asal_class}	"
+
+			data-field="bandara_asal"
+	
+	data-cellId="grid_headcell_field9" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN bandara_asal_fieldheadercolumn}
+	{BEGIN bandara_asal_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field32" {$item_simple_grid_field32} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="bandara_asal" data-fieldname="bandara_asal" 
+
+			{$bandara_asal_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label pengajuan_ticket_dtl bandara_asal }</span>
+					{$arrow_icon_bandara_asal}
+			</span>
+	</span>
+	{END bandara_asal_fieldheader}
+{END bandara_asal_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field9}
+									{BEGIN cellblock_grid_headcell_field10}
+	<th
+	
+	{$cell_grid_headcell_field10}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$bandara_tujuan_class}	"
+
+			data-field="bandara_tujuan"
+	
+	data-cellId="grid_headcell_field10" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN bandara_tujuan_fieldheadercolumn}
+	{BEGIN bandara_tujuan_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field33" {$item_simple_grid_field33} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="bandara_tujuan" data-fieldname="bandara_tujuan" 
+
+			{$bandara_tujuan_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label pengajuan_ticket_dtl bandara_tujuan }</span>
+					{$arrow_icon_bandara_tujuan}
+			</span>
+	</span>
+	{END bandara_tujuan_fieldheader}
+{END bandara_tujuan_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field10}
+									{BEGIN cellblock_grid_headcell_field11}
+	<th
+	
+	{$cell_grid_headcell_field11}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$maskapai_class}	"
+
+			data-field="maskapai"
+	
+	data-cellId="grid_headcell_field11" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN maskapai_fieldheadercolumn}
+	{BEGIN maskapai_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field34" {$item_simple_grid_field34} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="maskapai" data-fieldname="maskapai" 
+
+			{$maskapai_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label pengajuan_ticket_dtl maskapai }</span>
+					{$arrow_icon_maskapai}
+			</span>
+	</span>
+	{END maskapai_fieldheader}
+{END maskapai_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field11}
+									{BEGIN cellblock_grid_headcell_field12}
+	<th
+	
+	{$cell_grid_headcell_field12}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$tanggal_penerbangan_class}	"
+
+			data-field="tanggal_penerbangan"
+	
+	data-cellId="grid_headcell_field12" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN tanggal_penerbangan_fieldheadercolumn}
+	{BEGIN tanggal_penerbangan_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field35" {$item_simple_grid_field35} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="tanggal_penerbangan" data-fieldname="tanggal_penerbangan" 
+
+			{$tanggal_penerbangan_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label pengajuan_ticket_dtl tanggal_penerbangan }</span>
+					{$arrow_icon_tanggal_penerbangan}
+			</span>
+	</span>
+	{END tanggal_penerbangan_fieldheader}
+{END tanggal_penerbangan_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field12}
+									{BEGIN cellblock_grid_headcell_field13}
+	<th
+	
+	{$cell_grid_headcell_field13}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$waktu_berangkat_class}	"
+
+			data-field="waktu_berangkat"
+	
+	data-cellId="grid_headcell_field13" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN waktu_berangkat_fieldheadercolumn}
+	{BEGIN waktu_berangkat_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field36" {$item_simple_grid_field36} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="waktu_berangkat" data-fieldname="waktu_berangkat" 
+
+			{$waktu_berangkat_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label pengajuan_ticket_dtl waktu_berangkat }</span>
+					{$arrow_icon_waktu_berangkat}
+			</span>
+	</span>
+	{END waktu_berangkat_fieldheader}
+{END waktu_berangkat_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field13}
+									{BEGIN cellblock_grid_headcell_field14}
+	<th
+	
+	{$cell_grid_headcell_field14}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$waktu_tiba_class}	"
+
+			data-field="waktu_tiba"
+	
+	data-cellId="grid_headcell_field14" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN waktu_tiba_fieldheadercolumn}
+	{BEGIN waktu_tiba_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field37" {$item_simple_grid_field37} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="waktu_tiba" data-fieldname="waktu_tiba" 
+
+			{$waktu_tiba_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label pengajuan_ticket_dtl waktu_tiba }</span>
+					{$arrow_icon_waktu_tiba}
+			</span>
+	</span>
+	{END waktu_tiba_fieldheader}
+{END waktu_tiba_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field14}
+									{BEGIN cellblock_grid_headcell_field15}
+	<th
+	
+	{$cell_grid_headcell_field15}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$catatan_khusus_class}	"
+
+			data-field="catatan_khusus"
+	
+	data-cellId="grid_headcell_field15" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN catatan_khusus_fieldheadercolumn}
+	{BEGIN catatan_khusus_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field38" {$item_simple_grid_field38} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="catatan_khusus" data-fieldname="catatan_khusus" 
+
+			{$catatan_khusus_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label pengajuan_ticket_dtl catatan_khusus }</span>
+					{$arrow_icon_catatan_khusus}
+			</span>
+	</span>
+	{END catatan_khusus_fieldheader}
+{END catatan_khusus_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field15}
+									{BEGIN cellblock_grid_headcell_field16}
+	<th
+	
+	{$cell_grid_headcell_field16}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$bandara_asal_p_class}	"
+
+			data-field="bandara_asal_p"
+	
+	data-cellId="grid_headcell_field16" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN bandara_asal_p_fieldheadercolumn}
+	{BEGIN bandara_asal_p_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field39" {$item_simple_grid_field39} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="bandara_asal_p" data-fieldname="bandara_asal_p" 
+
+			{$bandara_asal_p_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label pengajuan_ticket_dtl bandara_asal_p }</span>
+					{$arrow_icon_bandara_asal_p}
+			</span>
+	</span>
+	{END bandara_asal_p_fieldheader}
+{END bandara_asal_p_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field16}
+									{BEGIN cellblock_grid_headcell_field17}
+	<th
+	
+	{$cell_grid_headcell_field17}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$bandara_tujuan_p_class}	"
+
+			data-field="bandara_tujuan_p"
+	
+	data-cellId="grid_headcell_field17" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN bandara_tujuan_p_fieldheadercolumn}
+	{BEGIN bandara_tujuan_p_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field40" {$item_simple_grid_field40} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="bandara_tujuan_p" data-fieldname="bandara_tujuan_p" 
+
+			{$bandara_tujuan_p_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label pengajuan_ticket_dtl bandara_tujuan_p }</span>
+					{$arrow_icon_bandara_tujuan_p}
+			</span>
+	</span>
+	{END bandara_tujuan_p_fieldheader}
+{END bandara_tujuan_p_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field17}
+									{BEGIN cellblock_grid_headcell_field18}
+	<th
+	
+	{$cell_grid_headcell_field18}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$maskapai_p_class}	"
+
+			data-field="maskapai_p"
+	
+	data-cellId="grid_headcell_field18" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN maskapai_p_fieldheadercolumn}
+	{BEGIN maskapai_p_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field41" {$item_simple_grid_field41} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="maskapai_p" data-fieldname="maskapai_p" 
+
+			{$maskapai_p_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label pengajuan_ticket_dtl maskapai_p }</span>
+					{$arrow_icon_maskapai_p}
+			</span>
+	</span>
+	{END maskapai_p_fieldheader}
+{END maskapai_p_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field18}
+									{BEGIN cellblock_grid_headcell_field19}
+	<th
+	
+	{$cell_grid_headcell_field19}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$tanggal_penerbangan_p_class}	"
+
+			data-field="tanggal_penerbangan_p"
+	
+	data-cellId="grid_headcell_field19" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN tanggal_penerbangan_p_fieldheadercolumn}
+	{BEGIN tanggal_penerbangan_p_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field42" {$item_simple_grid_field42} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="tanggal_penerbangan_p" data-fieldname="tanggal_penerbangan_p" 
+
+			{$tanggal_penerbangan_p_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label pengajuan_ticket_dtl tanggal_penerbangan_p }</span>
+					{$arrow_icon_tanggal_penerbangan_p}
+			</span>
+	</span>
+	{END tanggal_penerbangan_p_fieldheader}
+{END tanggal_penerbangan_p_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field19}
+									{BEGIN cellblock_grid_headcell_field20}
+	<th
+	
+	{$cell_grid_headcell_field20}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$waktu_berangkat_p_class}	"
+
+			data-field="waktu_berangkat_p"
+	
+	data-cellId="grid_headcell_field20" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN waktu_berangkat_p_fieldheadercolumn}
+	{BEGIN waktu_berangkat_p_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field43" {$item_simple_grid_field43} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="waktu_berangkat_p" data-fieldname="waktu_berangkat_p" 
+
+			{$waktu_berangkat_p_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label pengajuan_ticket_dtl waktu_berangkat_p }</span>
+					{$arrow_icon_waktu_berangkat_p}
+			</span>
+	</span>
+	{END waktu_berangkat_p_fieldheader}
+{END waktu_berangkat_p_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field20}
+									{BEGIN cellblock_grid_headcell_field21}
+	<th
+	
+	{$cell_grid_headcell_field21}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$waktu_tiba_p_class}	"
+
+			data-field="waktu_tiba_p"
+	
+	data-cellId="grid_headcell_field21" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN waktu_tiba_p_fieldheadercolumn}
+	{BEGIN waktu_tiba_p_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field44" {$item_simple_grid_field44} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="waktu_tiba_p" data-fieldname="waktu_tiba_p" 
+
+			{$waktu_tiba_p_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label pengajuan_ticket_dtl waktu_tiba_p }</span>
+					{$arrow_icon_waktu_tiba_p}
+			</span>
+	</span>
+	{END waktu_tiba_p_fieldheader}
+{END waktu_tiba_p_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field21}
+									{BEGIN cellblock_grid_headcell_field22}
+	<th
+	
+	{$cell_grid_headcell_field22}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$catatan_khusus_p_class}	"
+
+			data-field="catatan_khusus_p"
+	
+	data-cellId="grid_headcell_field22" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN catatan_khusus_p_fieldheadercolumn}
+	{BEGIN catatan_khusus_p_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field45" {$item_simple_grid_field45} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="catatan_khusus_p" data-fieldname="catatan_khusus_p" 
+
+			{$catatan_khusus_p_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label pengajuan_ticket_dtl catatan_khusus_p }</span>
+					{$arrow_icon_catatan_khusus_p}
+			</span>
+	</span>
+	{END catatan_khusus_p_fieldheader}
+{END catatan_khusus_p_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field22}
+							</tr>
+															
+					{END grid_header}
+			</thead>
+															<tbody>
+					{BEGIN grid_row}
+							
+																														<tr {$rowattrs} {$row_grid_1} class="{$rowclass}
+				
+								r-gridrow
+							">
+									{BEGIN cellblock_grid_cell_icons}
+	<td
+	
+	{$cell_grid_cell_icons}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_cell_icons" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="pengajuan_ticket_dtl_list"		data-control-cell
+	
+	>
+
+	 
+		{BEGIN inline_cancel}
+<span data-itemtype="grid_inline_cancel" data-itemid="grid_inline_cancel" {$item_grid_inline_cancel} data-pageid="{$pageid}" data-record-id="{$recId}" data-small data-button-item>
+	<a type="button" title="Cancel" class="btn-link   
+	 glyphicon glyphicon-remove" {$inlinerevertlink_attrs} title="Cancel" >		
+				
+								</a>
+</span>
+{END inline_cancel}
+	
+	</td>
+	{END cellblock_grid_cell_icons}
+									{BEGIN cellblock_grid_cell_checkbox}
+	<td
+	
+	{$cell_grid_cell_checkbox}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_cell_checkbox" data-pageid="{$pageid}" data-record-id="{$recId}"		data-control-cell
+	
+		data-checkbox-cell
+	>
+
+	 
+		{BEGIN checkbox_column}
+<span data-itemtype="grid_checkbox" data-itemid="grid_checkbox" {$item_grid_checkbox} data-pageid="{$pageid}" data-record-id="{$recId}" >
+	<input type="checkbox" {$checkbox_attrs}
+		>
+</span>	
+{END checkbox_column}
+	
+	</td>
+	{END cellblock_grid_cell_checkbox}
+									{BEGIN cellblock_grid_cell_field}
+	<td
+	
+	{$cell_grid_cell_field}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$req_id_class}	"
+
+			data-field="req_id"
+	
+	data-cellId="grid_cell_field" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN req_id_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field1" {$item_simple_grid_field1} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="req_id" data-fieldname="req_id" data-default-width >
+{$req_id_value}
+</span>
+{END req_id_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field}
+									{BEGIN cellblock_grid_cell_field1}
+	<td
+	
+	{$cell_grid_cell_field1}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$nik_penumpang_class}	"
+
+			data-field="nik_penumpang"
+	
+	data-cellId="grid_cell_field1" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN nik_penumpang_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field2" {$item_simple_grid_field2} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="nik_penumpang" data-fieldname="nik_penumpang" data-default-width >
+{$nik_penumpang_value}
+</span>
+{END nik_penumpang_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field1}
+									{BEGIN cellblock_grid_cell_field2}
+	<td
+	
+	{$cell_grid_cell_field2}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$nik_ktp_class}	"
+
+			data-field="nik_ktp"
+	
+	data-cellId="grid_cell_field2" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN nik_ktp_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field3" {$item_simple_grid_field3} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="nik_ktp" data-fieldname="nik_ktp" data-default-width >
+{$nik_ktp_value}
+</span>
+{END nik_ktp_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field2}
+									{BEGIN cellblock_grid_cell_field3}
+	<td
+	
+	{$cell_grid_cell_field3}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$nama_penumpang_class}	"
+
+			data-field="nama_penumpang"
+	
+	data-cellId="grid_cell_field3" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN nama_penumpang_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field4" {$item_simple_grid_field4} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="nama_penumpang" data-fieldname="nama_penumpang" data-default-width >
+{$nama_penumpang_value}
+</span>
+{END nama_penumpang_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field3}
+									{BEGIN cellblock_grid_cell_field4}
+	<td
+	
+	{$cell_grid_cell_field4}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$posisi_penumpang_class}	"
+
+			data-field="posisi_penumpang"
+	
+	data-cellId="grid_cell_field4" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN posisi_penumpang_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field5" {$item_simple_grid_field5} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="posisi_penumpang" data-fieldname="posisi_penumpang" data-default-width >
+{$posisi_penumpang_value}
+</span>
+{END posisi_penumpang_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field4}
+									{BEGIN cellblock_grid_cell_field5}
+	<td
+	
+	{$cell_grid_cell_field5}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$sbu_penumpang_class}	"
+
+			data-field="sbu_penumpang"
+	
+	data-cellId="grid_cell_field5" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN sbu_penumpang_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field6" {$item_simple_grid_field6} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="sbu_penumpang" data-fieldname="sbu_penumpang" data-default-width >
+{$sbu_penumpang_value}
+</span>
+{END sbu_penumpang_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field5}
+									{BEGIN cellblock_grid_cell_field6}
+	<td
+	
+	{$cell_grid_cell_field6}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$no_telp_penumpang_class}	"
+
+			data-field="no_telp_penumpang"
+	
+	data-cellId="grid_cell_field6" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN no_telp_penumpang_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field7" {$item_simple_grid_field7} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="no_telp_penumpang" data-fieldname="no_telp_penumpang" data-default-width >
+{$no_telp_penumpang_value}
+</span>
+{END no_telp_penumpang_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field6}
+									{BEGIN cellblock_grid_cell_field7}
+	<td
+	
+	{$cell_grid_cell_field7}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$gender_class}	"
+
+			data-field="gender"
+	
+	data-cellId="grid_cell_field7" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN gender_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field8" {$item_simple_grid_field8} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="gender" data-fieldname="gender" data-default-width >
+{$gender_value}
+</span>
+{END gender_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field7}
+									{BEGIN cellblock_grid_cell_field8}
+	<td
+	
+	{$cell_grid_cell_field8}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$tipe_perjalanan_class}	"
+
+			data-field="tipe_perjalanan"
+	
+	data-cellId="grid_cell_field8" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN tipe_perjalanan_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field9" {$item_simple_grid_field9} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="tipe_perjalanan" data-fieldname="tipe_perjalanan" data-default-width >
+{$tipe_perjalanan_value}
+</span>
+{END tipe_perjalanan_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field8}
+									{BEGIN cellblock_grid_cell_field9}
+	<td
+	
+	{$cell_grid_cell_field9}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$bandara_asal_class}	"
+
+			data-field="bandara_asal"
+	
+	data-cellId="grid_cell_field9" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN bandara_asal_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field10" {$item_simple_grid_field10} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="bandara_asal" data-fieldname="bandara_asal" data-default-width >
+{$bandara_asal_value}
+</span>
+{END bandara_asal_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field9}
+									{BEGIN cellblock_grid_cell_field10}
+	<td
+	
+	{$cell_grid_cell_field10}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$bandara_tujuan_class}	"
+
+			data-field="bandara_tujuan"
+	
+	data-cellId="grid_cell_field10" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN bandara_tujuan_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field11" {$item_simple_grid_field11} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="bandara_tujuan" data-fieldname="bandara_tujuan" data-default-width >
+{$bandara_tujuan_value}
+</span>
+{END bandara_tujuan_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field10}
+									{BEGIN cellblock_grid_cell_field11}
+	<td
+	
+	{$cell_grid_cell_field11}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$maskapai_class}	"
+
+			data-field="maskapai"
+	
+	data-cellId="grid_cell_field11" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN maskapai_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field12" {$item_simple_grid_field12} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="maskapai" data-fieldname="maskapai" data-default-width >
+{$maskapai_value}
+</span>
+{END maskapai_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field11}
+									{BEGIN cellblock_grid_cell_field12}
+	<td
+	
+	{$cell_grid_cell_field12}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$tanggal_penerbangan_class}	"
+
+			data-field="tanggal_penerbangan"
+	
+	data-cellId="grid_cell_field12" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN tanggal_penerbangan_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field13" {$item_simple_grid_field13} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="tanggal_penerbangan" data-fieldname="tanggal_penerbangan" data-default-width >
+{$tanggal_penerbangan_value}
+</span>
+{END tanggal_penerbangan_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field12}
+									{BEGIN cellblock_grid_cell_field13}
+	<td
+	
+	{$cell_grid_cell_field13}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$waktu_berangkat_class}	"
+
+			data-field="waktu_berangkat"
+	
+	data-cellId="grid_cell_field13" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN waktu_berangkat_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field14" {$item_simple_grid_field14} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="waktu_berangkat" data-fieldname="waktu_berangkat" data-default-width >
+{$waktu_berangkat_value}
+</span>
+{END waktu_berangkat_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field13}
+									{BEGIN cellblock_grid_cell_field14}
+	<td
+	
+	{$cell_grid_cell_field14}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$waktu_tiba_class}	"
+
+			data-field="waktu_tiba"
+	
+	data-cellId="grid_cell_field14" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN waktu_tiba_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field15" {$item_simple_grid_field15} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="waktu_tiba" data-fieldname="waktu_tiba" data-default-width >
+{$waktu_tiba_value}
+</span>
+{END waktu_tiba_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field14}
+									{BEGIN cellblock_grid_cell_field15}
+	<td
+	
+	{$cell_grid_cell_field15}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$catatan_khusus_class}	"
+
+			data-field="catatan_khusus"
+	
+	data-cellId="grid_cell_field15" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN catatan_khusus_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field16" {$item_simple_grid_field16} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="catatan_khusus" data-fieldname="catatan_khusus" data-default-width >
+{$catatan_khusus_value}
+</span>
+{END catatan_khusus_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field15}
+									{BEGIN cellblock_grid_cell_field16}
+	<td
+	
+	{$cell_grid_cell_field16}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$bandara_asal_p_class}	"
+
+			data-field="bandara_asal_p"
+	
+	data-cellId="grid_cell_field16" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN bandara_asal_p_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field17" {$item_simple_grid_field17} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="bandara_asal_p" data-fieldname="bandara_asal_p" data-default-width >
+{$bandara_asal_p_value}
+</span>
+{END bandara_asal_p_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field16}
+									{BEGIN cellblock_grid_cell_field17}
+	<td
+	
+	{$cell_grid_cell_field17}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$bandara_tujuan_p_class}	"
+
+			data-field="bandara_tujuan_p"
+	
+	data-cellId="grid_cell_field17" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN bandara_tujuan_p_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field18" {$item_simple_grid_field18} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="bandara_tujuan_p" data-fieldname="bandara_tujuan_p" data-default-width >
+{$bandara_tujuan_p_value}
+</span>
+{END bandara_tujuan_p_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field17}
+									{BEGIN cellblock_grid_cell_field18}
+	<td
+	
+	{$cell_grid_cell_field18}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$maskapai_p_class}	"
+
+			data-field="maskapai_p"
+	
+	data-cellId="grid_cell_field18" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN maskapai_p_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field19" {$item_simple_grid_field19} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="maskapai_p" data-fieldname="maskapai_p" data-default-width >
+{$maskapai_p_value}
+</span>
+{END maskapai_p_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field18}
+									{BEGIN cellblock_grid_cell_field19}
+	<td
+	
+	{$cell_grid_cell_field19}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$tanggal_penerbangan_p_class}	"
+
+			data-field="tanggal_penerbangan_p"
+	
+	data-cellId="grid_cell_field19" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN tanggal_penerbangan_p_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field20" {$item_simple_grid_field20} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="tanggal_penerbangan_p" data-fieldname="tanggal_penerbangan_p" data-default-width >
+{$tanggal_penerbangan_p_value}
+</span>
+{END tanggal_penerbangan_p_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field19}
+									{BEGIN cellblock_grid_cell_field20}
+	<td
+	
+	{$cell_grid_cell_field20}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$waktu_berangkat_p_class}	"
+
+			data-field="waktu_berangkat_p"
+	
+	data-cellId="grid_cell_field20" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN waktu_berangkat_p_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field21" {$item_simple_grid_field21} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="waktu_berangkat_p" data-fieldname="waktu_berangkat_p" data-default-width >
+{$waktu_berangkat_p_value}
+</span>
+{END waktu_berangkat_p_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field20}
+									{BEGIN cellblock_grid_cell_field21}
+	<td
+	
+	{$cell_grid_cell_field21}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$waktu_tiba_p_class}	"
+
+			data-field="waktu_tiba_p"
+	
+	data-cellId="grid_cell_field21" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN waktu_tiba_p_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field22" {$item_simple_grid_field22} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="waktu_tiba_p" data-fieldname="waktu_tiba_p" data-default-width >
+{$waktu_tiba_p_value}
+</span>
+{END waktu_tiba_p_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field21}
+									{BEGIN cellblock_grid_cell_field22}
+	<td
+	
+	{$cell_grid_cell_field22}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$catatan_khusus_p_class}	"
+
+			data-field="catatan_khusus_p"
+	
+	data-cellId="grid_cell_field22" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN catatan_khusus_p_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field23" {$item_simple_grid_field23} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="catatan_khusus_p" data-fieldname="catatan_khusus_p" data-default-width >
+{$catatan_khusus_p_value}
+</span>
+{END catatan_khusus_p_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field22}
+							</tr>
+										
+											{END grid_row}
+					</tbody>
+													<tfoot>
+			
+																																			<tr {$rowattrs} {$row_grid_2} class="{$rowclass}
+									{$gridFooter_class}
+					
+								r-gridrow
+							">
+									{BEGIN cellblock_grid_footcell_icons}
+	<td
+	
+	{$cell_grid_footcell_icons}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_footcell_icons" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_icons}
+									{BEGIN cellblock_grid_footcell_checkbox}
+	<td
+	
+	{$cell_grid_footcell_checkbox}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_footcell_checkbox" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_checkbox}
+									{BEGIN cellblock_grid_footcell_field}
+	<td
+	
+	{$cell_grid_footcell_field}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$req_id_class}	"
+
+	
+	data-cellId="grid_footcell_field" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="pengajuan_ticket_dtl_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field}
+									{BEGIN cellblock_grid_footcell_field1}
+	<td
+	
+	{$cell_grid_footcell_field1}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$nik_penumpang_class}	"
+
+	
+	data-cellId="grid_footcell_field1" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="pengajuan_ticket_dtl_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field1}
+									{BEGIN cellblock_grid_footcell_field2}
+	<td
+	
+	{$cell_grid_footcell_field2}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$nik_ktp_class}	"
+
+	
+	data-cellId="grid_footcell_field2" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="pengajuan_ticket_dtl_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field2}
+									{BEGIN cellblock_grid_footcell_field3}
+	<td
+	
+	{$cell_grid_footcell_field3}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$nama_penumpang_class}	"
+
+	
+	data-cellId="grid_footcell_field3" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="pengajuan_ticket_dtl_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field3}
+									{BEGIN cellblock_grid_footcell_field4}
+	<td
+	
+	{$cell_grid_footcell_field4}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$posisi_penumpang_class}	"
+
+	
+	data-cellId="grid_footcell_field4" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="pengajuan_ticket_dtl_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field4}
+									{BEGIN cellblock_grid_footcell_field5}
+	<td
+	
+	{$cell_grid_footcell_field5}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$sbu_penumpang_class}	"
+
+	
+	data-cellId="grid_footcell_field5" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="pengajuan_ticket_dtl_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field5}
+									{BEGIN cellblock_grid_footcell_field6}
+	<td
+	
+	{$cell_grid_footcell_field6}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$no_telp_penumpang_class}	"
+
+	
+	data-cellId="grid_footcell_field6" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="pengajuan_ticket_dtl_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field6}
+									{BEGIN cellblock_grid_footcell_field7}
+	<td
+	
+	{$cell_grid_footcell_field7}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$gender_class}	"
+
+	
+	data-cellId="grid_footcell_field7" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="pengajuan_ticket_dtl_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field7}
+									{BEGIN cellblock_grid_footcell_field8}
+	<td
+	
+	{$cell_grid_footcell_field8}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$tipe_perjalanan_class}	"
+
+	
+	data-cellId="grid_footcell_field8" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="pengajuan_ticket_dtl_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field8}
+									{BEGIN cellblock_grid_footcell_field9}
+	<td
+	
+	{$cell_grid_footcell_field9}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$bandara_asal_class}	"
+
+	
+	data-cellId="grid_footcell_field9" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="pengajuan_ticket_dtl_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field9}
+									{BEGIN cellblock_grid_footcell_field10}
+	<td
+	
+	{$cell_grid_footcell_field10}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$bandara_tujuan_class}	"
+
+	
+	data-cellId="grid_footcell_field10" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="pengajuan_ticket_dtl_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field10}
+									{BEGIN cellblock_grid_footcell_field11}
+	<td
+	
+	{$cell_grid_footcell_field11}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$maskapai_class}	"
+
+	
+	data-cellId="grid_footcell_field11" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="pengajuan_ticket_dtl_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field11}
+									{BEGIN cellblock_grid_footcell_field12}
+	<td
+	
+	{$cell_grid_footcell_field12}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$tanggal_penerbangan_class}	"
+
+	
+	data-cellId="grid_footcell_field12" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="pengajuan_ticket_dtl_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field12}
+									{BEGIN cellblock_grid_footcell_field13}
+	<td
+	
+	{$cell_grid_footcell_field13}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$waktu_berangkat_class}	"
+
+	
+	data-cellId="grid_footcell_field13" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="pengajuan_ticket_dtl_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field13}
+									{BEGIN cellblock_grid_footcell_field14}
+	<td
+	
+	{$cell_grid_footcell_field14}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$waktu_tiba_class}	"
+
+	
+	data-cellId="grid_footcell_field14" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="pengajuan_ticket_dtl_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field14}
+									{BEGIN cellblock_grid_footcell_field15}
+	<td
+	
+	{$cell_grid_footcell_field15}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$catatan_khusus_class}	"
+
+	
+	data-cellId="grid_footcell_field15" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="pengajuan_ticket_dtl_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field15}
+									{BEGIN cellblock_grid_footcell_field16}
+	<td
+	
+	{$cell_grid_footcell_field16}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$bandara_asal_p_class}	"
+
+	
+	data-cellId="grid_footcell_field16" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="pengajuan_ticket_dtl_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field16}
+									{BEGIN cellblock_grid_footcell_field17}
+	<td
+	
+	{$cell_grid_footcell_field17}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$bandara_tujuan_p_class}	"
+
+	
+	data-cellId="grid_footcell_field17" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="pengajuan_ticket_dtl_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field17}
+									{BEGIN cellblock_grid_footcell_field18}
+	<td
+	
+	{$cell_grid_footcell_field18}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$maskapai_p_class}	"
+
+	
+	data-cellId="grid_footcell_field18" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="pengajuan_ticket_dtl_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field18}
+									{BEGIN cellblock_grid_footcell_field19}
+	<td
+	
+	{$cell_grid_footcell_field19}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$tanggal_penerbangan_p_class}	"
+
+	
+	data-cellId="grid_footcell_field19" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="pengajuan_ticket_dtl_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field19}
+									{BEGIN cellblock_grid_footcell_field20}
+	<td
+	
+	{$cell_grid_footcell_field20}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$waktu_berangkat_p_class}	"
+
+	
+	data-cellId="grid_footcell_field20" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="pengajuan_ticket_dtl_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field20}
+									{BEGIN cellblock_grid_footcell_field21}
+	<td
+	
+	{$cell_grid_footcell_field21}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$waktu_tiba_p_class}	"
+
+	
+	data-cellId="grid_footcell_field21" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="pengajuan_ticket_dtl_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field21}
+									{BEGIN cellblock_grid_footcell_field22}
+	<td
+	
+	{$cell_grid_footcell_field22}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$catatan_khusus_p_class}	"
+
+	
+	data-cellId="grid_footcell_field22" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="pengajuan_ticket_dtl_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field22}
+							</tr>
+					
+					</tfoot>
+				</table>
+{END grid_block}
+	</div>
+<div class="r-below">
+					{BEGIN below-grid_block}
+<div class="r-form" data-location="below-grid" id="form_below-grid_{$pageid}" data-makeup="leftbar" {$form_below-grid} data-pageid="{$pageid}" >		
+	 
+				<div class="row">
+			 
+				<div 
+	data-cellId="below-grid_c1" data-pageid="{$pageid}"	{$cell_below-grid_c1}
+	class="r-align-center r-ori-vert			col-md-12
+	
+">
+		 
+		{BEGIN pagination_block}
+<span data-itemtype="pagination" data-itemid="pagination" {$item_pagination} data-pageid="{$pageid}" >
+{$pagination}
+</span>
+{END pagination_block}
+		</div>					</div>
+			</div>		
+{END below-grid_block}
+	</div>
+
+
+
+
+										{$footer}
+				</div>
+			</div>
+			<div class="r-body-shadow">
+			</div>
+		</div>
+	{END body}
+	</body>
+</html>
