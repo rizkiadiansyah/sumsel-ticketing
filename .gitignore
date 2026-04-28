@@ -15,9 +15,6 @@ Desktop.ini
 *.local
 *.key
 
-# PHP dependencies
-/vendor/
-
 # Runtime uploads and generated files
 /files/*
 !/files/.gitkeep
