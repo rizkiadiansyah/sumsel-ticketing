@@ -21,6 +21,55 @@ function val($data, $key) {
     return htmlspecialchars($data[$key] ?? '');
 }
 
+function normalizeTicketSbuCode($value, $sbuList) {
+    $value = trim((string) $value);
+    if ($value === '') {
+        return '';
+    }
+
+    $valueLower = strtolower($value);
+    foreach ($sbuList as $sbu) {
+        $code = trim((string) ($sbu['code'] ?? ''));
+        $desc = trim((string) ($sbu['desc'] ?? ''));
+
+        if ($code !== '' && strtolower($code) === $valueLower) {
+            return $code;
+        }
+
+        if ($desc !== '' && strtolower($desc) === $valueLower) {
+            return $code;
+        }
+    }
+
+    return $value;
+}
+
+function normalizeTicketPhoneNumber($value) {
+    $value = trim((string) $value);
+    if ($value === '') {
+        return '';
+    }
+
+    $digits = preg_replace('/\D/', '', $value);
+    if ($digits === '') {
+        return '';
+    }
+
+    if (strpos($digits, '0') === 0) {
+        return '+62' . substr($digits, 1);
+    }
+
+    if (strpos($digits, '62') === 0) {
+        return '+' . $digits;
+    }
+
+    if (strpos($digits, '8') === 0) {
+        return '+62' . $digits;
+    }
+
+    return '+' . $digits;
+}
+
 // Fetch SBU list dari database
 $sbuList = [];
 $sqlSbu = "SELECT DISTINCT CODE FROM tbl_code_list WHERE CatID = 'app_sbu' ORDER BY CODE";
@@ -38,6 +87,9 @@ while ($rowSbu = db_fetch_array($rsSbu)) {
         'desc' => $rowSbu['Description']
     ];
 }
+
+$sbuPemesanValue = normalizeTicketSbuCode($userData['sbu'] ?? '', $sbuPList);
+$noTelpPemesanValue = normalizeTicketPhoneNumber($userData['no_hp'] ?? '');
 
 // Fetch Airport list dari database
 $airportList = [];
@@ -377,14 +429,14 @@ while ($rowAirline = db_fetch_array($rsAirline)) {
           <label>SBU <span class="req">*</span></label>
           <input type="text" id="sbu_pemesan" name="sbu_pemesan"
             placeholder="SBU" required
-            value="<?= val($userData, 'sbu') ?>"
+            value="<?= htmlspecialchars($sbuPemesanValue) ?>"
             <?= $isLoggedIn ? 'readonly' : '' ?>>
         </div>
         <div class="field">
           <label>No. Telepon <span class="req">*</span></label>
           <input type="text" id="no_telp_pemesan" name="no_telp_pemesan"
-            placeholder="08xxxxxxxxxx" required
-            value="<?= val($userData, 'no_hp') ?>"
+            placeholder="+628xxxxxxxxxx" required
+            value="<?= htmlspecialchars($noTelpPemesanValue) ?>"
             <?= $isLoggedIn ? 'readonly' : '' ?>>
         </div>
         <div class="field">

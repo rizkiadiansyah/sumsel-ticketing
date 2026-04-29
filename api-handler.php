@@ -6,7 +6,14 @@ header('Access-Control-Allow-Headers: Content-Type');
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') { exit(0); }
 require_once __DIR__ . '/include/dbcommon.php';
-require_once 'koneksi.php';
+$runnerConnection = DB::DefaultConnection();
+$conn = $runnerConnection ? $runnerConnection->conn : null;
+if (!$conn instanceof mysqli) {
+    http_response_code(500);
+    echo json_encode(['success' => false, 'message' => 'Koneksi database tidak tersedia']);
+    exit;
+}
+$conn->set_charset('utf8mb4');
 
 // ── AMBIL CONFIG SMTP DARI PHPRUNNER ──────────────────────────────
 require_once __DIR__ . '/libs/phpmailer/class.phpmailer.php';
@@ -60,6 +67,61 @@ function isSuperAdmin($nik) {
 }
 
 // ── FUNGSI KIRIM EMAIL (pakai config PHPRunner) ───────────────────
+function resolveTicketSbuCode($value) {
+    global $conn;
+
+    $value = trim((string) $value);
+    if ($value === '') {
+        return '';
+    }
+
+    $valueEsc = $conn->real_escape_string($value);
+    $sql = "
+        SELECT CODE
+        FROM tbl_code_list
+        WHERE CatID = 'SBU'
+          AND (
+            LOWER(CODE) = LOWER('$valueEsc')
+            OR LOWER(Description) = LOWER('$valueEsc')
+          )
+        ORDER BY OrderNo
+        LIMIT 1
+    ";
+
+    $rs = $conn->query($sql);
+    if ($rs && $row = $rs->fetch_assoc()) {
+        return $row['CODE'];
+    }
+
+    return $value;
+}
+
+function normalizeTicketPhoneNumber($value) {
+    $value = trim((string) $value);
+    if ($value === '') {
+        return '';
+    }
+
+    $digits = preg_replace('/\D/', '', $value);
+    if ($digits === '') {
+        return '';
+    }
+
+    if (strpos($digits, '0') === 0) {
+        return '+62' . substr($digits, 1);
+    }
+
+    if (strpos($digits, '62') === 0) {
+        return '+' . $digits;
+    }
+
+    if (strpos($digits, '8') === 0) {
+        return '+62' . $digits;
+    }
+
+    return '+' . $digits;
+}
+
 function kirimEmail($to, $to_name, $subject, $body_html, $cc = [], $extra_to = []) {
     global $globalSettings;
 
@@ -132,7 +194,7 @@ function sendEmailNotification($req_id, $requestor_data, $penumpang_list, $mode 
     }
 
     $base_url  = rtrim(APP_URL, '/');
-    $cek_link  = $base_url . '/sumsel-ticketing/cek-status.php?req_id=' . urlencode($req_id);
+    $cek_link  = $base_url . '/cek-status.php?req_id=' . urlencode($req_id);
 
     // ── Variabel yang beda antara tiket vs reschedule ─────────────
     if ($is_rsc) {
@@ -555,8 +617,8 @@ if ($action === 'submit_tiket') {
         $nik_pemesan           = $conn->real_escape_string($hdr['nik_pemesan'] ?? '');
         $nama_pemesan          = $conn->real_escape_string($hdr['nama_pemesan'] ?? '');
         $posisi_pemesan        = $conn->real_escape_string($hdr['posisi_pemesan'] ?? '');
-        $sbu_pemesan           = $conn->real_escape_string($hdr['sbu_pemesan'] ?? '');
-        $no_telp_pemesan       = $conn->real_escape_string(preg_replace('/\D/', '', $hdr['no_telp_pemesan'] ?? ''));
+        $sbu_pemesan           = $conn->real_escape_string(resolveTicketSbuCode($hdr['sbu_pemesan'] ?? ''));
+        $no_telp_pemesan       = $conn->real_escape_string(normalizeTicketPhoneNumber($hdr['no_telp_pemesan'] ?? ''));
         $email_pemesan         = $conn->real_escape_string($hdr['email_pemesan'] ?? '');
         $jenis_pengajuan       = $conn->real_escape_string($hdr['jenis_pengajuan'] ?? 'Dinas');
         $alasan                = $conn->real_escape_string($hdr['alasan'] ?? '');
@@ -741,8 +803,8 @@ if ($action === 'submit_reschedule') {
         $nik_pemesan     = $conn->real_escape_string($hdr['nik_pemesan']     ?? '');
         $nama_pemesan    = $conn->real_escape_string($hdr['nama_pemesan']    ?? '');
         $posisi_pemesan  = $conn->real_escape_string($hdr['posisi_pemesan']  ?? '');
-        $sbu_pemesan     = $conn->real_escape_string($hdr['sbu_pemesan']     ?? '');
-        $no_telp_pemesan = $conn->real_escape_string(preg_replace('/\D/', '', $hdr['no_telp_pemesan'] ?? ''));
+        $sbu_pemesan     = $conn->real_escape_string(resolveTicketSbuCode($hdr['sbu_pemesan']     ?? ''));
+        $no_telp_pemesan = $conn->real_escape_string(normalizeTicketPhoneNumber($hdr['no_telp_pemesan'] ?? ''));
         $email_pemesan   = $conn->real_escape_string($hdr['email_pemesan']   ?? '');
         $atasan_langsung = $conn->real_escape_string($hdr['atasan_langsung'] ?? '');
         $jenis_pengajuan = $conn->real_escape_string($hdr['jenis_pengajuan'] ?? 'Dinas');

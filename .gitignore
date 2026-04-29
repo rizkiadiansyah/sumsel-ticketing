@@ -1,3 +1,7 @@
+# Environment-specific connection config
+/connections/ConnectionManager.php
+/koneksi.php
+
 # OS / editor
 .DS_Store
 Thumbs.db
