@@ -141,9 +141,19 @@ function buttonHandler_Approved($params)
 	}
 
 	RunnerContext::push( new RunnerContextItem( $params["location"], $contextParams));
-	require_once $_SERVER['DOCUMENT_ROOT'] . '/sumsel-ticketing/koneksi.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/sumsel-ticketing/libs/phpmailer/class.phpmailer.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/sumsel-ticketing/libs/phpmailer/class.smtp.php';
+	require_once __DIR__ . '/include/dbcommon.php';
+
+$runnerConnection = DB::DefaultConnection();
+$conn = $runnerConnection ? $runnerConnection->conn : null;
+if (!$conn instanceof mysqli) {
+    $result["success"] = false;
+    $result["message"] = 'Koneksi database tidak tersedia';
+    return;
+}
+$conn->set_charset('utf8mb4');
+
+require_once __DIR__ . '/libs/phpmailer/class.phpmailer.php';
+require_once __DIR__ . '/libs/phpmailer/class.smtp.php';
 
 // Config SMTP
 $globalSettings = array(
@@ -198,7 +208,7 @@ while ($record = $button->getNextSelectedRecord()) {
     $nama_pemesan  = $record['nama_pemesan'];
     $now           = date('Y-m-d H:i:s');
     $approved_by   = isset($_SESSION['UserName']) ? $_SESSION['UserName'] : 'Admin';
-    $cek_link      = 'http://' . $_SERVER['HTTP_HOST'] . '/sumsel-ticketing/cek-status.php?req_id=' . urlencode($req_id);
+    $cek_link      = 'http://' . $_SERVER['HTTP_HOST'] . '/cek-status.php?req_id=' . urlencode($req_id);
 
     $res = CustomQuery("UPDATE tbl_pengajuan_ticket_hdr 
         SET status = '2', 
@@ -325,9 +335,20 @@ function buttonHandler_Rejected($params)
 	}
 
 	RunnerContext::push( new RunnerContextItem( $params["location"], $contextParams));
-	require_once $_SERVER['DOCUMENT_ROOT'] . '/sumsel-ticketing/koneksi.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/sumsel-ticketing/libs/phpmailer/class.phpmailer.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/sumsel-ticketing/libs/phpmailer/class.smtp.php';
+	require_once __DIR__ . '/include/dbcommon.php';
+
+$runnerConnection = DB::DefaultConnection();
+$conn = $runnerConnection ? $runnerConnection->conn : null;
+if (!$conn instanceof mysqli) {
+    $result["success"] = false;
+    $result["message"] = 'Koneksi database tidak tersedia';
+    return;
+}
+$conn->set_charset('utf8mb4');
+
+require_once __DIR__ . '/libs/phpmailer/class.phpmailer.php';
+require_once __DIR__ . '/libs/phpmailer/class.smtp.php';
+
 
 // Config SMTP
 $globalSettings = array(
@@ -377,7 +398,7 @@ while ($record = $button->getNextSelectedRecord()) {
     $keterangan_admin = $record['ket_admin'];
     $now              = date('Y-m-d H:i:s');
     $rejected_by      = isset($_SESSION['UserName']) ? $_SESSION['UserName'] : 'Admin';
-    $cek_link         = 'http://' . $_SERVER['HTTP_HOST'] . '/sumsel-ticketing/cek-status.php?req_id=' . urlencode($req_id);
+    $cek_link         = 'http://' . $_SERVER['HTTP_HOST'] . '/cek-status.php?req_id=' . urlencode($req_id);
 
     // Validasi ket_admin wajib diisi
     if (empty($keterangan_admin)) {
