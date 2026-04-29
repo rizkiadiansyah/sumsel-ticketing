@@ -1,6 +1,11 @@
 <?php
 require_once("include/dbcommon.php");
-require_once 'koneksi.php';
+$runnerConnection = DB::DefaultConnection();
+$conn = $runnerConnection ? $runnerConnection->conn : null;
+if (!$conn instanceof mysqli) {
+    http_response_code(500); exit('Koneksi database tidak tersedia');
+}
+$conn->set_charset('utf8mb4');
 
 if (!isset($_SESSION['UserID']) || $_SESSION['UserID'] == '') {
     http_response_code(403); exit('Unauthorized');
