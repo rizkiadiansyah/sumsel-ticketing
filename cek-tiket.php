@@ -2,10 +2,17 @@
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 
-require_once 'koneksi.php';
 require_once __DIR__ . '/include/dbcommon.php';
 require_once __DIR__ . '/api-handler.php';
 
+$runnerConnection = DB::DefaultConnection();
+$conn = $runnerConnection ? $runnerConnection->conn : null;
+if (!$conn instanceof mysqli) {
+    http_response_code(500);
+    echo json_encode(['success' => false, 'message' => 'Koneksi database tidak tersedia']);
+    exit;
+}
+$conn->set_charset('utf8mb4');
 
 $req_id = $conn->real_escape_string(trim($_GET['req_id'] ?? ''));
 
