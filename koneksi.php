@@ -1,8 +1,8 @@
 <?php
-define('DB_HOST', '45.64.1.195');
-define('DB_USER', 'admin_ticketing');
-define('DB_PASS', '#Sentosa26');
-define('DB_NAME', 'ticketing_sumsel_prod');
+define('DB_HOST', 'localhost');
+define('DB_USER', 'root');
+define('DB_PASS', '');
+define('DB_NAME', 'sumsel_ticketing');
 
 $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 

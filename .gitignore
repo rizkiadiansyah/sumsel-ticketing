@@ -1,3 +1,10 @@
+connections/ConnectionManager.php
+koneksi.php
+.htaccess
+config.php
+
+.php-ini
+.php-version
 # OS / editor
 .DS_Store
 Thumbs.db

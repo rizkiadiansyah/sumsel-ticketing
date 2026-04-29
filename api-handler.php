@@ -59,6 +59,62 @@ function isSuperAdmin($nik) {
     return ($data['total'] ?? 0) > 0;
 }
 
+// ── NORMALISASI SBU ────────────────────────────────────────────────
+function resolveSbuCode($value) {
+    global $conn;
+
+    $value = trim((string) $value);
+    if ($value === '') {
+        return '';
+    }
+
+    $valueEsc = $conn->real_escape_string($value);
+    $sql = "
+        SELECT CODE
+        FROM tbl_code_list
+        WHERE CatID = 'SBU'
+          AND (
+            LOWER(CODE) = LOWER('$valueEsc')
+            OR LOWER(Description) = LOWER('$valueEsc')
+          )
+        ORDER BY OrderNo
+        LIMIT 1
+    ";
+
+    $rs = $conn->query($sql);
+    if ($rs && $row = $rs->fetch_assoc()) {
+        return $row['CODE'];
+    }
+
+    return $value;
+}
+
+function normalizeTicketPhoneNumber($value) {
+    $value = trim((string) $value);
+    if ($value === '') {
+        return '';
+    }
+
+    $digits = preg_replace('/\D/', '', $value);
+    if ($digits === '') {
+        return '';
+    }
+
+    if (strpos($digits, '0') === 0) {
+        return '+62' . substr($digits, 1);
+    }
+
+    if (strpos($digits, '62') === 0) {
+        return '+' . $digits;
+    }
+
+    if (strpos($digits, '8') === 0) {
+        return '+62' . $digits;
+    }
+
+    return '+' . $digits;
+}
+
 // ── FUNGSI KIRIM EMAIL (pakai config PHPRunner) ───────────────────
 function kirimEmail($to, $to_name, $subject, $body_html, $cc = [], $extra_to = []) {
     global $globalSettings;
@@ -555,8 +611,8 @@ if ($action === 'submit_tiket') {
         $nik_pemesan           = $conn->real_escape_string($hdr['nik_pemesan'] ?? '');
         $nama_pemesan          = $conn->real_escape_string($hdr['nama_pemesan'] ?? '');
         $posisi_pemesan        = $conn->real_escape_string($hdr['posisi_pemesan'] ?? '');
-        $sbu_pemesan           = $conn->real_escape_string($hdr['sbu_pemesan'] ?? '');
-        $no_telp_pemesan       = $conn->real_escape_string(preg_replace('/\D/', '', $hdr['no_telp_pemesan'] ?? ''));
+        $sbu_pemesan           = $conn->real_escape_string(resolveSbuCode($hdr['sbu_pemesan'] ?? ''));
+        $no_telp_pemesan       = $conn->real_escape_string(normalizeTicketPhoneNumber($hdr['no_telp_pemesan'] ?? ''));
         $email_pemesan         = $conn->real_escape_string($hdr['email_pemesan'] ?? '');
         $jenis_pengajuan       = $conn->real_escape_string($hdr['jenis_pengajuan'] ?? 'Dinas');
         $alasan                = $conn->real_escape_string($hdr['alasan'] ?? '');
@@ -741,8 +797,8 @@ if ($action === 'submit_reschedule') {
         $nik_pemesan     = $conn->real_escape_string($hdr['nik_pemesan']     ?? '');
         $nama_pemesan    = $conn->real_escape_string($hdr['nama_pemesan']    ?? '');
         $posisi_pemesan  = $conn->real_escape_string($hdr['posisi_pemesan']  ?? '');
-        $sbu_pemesan     = $conn->real_escape_string($hdr['sbu_pemesan']     ?? '');
-        $no_telp_pemesan = $conn->real_escape_string(preg_replace('/\D/', '', $hdr['no_telp_pemesan'] ?? ''));
+        $sbu_pemesan     = $conn->real_escape_string(resolveSbuCode($hdr['sbu_pemesan']     ?? ''));
+        $no_telp_pemesan = $conn->real_escape_string(normalizeTicketPhoneNumber($hdr['no_telp_pemesan'] ?? ''));
         $email_pemesan   = $conn->real_escape_string($hdr['email_pemesan']   ?? '');
         $atasan_langsung = $conn->real_escape_string($hdr['atasan_langsung'] ?? '');
         $jenis_pengajuan = $conn->real_escape_string($hdr['jenis_pengajuan'] ?? 'Dinas');
