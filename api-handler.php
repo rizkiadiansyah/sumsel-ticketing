@@ -195,7 +195,7 @@ function sendEmailNotification($req_id, $requestor_data, $penumpang_list, $mode 
     }
 
     $base_url  = rtrim(APP_URL, '/');
-    $cek_link  = $base_url . '/sumsel-ticketing/cek-status.php?req_id=' . urlencode($req_id);
+    $cek_link  = $base_url . '/cek-status.php?req_id=' . urlencode($req_id);
 
     // ── Variabel yang beda antara tiket vs reschedule ─────────────
     if ($is_rsc) {

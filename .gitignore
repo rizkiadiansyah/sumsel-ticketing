@@ -1,9 +1,8 @@
-connections/ConnectionManager.php
-.htaccess
-config.php
+# Environment-specific connection config
+/connections/ConnectionManager.php
+/connections/ConnectionManager.php.bak
+/koneksi.php
 
-.php-ini
-.php-version
 # OS / editor
 .DS_Store
 Thumbs.db
