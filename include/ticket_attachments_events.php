@@ -56,8 +56,8 @@ date_default_timezone_set('Asia/Jakarta');
 $now       = date('Y-m-d H:i:s');
 $issued_by = isset($_SESSION['UserName']) ? $_SESSION['UserName'] : 'Admin';
 
-$cek_link = 'http://' . $_SERVER['HTTP_HOST'] . '/sumsel-ticketing/cek-status.php?req_id=' . urlencode($req_id);
-
+$base_url = 'http://' . $_SERVER['HTTP_HOST'];
+$cek_link = $base_url . '/cek-status.php?req_id=' . urlencode($req_id);
 // ================== UPDATE STATUS ==================
 CustomQuery("UPDATE tbl_pengajuan_ticket_hdr 
     SET status = '5', 
