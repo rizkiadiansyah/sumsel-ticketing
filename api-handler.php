@@ -6,7 +6,14 @@ header('Access-Control-Allow-Headers: Content-Type');
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') { exit(0); }
 require_once __DIR__ . '/include/dbcommon.php';
-require_once 'koneksi.php';
+$runnerConnection = DB::DefaultConnection();
+$conn = $runnerConnection ? $runnerConnection->conn : null;
+if (!$conn instanceof mysqli) {
+    http_response_code(500);
+    echo json_encode(['success' => false, 'message' => 'Koneksi database tidak tersedia']);
+    exit;
+}
+$conn->set_charset('utf8mb4');
 
 // ── AMBIL CONFIG SMTP DARI PHPRUNNER ──────────────────────────────
 require_once __DIR__ . '/libs/phpmailer/class.phpmailer.php';
