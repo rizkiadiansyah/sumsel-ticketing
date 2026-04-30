@@ -11,7 +11,7 @@ if (!selectedRecords || selectedRecords.length === 0) {
     return false;
 }
 swal("Konfirmasi",
-     "Issued " + selectedRecords.length + " pengajuan tiket?",
+     "Hold " + selectedRecords.length + " pengajuan tiket?",
 {
     buttons: {
         cancel: "Batal",

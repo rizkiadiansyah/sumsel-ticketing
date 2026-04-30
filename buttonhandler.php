@@ -209,6 +209,14 @@ while ($record = $button->getNextSelectedRecord()) {
     $now           = date('Y-m-d H:i:s');
     $approved_by   = isset($_SESSION['UserName']) ? $_SESSION['UserName'] : 'Admin';
     $cek_link      = 'http://' . $_SERVER['HTTP_HOST'] . '/cek-status.php?req_id=' . urlencode($req_id);
+    $status_saat_ini  = $record['status'];
+
+    // Hanya status On Progress (1 dan 3) yang bisa di-hold
+    if ($status_saat_ini != '1' && $status_saat_ini != '3') {
+        $skipped++;
+        $details[] = $req_id . ' (' . $nama_pemesan . ') dilewati — status bukan On Progress atau Hold';
+        continue;
+    }
 
     $res = CustomQuery("UPDATE tbl_pengajuan_ticket_hdr 
         SET status = '2', 
@@ -221,6 +229,7 @@ while ($record = $button->getNextSelectedRecord()) {
         $error_msg = 'Gagal update status untuk ' . $req_id;
         continue;
     }
+
 
     if (!empty($email_pemesan)) {
         $subject = '[Sumsel Ticketing] Pengajuan Tiket Disetujui - ' . $req_id;
@@ -399,6 +408,14 @@ while ($record = $button->getNextSelectedRecord()) {
     $now              = date('Y-m-d H:i:s');
     $rejected_by      = isset($_SESSION['UserName']) ? $_SESSION['UserName'] : 'Admin';
     $cek_link         = 'http://' . $_SERVER['HTTP_HOST'] . '/cek-status.php?req_id=' . urlencode($req_id);
+    $status_saat_ini  = $record['status'];
+
+    // Hanya status On Progress (1) yang bisa di-hold
+    if ($status_saat_ini != '1') {
+        $skipped++;
+        $details[] = $req_id . ' (' . $nama_pemesan . ') dilewati — status bukan On Progress';
+        continue;
+    }
 
     // Validasi ket_admin wajib diisi
     if (empty($keterangan_admin)) {
@@ -406,6 +423,7 @@ while ($record = $button->getNextSelectedRecord()) {
         $error_msg = 'Harap isi Keterangan Admin pada pengajuan ' . $req_id . ' sebelum melakukan reject.';
         continue;
     }
+
 
     $res = CustomQuery("UPDATE tbl_pengajuan_ticket_hdr 
         SET status = '4', 
@@ -594,11 +612,20 @@ function buttonHandler_Issued($params)
 	}
 
 	RunnerContext::push( new RunnerContextItem( $params["location"], $contextParams));
-	require_once $_SERVER['DOCUMENT_ROOT'] . '/sumsel-ticketing/koneksi.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/sumsel-ticketing/libs/phpmailer/class.phpmailer.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/sumsel-ticketing/libs/phpmailer/class.smtp.php';
+	require_once __DIR__ . '/include/dbcommon.php';
 
-// Config SMTP
+$runnerConnection = DB::DefaultConnection();
+$conn = $runnerConnection ? $runnerConnection->conn : null;
+if (!$conn instanceof mysqli) {
+    $result["success"] = false;
+    $result["message"] = 'Koneksi database tidak tersedia';
+    return;
+}
+$conn->set_charset('utf8mb4');
+
+require_once __DIR__ . '/libs/phpmailer/class.phpmailer.php';
+require_once __DIR__ . '/libs/phpmailer/class.smtp.php';
+
 $globalSettings = array(
     'strSMTPServer'   => 'mail.baramultigroup.co.id',
     'strSMTPPort'     => '465',
@@ -611,7 +638,7 @@ $globalSettings = array(
 if (!defined('APP_NAME')) define('APP_NAME', 'Sumsel Ticketing');
 if (!defined('APP_URL'))  define('APP_URL',  'http://' . $_SERVER['HTTP_HOST']);
 
-function kirimEmailIssued($to, $to_name, $subject, $body_html) {
+function kirimEmailHold($to, $to_name, $subject, $body_html) {
     global $globalSettings;
 
     $mail = new PHPMailer();
@@ -633,7 +660,7 @@ function kirimEmailIssued($to, $to_name, $subject, $body_html) {
     $mail->IsHTML(true);
 
     if (!$mail->Send()) {
-        error_log('[Issued] Gagal kirim email ke ' . $to . ': ' . $mail->ErrorInfo);
+        error_log('[Hold] Gagal kirim email ke ' . $to . ': ' . $mail->ErrorInfo);
         return false;
     }
     return true;
@@ -643,19 +670,31 @@ $processed = 0;
 $details   = array();
 $has_error = false;
 $error_msg = '';
+$skipped   = 0;
 date_default_timezone_set('Asia/Jakarta');
 
 while ($record = $button->getNextSelectedRecord()) {
     $req_id        = $record['req_id'];
     $email_pemesan = $record['email_pemesan'];
     $nama_pemesan  = $record['nama_pemesan'];
-    $now           = date('Y-m-d H:i:s');
-    $issued_by     = isset($_SESSION['UserName']) ? $_SESSION['UserName'] : 'Admin';
-    $cek_link      = 'http://' . $_SERVER['HTTP_HOST'] . '/sumsel-ticketing/cek-status.php?req_id=' . urlencode($req_id);
+    $status_saat_ini = $record['status'];
+
+
+    // Hanya status On Progress (1) yang bisa di-hold
+    if ($status_saat_ini != '1') {
+        $skipped++;
+        $details[] = $req_id . ' (' . $nama_pemesan . ') dilewati — status bukan On Progress';
+        continue;
+    }
+
+    $keterangan_admin = $record['ket_admin'] ?? ''; // tidak wajib
+    $now       = date('Y-m-d H:i:s');
+    $held_by   = isset($_SESSION['UserName']) ? $_SESSION['UserName'] : 'Admin';
+    $cek_link  = 'http://' . $_SERVER['HTTP_HOST'] . '/cek-status.php?req_id=' . urlencode($req_id);
 
     $res = CustomQuery("UPDATE tbl_pengajuan_ticket_hdr 
-        SET status = '5', 
-            update_by = '$issued_by', 
+        SET status = '3', 
+            update_by = '$held_by', 
             updated_at = '$now' 
         WHERE req_id = '$req_id'");
 
@@ -666,41 +705,47 @@ while ($record = $button->getNextSelectedRecord()) {
     }
 
     if (!empty($email_pemesan)) {
-        $subject = '[Sumsel Ticketing] Tiket Telah Diterbitkan - ' . $req_id;
+        $subject = '[Sumsel Ticketing] Pengajuan Tiket Di-Hold - ' . $req_id;
         $body = "
         <html><head><meta charset='UTF-8'></head>
         <body style='font-family:Arial,sans-serif;color:#1f2937'>
           <div style='max-width:620px;margin:32px auto;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08)'>
-            <div style='background:linear-gradient(135deg,#1d4ed8 0%,#3b82f6 100%);padding:32px;text-align:center'>
-              <div style='font-size:36px;margin-bottom:8px'>&#x1F3AB;</div>
-              <h1 style='margin:0;color:#fff;font-size:22px;font-weight:700'>Tiket Telah Diterbitkan!</h1>
-              <p style='margin:8px 0 0;color:#bfdbfe;font-size:14px'>Tiket Anda sudah siap digunakan</p>
+            <div style='background:linear-gradient(135deg,#d97706 0%,#f59e0b 100%);padding:32px;text-align:center'>
+              <div style='font-size:36px;margin-bottom:8px'>⏸️</div>
+              <h1 style='margin:0;color:#fff;font-size:22px;font-weight:700'>Pengajuan Di-Hold</h1>
+              <p style='margin:8px 0 0;color:#fde68a;font-size:14px'>Tiket Anda sedang ditahan sementara</p>
             </div>
             <div style='padding:28px 32px'>
               <p style='font-size:15px;margin:0 0 16px'>Halo <strong>" . htmlspecialchars($nama_pemesan) . "</strong>,</p>
-              <p style='font-size:14px;color:#6b7280;margin:0 0 24px'>Pengajuan tiket Anda telah <strong style='color:#1d4ed8'>diterbitkan</strong> oleh admin dan siap untuk digunakan.</p>
-              <div style='background:#eff6ff;border:2px dashed #93c5fd;border-radius:12px;padding:18px;text-align:center;margin-bottom:24px'>
-                <div style='font-size:12px;color:#1d4ed8;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px'>Nomor Tiket</div>
-                <div style='font-size:26px;font-weight:700;color:#1d4ed8'>$req_id</div>
+              <p style='font-size:14px;color:#6b7280;margin:0 0 24px'>Pengajuan tiket Anda sedang <strong style='color:#d97706'>di-hold</strong> oleh admin. Mohon menunggu informasi lebih lanjut.</p>
+              <div style='background:#fffbeb;border:2px dashed #fcd34d;border-radius:12px;padding:18px;text-align:center;margin-bottom:24px'>
+                <div style='font-size:12px;color:#d97706;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px'>Nomor Tiket</div>
+                <div style='font-size:26px;font-weight:700;color:#d97706'>$req_id</div>
               </div>
               <table style='width:100%;border-collapse:collapse;background:#f9fafb;border-radius:10px;overflow:hidden'>
                 <tr style='border-bottom:1px solid #e5e7eb'>
                   <td style='padding:10px 14px;font-size:13px;color:#6b7280;width:140px'>Status</td>
-                  <td style='padding:10px 14px;font-size:13px;font-weight:600;color:#1d4ed8'>Issued</td>
+                  <td style='padding:10px 14px;font-size:13px;font-weight:600;color:#d97706'>Hold</td>
                 </tr>
                 <tr style='border-bottom:1px solid #e5e7eb'>
-                  <td style='padding:10px 14px;font-size:13px;color:#6b7280'>Diterbitkan Oleh</td>
-                  <td style='padding:10px 14px;font-size:13px;font-weight:600;color:#1f2937'>" . htmlspecialchars($issued_by) . "</td>
+                  <td style='padding:10px 14px;font-size:13px;color:#6b7280'>Di-Hold Oleh</td>
+                  <td style='padding:10px 14px;font-size:13px;font-weight:600;color:#1f2937'>" . htmlspecialchars($held_by) . "</td>
                 </tr>
+								" . (!empty($keterangan_admin) ? "
+								<tr style='border-bottom:1px solid #e5e7eb'>
+								  <td style='padding:10px 14px;font-size:13px;color:#6b7280'>Keterangan</td>
+								  <td style='padding:10px 14px;font-size:13px;color:#1f2937'>" . htmlspecialchars($keterangan_admin) . "</td>
+								</tr>
+								" : "") . "
                 <tr>
                   <td style='padding:10px 14px;font-size:13px;color:#6b7280'>Tanggal</td>
                   <td style='padding:10px 14px;font-size:13px;color:#1f2937'>" . date('d M Y H:i') . "</td>
                 </tr>
               </table>
-              <div style='background:#eff6ff;border:1.5px solid #93c5fd;border-radius:12px;padding:20px;text-align:center;margin-top:24px'>
-                <div style='font-size:14px;font-weight:600;color:#1e3a8a;margin-bottom:12px'>Pantau Status Pengajuan Anda</div>
-                <a href='$cek_link' style='display:inline-block;background:#1d4ed8;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:8px;font-size:14px;font-weight:700'>&#x1F50D; Cek Status Tiket</a>
-                <div style='font-size:12px;color:#6b7280;margin-top:10px'>atau buka: <a href='$cek_link' style='color:#1d4ed8;word-break:break-all'>$cek_link</a></div>
+              <div style='background:#fffbeb;border:1.5px solid #fcd34d;border-radius:12px;padding:20px;text-align:center;margin-top:24px'>
+                <div style='font-size:14px;font-weight:600;color:#92400e;margin-bottom:12px'>Pantau Status Pengajuan Anda</div>
+                <a href='$cek_link' style='display:inline-block;background:#d97706;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:8px;font-size:14px;font-weight:700'>&#x1F50D; Cek Status Tiket</a>
+                <div style='font-size:12px;color:#6b7280;margin-top:10px'>atau buka: <a href='$cek_link' style='color:#4338ca;word-break:break-all'>$cek_link</a></div>
               </div>
             </div>
             <div style='background:#f9fafb;border-top:1px solid #e5e7eb;padding:20px 32px;text-align:center'>
@@ -710,19 +755,19 @@ while ($record = $button->getNextSelectedRecord()) {
           </div>
         </body></html>";
 
-        kirimEmailIssued($email_pemesan, $nama_pemesan, $subject, $body);
+        kirimEmailHold($email_pemesan, $nama_pemesan, $subject, $body);
     }
 
-    $details[]  = $req_id . ' (' . $nama_pemesan . ') berhasil di-issued';
+    $details[]  = $req_id . ' (' . $nama_pemesan . ') berhasil di-hold';
     $processed++;
 }
 
 if ($processed > 0) {
     $result["success"] = true;
-    $result["message"] = $processed . ' pengajuan berhasil di-issued.';
+    $result["message"] = $processed . ' pengajuan berhasil di-hold.' . ($skipped > 0 ? " $skipped dilewati karena bukan status On Progress." : '');
 } else {
     $result["success"] = false;
-    $result["message"] = $has_error ? $error_msg : 'Tidak ada pengajuan yang diproses.';
+    $result["message"] = $has_error ? $error_msg : ($skipped > 0 ? "Semua tiket yang dipilih bukan status On Progress." : 'Tidak ada pengajuan yang diproses.');
 }
 $result["details"] = $details;;
 	RunnerContext::pop();

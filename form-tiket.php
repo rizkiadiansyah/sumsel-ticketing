@@ -549,6 +549,11 @@ while ($rowAirline = db_fetch_array($rsAirline)) {
   <script>
     let penumpangCount = 0;
     let hasChanges = false;
+    const MAX_PENUMPANG = 8;
+
+    // Simpan data tiap penumpang dalam array
+    // Setiap entry = object berisi semua nilai field
+    let penumpangData = []; // [{field: value, ...}, ...]
 
     function markFormChanged() {
       hasChanges = true;
@@ -562,73 +567,395 @@ while ($rowAirline = db_fetch_array($rsAirline)) {
       }
     });
 
-    // Build data maskapai dari PHP sekali saja
     const airlineData = [
-        <?php foreach ($airlineList as $airline): ?>
-        { code: '<?= $airline['code'] ?>', name: '<?= addslashes($airline['name']) ?>' },
-        <?php endforeach; ?>
+      <?php foreach ($airlineList as $airline): ?>
+      { code: '<?= $airline['code'] ?>', name: '<?= addslashes($airline['name']) ?>' },
+      <?php endforeach; ?>
     ];
 
     function buildMaskapaiOptions(isVip, placeholder) {
-        let html = `<option value="">${placeholder}</option>`;
-        airlineData.forEach(function(airline) {
-            const isGaruda  = airline.code === 'GA';
-            const disabled = isGaruda && !isVip ? 'disabled' : '';
-            const label    = isGaruda && !isVip ? airline.name + ' (Tidak tersedia)' : airline.name;
-            html += `<option value="${airline.name}" ${disabled}>${label}</option>`;
-        });
-        return html;
+      let html = `<option value="">${placeholder}</option>`;
+      airlineData.forEach(function(airline) {
+        const isGaruda = airline.code === 'GA';
+        const disabled = isGaruda && !isVip ? 'disabled' : '';
+        const label    = isGaruda && !isVip ? airline.name + ' (Tidak tersedia)' : airline.name;
+        html += `<option value="${airline.name}" ${disabled}>${label}</option>`;
+      });
+      return html;
     }
 
-    // ── Helper: konversi gender DB (L/P) → value option form ─────
     function genderLabel(g) {
       return g === 'L' ? 'Laki-laki' : g === 'P' ? 'Perempuan' : '';
     }
 
-    // ── Isi field penumpang dari data hasil search ────────────────
-    function fillPenumpangData(idx, data) {
-      const card = document.getElementById(`penumpang_${idx}`);
+    // Ambil semua nilai field dari satu card DOM ke object data
+    function snapshotCard(card, pos) {
+      // Kalau card sudah tidak di DOM, kembalikan data lama tanpa overwrite
+      if (!card.isConnected) return penumpangData[pos - 1] || {};
+
+      const g  = (name) => card.querySelector(`[name="${name}"]`)?.value ?? '';
+      const gc = (name) => card.querySelector(`[name="${name}"]:checked`)?.value ?? '';
+      const existing = penumpangData[pos - 1] || {};
+
+      return {
+        nik_penumpang:         g(`nik_penumpang_${pos}`),
+        nik_ktp:               g(`nik_ktp_${pos}`),
+        nama_penumpang:        g(`nama_penumpang_${pos}`),
+        posisi_penumpang:      g(`posisi_penumpang_${pos}`),
+        sbu_penumpang:         g(`sbu_penumpang_${pos}`),
+        no_telp_penumpang:     g(`no_telp_penumpang_${pos}`),
+        gender:                g(`gender_${pos}`),
+        tipe_perjalanan:       gc(`tipe_perjalanan_${pos}`) || 'One Way',
+        _roundTrip:            (gc(`tipe_perjalanan_${pos}`) || 'One Way') === 'Round Trip',
+        _isVip:                existing._isVip || false,
+        bandara_asal:          g(`bandara_asal_${pos}`),
+        bandara_tujuan:        g(`bandara_tujuan_${pos}`),
+        maskapai:              g(`maskapai_${pos}`)               || existing.maskapai,
+        tanggal_penerbangan:   g(`tanggal_penerbangan_${pos}`),
+        waktu_berangkat:       g(`waktu_berangkat_${pos}`),
+        waktu_tiba:            g(`waktu_tiba_${pos}`),
+        catatan_khusus:        g(`catatan_khusus_${pos}`),
+        bandara_asal_p:        g(`bandara_asal_p_${pos}`),
+        bandara_tujuan_p:      g(`bandara_tujuan_p_${pos}`),
+        maskapai_p:            g(`maskapai_p_${pos}`)             || existing.maskapai_p,
+        tanggal_penerbangan_p: g(`tanggal_penerbangan_p_${pos}`),
+        waktu_berangkat_p:     g(`waktu_berangkat_p_${pos}`),
+        waktu_tiba_p:          g(`waktu_tiba_p_${pos}`),
+        catatan_khusus_p:      g(`catatan_khusus_p_${pos}`),
+      };
+    }
+
+    // Render seluruh daftar penumpang dari array penumpangData
+    function renderAll() {
+      const list = document.getElementById('penumpangList');
+      list.innerHTML = '';
+
+      penumpangData.forEach((data, i) => {
+        const pos = i + 1; // posisi tampilan 1-based
+        const card = document.createElement('div');
+        card.className = 'penumpang-card';
+        card.id = `penumpang_${pos}`;
+
+        const roundTrip = data._roundTrip;
+        const isVip     = data._isVip;
+
+        card.innerHTML = `
+          <div class="penumpang-header">
+            <span class="penumpang-num">Penumpang ${pos}</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;font-weight:500;margin:0">
+                <input type="checkbox" name="sama_dengan_pemesan_${pos}"
+                  onchange="toggleSamaDenganPemesan(${pos}, this.checked)"
+                  style="width:16px;height:16px;cursor:pointer">
+                Sama dengan data pemesan
+              </label>
+              ${penumpangData.length > 1
+                ? `<button type="button" class="btn-remove" onclick="removePenumpang(${pos})">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Hapus
+                  </button>`
+                : ''}
+            </div>
+          </div>
+
+          <!-- NIK SEARCH -->
+          <div class="nik-search-wrap">
+            <div class="field">
+              <label>NIK Karyawan <span class="req">*</span></label>
+              <input type="text" name="nik_penumpang_${pos}"
+                placeholder="Ketik NIK untuk mencari data penumpang…"
+                maxlength="50" required autocomplete="off"
+                style="padding-right:38px"
+                value="${esc(data.nik_penumpang)}">
+              <svg class="nik-search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none"
+                stroke="#9ca3af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+            </div>
+            <div class="nik-dropdown" id="nikDrop_${pos}"></div>
+          </div>
+
+          <!-- DATA PENUMPANG -->
+          <div class="grid-3" style="margin-bottom:14px">
+            <div class="field">
+              <label>NIK KTP <span class="req">*</span></label>
+              <input type="text" name="nik_ktp_${pos}" placeholder="16 digit NIK KTP"
+                maxlength="16" required value="${esc(data.nik_ktp)}">
+            </div>
+            <div class="field col-span-2">
+              <label>Nama Penumpang <span class="req">*</span></label>
+              <input type="text" name="nama_penumpang_${pos}" placeholder="Sesuai KTP / Paspor"
+                required value="${esc(data.nama_penumpang)}">
+            </div>
+            <div class="field">
+              <label>Posisi / Jabatan <span class="req">*</span></label>
+              <input type="text" name="posisi_penumpang_${pos}" placeholder="Jabatan penumpang"
+                required value="${esc(data.posisi_penumpang)}">
+            </div>
+            <div class="field">
+              <label>SBU <span class="req">*</span></label>
+              <select name="sbu_penumpang_${pos}" required>
+                <option value="">Pilih SBU</option>
+                <?php foreach ($sbuPList as $sbu): ?>
+                <option value="<?= htmlspecialchars($sbu['code']) ?>"
+                  ${data.sbu_penumpang === '<?= $sbu['code'] ?>' ? 'selected' : ''}>
+                  <?= htmlspecialchars($sbu['code'] . ' - ' . $sbu['desc']) ?>
+                </option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+            <div class="field">
+              <label>No. Telepon <span class="req">*</span></label>
+              <input type="text" name="no_telp_penumpang_${pos}" placeholder="08xxxxxxxxxx"
+                required value="${esc(data.no_telp_penumpang)}">
+            </div>
+            <div class="field">
+              <label>Jenis Kelamin <span class="req">*</span></label>
+              <select name="gender_${pos}" required>
+                <option value="">Pilih Gender</option>
+                <option value="Laki-laki"  ${data.gender === 'Laki-laki'  ? 'selected' : ''}>Laki-laki</option>
+                <option value="Perempuan"  ${data.gender === 'Perempuan'  ? 'selected' : ''}>Perempuan</option>
+              </select>
+            </div>
+            <div class="field col-span-2">
+              <label>Tipe Perjalanan <span class="req">*</span></label>
+              <div class="radio-group">
+                <label class="radio-opt">
+                  <input type="radio" name="tipe_perjalanan_${pos}" value="One Way"
+                    ${!roundTrip ? 'checked' : ''}
+                    onchange="onTipeChange(${pos}, this.value)" required> One Way
+                </label>
+                <label class="radio-opt">
+                  <input type="radio" name="tipe_perjalanan_${pos}" value="Round Trip"
+                    ${roundTrip ? 'checked' : ''}
+                    onchange="onTipeChange(${pos}, this.value)" required> Round Trip
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- PENERBANGAN PERGI -->
+          <div style="background:#fff;border:1.5px solid #e0e7ff;border-radius:10px;padding:16px;margin-bottom:4px">
+            <div style="font-size:12px;font-weight:700;color:var(--indigo);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px">
+              Penerbangan Pergi
+            </div>
+            <div class="grid-3">
+              <div class="field"><label>Bandara Asal <span class="req">*</span></label>
+                <input type="text" name="bandara_asal_${pos}" placeholder="CGK — Jakarta"
+                  list="airportList" autocomplete="off" required value="${esc(data.bandara_asal)}">
+              </div>
+              <div class="field"><label>Bandara Tujuan <span class="req">*</span></label>
+                <input type="text" name="bandara_tujuan_${pos}" placeholder="PLM — Palembang"
+                  list="airportList" autocomplete="off" required value="${esc(data.bandara_tujuan)}">
+              </div>
+              <div class="field"><label>Maskapai <span class="req">*</span></label>
+                <select name="maskapai_${pos}" required>
+                  ${buildMaskapaiOptions(isVip, 'Pilih Maskapai')}
+                </select>
+              </div>
+              <div class="field"><label>Tanggal Penerbangan <span class="req">*</span></label>
+                <input type="date" name="tanggal_penerbangan_${pos}" required
+                  value="${esc(data.tanggal_penerbangan)}">
+              </div>
+              <div class="field"><label>Waktu Berangkat <span class="req">*</span></label>
+                <input type="time" name="waktu_berangkat_${pos}" required
+                  value="${esc(data.waktu_berangkat)}">
+              </div>
+              <div class="field"><label>Waktu Tiba <span class="req">*</span></label>
+                <input type="time" name="waktu_tiba_${pos}" required
+                  value="${esc(data.waktu_tiba)}">
+              </div>
+              <div class="field col-span-3"><label>Catatan Khusus</label>
+                <input type="text" name="catatan_khusus_${pos}"
+                  placeholder="Contoh: butuh kursi aisle, extra baggage, dll"
+                  value="${esc(data.catatan_khusus)}">
+              </div>
+            </div>
+          </div>
+
+          <!-- PENERBANGAN PULANG -->
+          <div id="pulang_${pos}" class="pulang-section ${roundTrip ? 'show' : ''}"
+            style="background:#fff;border:1.5px solid #e0e7ff;border-radius:10px;padding:16px;margin-top:16px;margin-bottom:0">
+            <div class="pulang-label">Penerbangan Pulang (Round Trip)</div>
+            <div class="grid-3">
+              <div class="field"><label>Bandara Asal <span class="req">*</span></label>
+                <input type="text" name="bandara_asal_p_${pos}" placeholder="PLM — Palembang"
+                  list="airportList" autocomplete="off"
+                  ${roundTrip ? 'required' : ''}
+                  value="${esc(data.bandara_asal_p)}">
+              </div>
+              <div class="field"><label>Bandara Tujuan <span class="req">*</span></label>
+                <input type="text" name="bandara_tujuan_p_${pos}" placeholder="CGK — Jakarta"
+                  list="airportList" autocomplete="off"
+                  ${roundTrip ? 'required' : ''}
+                  value="${esc(data.bandara_tujuan_p)}">
+              </div>
+              <div class="field"><label>Maskapai <span class="req">*</span></label>
+                <select name="maskapai_p_${pos}" ${roundTrip ? 'required' : ''}>
+                  ${buildMaskapaiOptions(isVip, '— Pilih Maskapai —')}
+                </select>
+              </div>
+              <div class="field"><label>Tanggal Penerbangan <span class="req">*</span></label>
+                <input type="date" name="tanggal_penerbangan_p_${pos}"
+                  ${roundTrip ? 'required' : ''}
+                  value="${esc(data.tanggal_penerbangan_p)}">
+              </div>
+              <div class="field"><label>Waktu Berangkat <span class="req">*</span></label>
+                <input type="time" name="waktu_berangkat_p_${pos}"
+                  ${roundTrip ? 'required' : ''}
+                  value="${esc(data.waktu_berangkat_p)}">
+              </div>
+              <div class="field"><label>Waktu Tiba <span class="req">*</span></label>
+                <input type="time" name="waktu_tiba_p_${pos}"
+                  ${roundTrip ? 'required' : ''}
+                  value="${esc(data.waktu_tiba_p)}">
+              </div>
+              <div class="field col-span-3"><label>Catatan Khusus</label>
+                <input type="text" name="catatan_khusus_p_${pos}"
+                  placeholder="Catatan penerbangan pulang"
+                  value="${esc(data.catatan_khusus_p)}">
+              </div>
+            </div>
+          </div>
+        `;
+
+        list.appendChild(card);
+
+        // Restore maskapai yang sudah dipilih (setelah options di-build)
+        const selPergi  = card.querySelector(`[name="maskapai_${pos}"]`);
+        const selPulang = card.querySelector(`[name="maskapai_p_${pos}"]`);
+        if (selPergi  && data.maskapai)   selPergi.value   = data.maskapai;
+        if (selPulang && data.maskapai_p) selPulang.value  = data.maskapai_p;
+
+        initNikSearch(pos);
+      });
+
+      updateAddButton();
+    }
+
+    function esc(v) {
+      return String(v ?? '').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
+    function updateAddButton() {
+      const btn = document.querySelector('.btn-add-penumpang');
+      if (!btn) return;
+      if (penumpangData.length >= MAX_PENUMPANG) {
+        btn.style.display = 'none';
+      } else {
+        btn.style.display = 'flex';
+      }
+    }
+
+    function addPenumpang() {
+      if (penumpangData.length >= MAX_PENUMPANG) {
+        showToast(`Maksimal ${MAX_PENUMPANG} penumpang dalam satu pengajuan.`);
+        return;
+      }
+      // Simpan dulu semua data yang sudah diisi sebelum render ulang
+      saveAllSnapshots();
+      penumpangData.push({
+        nik_penumpang:'', nik_ktp:'', nama_penumpang:'', posisi_penumpang:'',
+        sbu_penumpang:'', no_telp_penumpang:'', gender:'',
+        tipe_perjalanan:'One Way', _roundTrip: false, _isVip: false,
+        bandara_asal:'', bandara_tujuan:'', maskapai:'',
+        tanggal_penerbangan:'', waktu_berangkat:'', waktu_tiba:'', catatan_khusus:'',
+        bandara_asal_p:'', bandara_tujuan_p:'', maskapai_p:'',
+        tanggal_penerbangan_p:'', waktu_berangkat_p:'', waktu_tiba_p:'', catatan_khusus_p:'',
+      });
+      renderAll();
+      markFormChanged();
+    }
+
+    function removePenumpang(pos) {
+      // Sebelum hapus, simpan snapshot card yang masih ada
+      saveAllSnapshots();
+      penumpangData.splice(pos - 1, 1);
+      renderAll();
+      markFormChanged();
+    }
+
+    // Simpan nilai semua card yang ada ke penumpangData
+    function saveAllSnapshots() {
+      penumpangData.forEach((_, i) => {
+        const pos  = i + 1;
+        const card = document.getElementById(`penumpang_${pos}`);
+        if (card && card.isConnected) {
+          penumpangData[i] = { ...penumpangData[i], ...snapshotCard(card, pos) };
+        }
+      });
+    }
+
+    function onTipeChange(pos, val) {
+      const idx = pos - 1;
+      if (penumpangData[idx]) {
+        penumpangData[idx]._roundTrip = (val === 'Round Trip');
+      }
+      // Update DOM langsung tanpa re-render penuh
+      const sec = document.getElementById(`pulang_${pos}`);
+      if (!sec) return;
+      sec.classList.toggle('show', val === 'Round Trip');
+      const inputs = sec.querySelectorAll('input[type="text"], input[type="date"], input[type="time"], select');
+      inputs.forEach(inp => {
+        if (val === 'Round Trip') {
+          if (!inp.name.includes('catatan_khusus')) inp.setAttribute('required', 'required');
+        } else {
+          inp.removeAttribute('required');
+          inp.value = '';
+        }
+      });
+    }
+
+    // Alias agar togglePulang lama masih kompatibel jika ada referensi
+    function togglePulang(pos, val) { onTipeChange(pos, val); }
+
+    function fillPenumpangData(pos, data) {
+      const card = document.getElementById(`penumpang_${pos}`);
       if (!card) return;
 
-      // Isi input text biasa
+      // Cek apakah NIK sudah dipakai penumpang lain
+      const nikBaru = String(data.nik ?? '').toLowerCase().trim();
+      const duplikat = penumpangData.some((_, i) => {
+        const otherPos = i + 1;
+        if (otherPos === pos) return false;
+        const otherCard = document.getElementById(`penumpang_${otherPos}`);
+        const otherNik  = otherCard?.querySelector(`[name="nik_penumpang_${otherPos}"]`)?.value.trim().toLowerCase();
+        return otherNik && otherNik === nikBaru;
+      });
+
+      if (duplikat) {
+        showToast(`NIK ${data.nik} sudah digunakan oleh penumpang lain.`);
+        // Kosongkan field NIK agar tidak menyimpan NIK duplikat
+        const nikInput = card.querySelector(`[name="nik_penumpang_${pos}"]`);
+        if (nikInput) nikInput.value = '';
+        return;
+      }
+
+
       const set = (name, val) => {
         const el = card.querySelector(`[name="${name}"]`);
         if (el) el.value = val ?? '';
       };
 
-      set(`nik_ktp_${idx}`,           data.nik_ktp       ?? '');
-      set(`nama_penumpang_${idx}`,    data.nama           ?? '');
-      set(`posisi_penumpang_${idx}`,  data.posisi_jabatan ?? '');
-      set(`no_telp_penumpang_${idx}`, data.no_telp        ?? '');
+      set(`nik_ktp_${pos}`,           data.nik_ktp       ?? '');
+      set(`nama_penumpang_${pos}`,    data.nama           ?? '');
+      set(`posisi_penumpang_${pos}`,  data.posisi_jabatan ?? '');
+      set(`no_telp_penumpang_${pos}`, data.no_telp        ?? '');
 
-      // SBU — set select, coba exact match dulu
-      const sbuSel = card.querySelector(`[name="sbu_penumpang_${idx}"]`);
+      const sbuSel = card.querySelector(`[name="sbu_penumpang_${pos}"]`);
       if (sbuSel && data.sbu) {
         const sbuLower = data.sbu.toLowerCase().trim();
         let matched = false;
-
         for (const opt of sbuSel.options) {
-          // cek apakah teks option mengandung description dari DB
-          if (opt.text.toLowerCase().includes(sbuLower)) {
-            opt.selected = true;
-            matched = true;
-            break;
-          }
+          if (opt.text.toLowerCase().includes(sbuLower)) { opt.selected = true; matched = true; break; }
         }
-
-        // fallback: cek sebaliknya — description DB mengandung teks option
         if (!matched) {
           for (const opt of sbuSel.options) {
-            if (sbuLower.includes(opt.text.toLowerCase().trim())) {
-              opt.selected = true;
-              break;
-            }
+            if (sbuLower.includes(opt.text.toLowerCase().trim())) { opt.selected = true; break; }
           }
         }
       }
 
-      // Gender — map L/P ke value option
-      const genderSel = card.querySelector(`[name="gender_${idx}"]`);
+      const genderSel = card.querySelector(`[name="gender_${pos}"]`);
       if (genderSel) {
         const mapped = genderLabel(data.gender);
         for (const opt of genderSel.options) {
@@ -636,70 +963,74 @@ while ($rowAirline = db_fetch_array($rsAirline)) {
         }
       }
 
-      // Update maskapai sesuai VIP — langsung dari data, tanpa fetch ulang
-      const isVip    = parseInt(data.vip) === 1;
-      const selPergi  = card.querySelector(`[name="maskapai_${idx}"]`);
-      const selPulang = card.querySelector(`[name="maskapai_p_${idx}"]`);
+      const isVip = parseInt(data.vip) === 1;
+      if (penumpangData[pos - 1]) penumpangData[pos - 1]._isVip = isVip;
+
+      const selPergi  = card.querySelector(`[name="maskapai_${pos}"]`);
+      const selPulang = card.querySelector(`[name="maskapai_p_${pos}"]`);
       if (selPergi)  selPergi.innerHTML  = buildMaskapaiOptions(isVip, 'Pilih Maskapai');
       if (selPulang) selPulang.innerHTML = buildMaskapaiOptions(isVip, '— Pilih Maskapai —');
 
       markFormChanged();
     }
 
-    // ── NIK search autocomplete ───────────────────────────────────
-    function initNikSearch(idx) {
-      const card     = document.getElementById(`penumpang_${idx}`);
+    function initNikSearch(pos) {
+      const card = document.getElementById(`penumpang_${pos}`);
       if (!card) return;
 
-      const nikInput = card.querySelector(`[name="nik_penumpang_${idx}"]`);
-      const dropdown = card.querySelector(`#nikDrop_${idx}`);
+      const nikInput = card.querySelector(`[name="nik_penumpang_${pos}"]`);
+      const dropdown = card.querySelector(`#nikDrop_${pos}`);
       let debounceTimer = null;
 
       function showDropdown(results) {
         dropdown.innerHTML = '';
 
-        if (!results.length) {
+        // Kumpulkan semua NIK yang sudah dipakai penumpang lain
+        const usedNiks = [];
+        penumpangData.forEach((_, i) => {
+          const otherPos = i + 1;
+          if (otherPos === pos) return; // skip penumpang sendiri
+          const card = document.getElementById(`penumpang_${otherPos}`);
+          const val  = card?.querySelector(`[name="nik_penumpang_${otherPos}"]`)?.value.trim();
+          if (val) usedNiks.push(val.toLowerCase());
+        });
+
+        // Filter hasil: hilangkan NIK yang sudah dipakai
+        const filtered = results.filter(row => !usedNiks.includes(row.nik.toLowerCase()));
+
+        if (!filtered.length) {
           dropdown.innerHTML = '<div class="nik-dd-empty">Tidak ada data ditemukan</div>';
           dropdown.classList.add('show');
           return;
         }
 
-        results.forEach(row => {
+        filtered.forEach(row => {
           const item = document.createElement('div');
           item.className = 'nik-dd-item';
           item.innerHTML = `
             <span class="nik-dd-nik">${row.nik}</span>
             <span class="nik-dd-nama">${row.nama}</span>
             <span class="nik-dd-meta">${row.posisi_jabatan ?? ''} · ${row.sbu ?? ''}</span>`;
-
           item.addEventListener('mousedown', (e) => {
-            e.preventDefault(); // cegah blur sebelum klik selesai
+            e.preventDefault();
             nikInput.value = row.nik;
             dropdown.classList.remove('show');
-            fillPenumpangData(idx, row);
+            fillPenumpangData(pos, row);
           });
-
           dropdown.appendChild(item);
         });
 
         dropdown.classList.add('show');
       }
 
-      function hideDropdown() {
-        dropdown.classList.remove('show');
-      }
+      function hideDropdown() { dropdown.classList.remove('show'); }
 
-      // Ketik → search dengan debounce
       nikInput.addEventListener('input', function () {
         const q = this.value.trim();
         clearTimeout(debounceTimer);
-
         if (!q || q.length < 2) { hideDropdown(); return; }
-
-        // Tampilkan loading dulu
         dropdown.innerHTML = '<div class="nik-dd-loading">Mencari data…</div>';
         dropdown.classList.add('show');
-
         debounceTimer = setTimeout(async () => {
           try {
             const res  = await fetch(`api-handler.php?action=search_penumpang&q=${encodeURIComponent(q)}`);
@@ -707,261 +1038,76 @@ while ($rowAirline = db_fetch_array($rsAirline)) {
             showDropdown(data.results ?? []);
           } catch (err) {
             dropdown.innerHTML = '<div class="nik-dd-empty">Gagal mengambil data</div>';
-            console.error('search_penumpang error:', err);
           }
         }, 300);
       });
 
-      // Blur → tutup dropdown (delay agar mousedown sempat jalan)
       nikInput.addEventListener('blur', () => {
-        setTimeout(hideDropdown, 150);
-      });
+        setTimeout(() => {
+          hideDropdown();
 
-      // Keyboard navigation
+          // Cek duplikat input manual saat user keluar dari field
+          const nikVal = nikInput.value.trim().toLowerCase();
+          if (!nikVal) return;
+
+          const duplikat = penumpangData.some((_, i) => {
+            const otherPos = i + 1;
+            if (otherPos === pos) return false;
+            const otherCard = document.getElementById(`penumpang_${otherPos}`);
+            const otherNik  = otherCard
+              ?.querySelector(`[name="nik_penumpang_${otherPos}"]`)
+              ?.value.trim().toLowerCase();
+            return otherNik && otherNik === nikVal;
+          });
+
+          if (duplikat) {
+            showToast(`NIK "${nikInput.value.trim()}" sudah digunakan oleh penumpang lain.`);
+            nikInput.value = '';
+            nikInput.style.borderColor = 'var(--red)';
+            nikInput.style.boxShadow   = '0 0 0 3px rgba(220,38,38,.15)';
+            nikInput.focus();
+          } else {
+            // Reset style jika valid
+            nikInput.style.borderColor = '';
+            nikInput.style.boxShadow   = '';
+          }
+        }, 150);
+      });
       nikInput.addEventListener('keydown', (e) => {
         const items  = dropdown.querySelectorAll('.nik-dd-item');
         const active = dropdown.querySelector('.nik-dd-item.active');
-
         if (e.key === 'ArrowDown') {
           e.preventDefault();
           const next = active ? (active.nextElementSibling || items[0]) : items[0];
-          active?.classList.remove('active');
-          next?.classList.add('active');
+          active?.classList.remove('active'); next?.classList.add('active');
           next?.scrollIntoView({ block: 'nearest' });
-
         } else if (e.key === 'ArrowUp') {
           e.preventDefault();
-          const prev = active
-            ? (active.previousElementSibling || items[items.length - 1])
-            : items[items.length - 1];
-          active?.classList.remove('active');
-          prev?.classList.add('active');
+          const prev = active ? (active.previousElementSibling || items[items.length-1]) : items[items.length-1];
+          active?.classList.remove('active'); prev?.classList.add('active');
           prev?.scrollIntoView({ block: 'nearest' });
-
         } else if (e.key === 'Enter' && active) {
-          e.preventDefault();
-          active.dispatchEvent(new Event('mousedown'));
-
-        } else if (e.key === 'Escape') {
-          hideDropdown();
-        }
-      });
-    }
-    function addPenumpang() {
-      penumpangCount++;
-      const idx = penumpangCount;
-      const list = document.getElementById('penumpangList');
-      const card = document.createElement('div');
-      card.className = 'penumpang-card';
-      card.id = `penumpang_${idx}`;
-card.innerHTML = `
-  <div class="penumpang-header">
-    <span class="penumpang-num">Penumpang ${idx}</span>
-    <div style="display:flex;align-items:center;gap:6px">
-      <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;font-weight:500;margin:0">
-        <input type="checkbox" name="sama_dengan_pemesan_${idx}" onchange="toggleSamaDenganPemesan(${idx}, this.checked)" style="width:16px;height:16px;cursor:pointer">
-        Sama dengan data pemesan
-      </label>
-      ${idx > 1 ? `<button type="button" class="btn-remove" onclick="removePenumpang(${idx})">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Hapus
-      </button>` : ''}
-    </div>
-  </div>
-
-  <!-- ① NIK SEARCH -->
-  <div class="nik-search-wrap">
-    <div class="field">
-      <label>NIK Karyawan <span class="req">*</span></label>
-      <input
-        type="text"
-        name="nik_penumpang_${idx}"
-        placeholder="Ketik NIK untuk mencari data penumpang…"
-        maxlength="50"
-        required
-        autocomplete="off"
-        style="padding-right:38px">
-      <svg class="nik-search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none"
-        stroke="#9ca3af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-      </svg>
-    </div>
-    <div class="nik-dropdown" id="nikDrop_${idx}"></div>
-  </div>
-
-  <!-- ② DATA PENUMPANG — auto-fill tapi tetap bisa diedit -->
-  <div class="grid-3" style="margin-bottom:14px">
-
-    <div class="field">
-      <label>NIK KTP <span class="req">*</span></label>
-      <input type="text" name="nik_ktp_${idx}" placeholder="16 digit NIK KTP" maxlength="16" required>
-    </div>
-
-    <div class="field col-span-2">
-      <label>Nama Penumpang <span class="req">*</span></label>
-      <input type="text" name="nama_penumpang_${idx}" placeholder="Sesuai KTP / Paspor" required>
-    </div>
-
-    <div class="field">
-      <label>Posisi / Jabatan <span class="req">*</span></label>
-      <input type="text" name="posisi_penumpang_${idx}" placeholder="Jabatan penumpang" required>
-    </div>
-
-    <div class="field">
-      <label>SBU <span class="req">*</span></label>
-      <select name="sbu_penumpang_${idx}" required>
-        <option value="">Pilih SBU</option>
-        <?php foreach ($sbuPList as $sbu): ?>
-        <option value="<?= htmlspecialchars($sbu['code']) ?>">
-          <?= htmlspecialchars($sbu['code'] . ' - ' . $sbu['desc']) ?>
-        </option>
-        <?php endforeach; ?>
-      </select>
-    </div>
-
-    <div class="field">
-      <label>No. Telepon <span class="req">*</span></label>
-      <input type="text" name="no_telp_penumpang_${idx}" placeholder="08xxxxxxxxxx" required>
-    </div>
-
-    <div class="field">
-      <label>Jenis Kelamin <span class="req">*</span></label>
-      <select name="gender_${idx}" required>
-        <option value="">Pilih Gender</option>
-        <option value="Laki-laki">Laki-laki</option>
-        <option value="Perempuan">Perempuan</option>
-      </select>
-    </div>
-
-    <div class="field col-span-2">
-      <label>Tipe Perjalanan <span class="req">*</span></label>
-      <div class="radio-group">
-        <label class="radio-opt">
-          <input type="radio" name="tipe_perjalanan_${idx}" value="One Way" checked
-            onchange="togglePulang(${idx}, this.value)" required> One Way
-        </label>
-        <label class="radio-opt">
-          <input type="radio" name="tipe_perjalanan_${idx}" value="Round Trip"
-            onchange="togglePulang(${idx}, this.value)" required> Round Trip
-        </label>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- ③ PENERBANGAN PERGI -->
-  <div style="background:#fff;border:1.5px solid #e0e7ff;border-radius:10px;padding:16px;margin-bottom:4px">
-    <div style="font-size:12px;font-weight:700;color:var(--indigo);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px">
-      Penerbangan Pergi
-    </div>
-    <div class="grid-3">
-      <div class="field"><label>Bandara Asal <span class="req">*</span></label>
-        <input type="text" name="bandara_asal_${idx}" placeholder="CGK — Jakarta" list="airportList" autocomplete="off" required>
-      </div>
-      <div class="field"><label>Bandara Tujuan <span class="req">*</span></label>
-        <input type="text" name="bandara_tujuan_${idx}" placeholder="PLM — Palembang" list="airportList" autocomplete="off" required>
-      </div>
-      <div class="field"><label>Maskapai <span class="req">*</span></label>
-        <select name="maskapai_${idx}" required>${buildMaskapaiOptions(false, 'Pilih Maskapai')}</select>
-      </div>
-      <div class="field"><label>Tanggal Penerbangan <span class="req">*</span></label>
-        <input type="date" name="tanggal_penerbangan_${idx}" required>
-      </div>
-      <div class="field"><label>Waktu Berangkat <span class="req">*</span></label>
-        <input type="time" name="waktu_berangkat_${idx}" required>
-      </div>
-      <div class="field"><label>Waktu Tiba <span class="req">*</span></label>
-        <input type="time" name="waktu_tiba_${idx}" required>
-      </div>
-      <div class="field col-span-3"><label>Catatan Khusus</label>
-        <input type="text" name="catatan_khusus_${idx}" placeholder="Contoh: butuh kursi aisle, extra baggage, dll">
-      </div>
-    </div>
-  </div>
-
-  <!-- ④ PENERBANGAN PULANG -->
-  <div class="pulang-section" id="pulang_${idx}"
-    style="background:#fff;border:1.5px solid #e0e7ff;border-radius:10px;padding:16px;margin-top:16px;margin-bottom:0">
-    <div class="pulang-label">Penerbangan Pulang (Round Trip)</div>
-    <div class="grid-3">
-      <div class="field"><label>Bandara Asal <span class="req">*</span></label>
-        <input type="text" name="bandara_asal_p_${idx}" placeholder="PLM — Palembang" list="airportList" autocomplete="off">
-      </div>
-      <div class="field"><label>Bandara Tujuan <span class="req">*</span></label>
-        <input type="text" name="bandara_tujuan_p_${idx}" placeholder="CGK — Jakarta" list="airportList" autocomplete="off">
-      </div>
-      <div class="field"><label>Maskapai <span class="req">*</span></label>
-        <select name="maskapai_p_${idx}">${buildMaskapaiOptions(false, '— Pilih Maskapai —')}</select>
-      </div>
-      <div class="field"><label>Tanggal Penerbangan <span class="req">*</span></label>
-        <input type="date" name="tanggal_penerbangan_p_${idx}">
-      </div>
-      <div class="field"><label>Waktu Berangkat <span class="req">*</span></label>
-        <input type="time" name="waktu_berangkat_p_${idx}">
-      </div>
-      <div class="field"><label>Waktu Tiba <span class="req">*</span></label>
-        <input type="time" name="waktu_tiba_p_${idx}">
-      </div>
-      <div class="field col-span-3"><label>Catatan Khusus</label>
-        <input type="text" name="catatan_khusus_p_${idx}" placeholder="Catatan penerbangan pulang">
-      </div>
-    </div>
-  </div>
-`;
-      list.appendChild(card); // ← appendChild dulu
-
-      initNikSearch(idx);
-      markFormChanged();
-    }
-
-    function removePenumpang(idx) { 
-      document.getElementById(`penumpang_${idx}`)?.remove();
-      markFormChanged();
-    }
-    function togglePulang(idx, val) { 
-      const sec = document.getElementById(`pulang_${idx}`);
-      sec?.classList.toggle('show', val === 'Round Trip');
-      const inputs = sec?.querySelectorAll('input[type="text"], input[type="date"], input[type="time"], select') || [];
-      inputs.forEach(inp => {
-        if (val === 'Round Trip') {
-          if (!inp.name.includes('catatan_khusus')) {
-            inp.setAttribute('required', 'required');
-          }
-        } else {
-          inp.removeAttribute('required');
-        }
+          e.preventDefault(); active.dispatchEvent(new Event('mousedown'));
+        } else if (e.key === 'Escape') { hideDropdown(); }
       });
     }
 
-    function toggleSamaDenganPemesan(idx, isChecked) {
-      const card = document.getElementById(`penumpang_${idx}`);
+    function toggleSamaDenganPemesan(pos, isChecked) {
+      const card = document.getElementById(`penumpang_${pos}`);
       if (!card) return;
-      
-      const nikPemesan = document.getElementById('nik_pemesan').value;
-      const namaPemesan = document.getElementById('nama_pemesan').value;
-      const posisiPemesan = document.getElementById('posisi_pemesan').value;
-      const sbuPemesan = document.getElementById('sbu_pemesan').value;
-      const telpPemesan = document.getElementById('no_telp_pemesan').value;
-      
-      const nikInput = card.querySelector(`[name="nik_penumpang_${idx}"]`);
-      const namaInput = card.querySelector(`[name="nama_penumpang_${idx}"]`);
-      const posisiInput = card.querySelector(`[name="posisi_penumpang_${idx}"]`);
-      const sbuInput = card.querySelector(`[name="sbu_penumpang_${idx}"]`);
-      const telpInput = card.querySelector(`[name="no_telp_penumpang_${idx}"]`);
-      
+      const v = (id) => document.getElementById(id)?.value ?? '';
+      const set = (name, val) => { const el = card.querySelector(`[name="${name}"]`); if (el) el.value = val; };
+
       if (isChecked) {
-        nikInput.value = nikPemesan;
-        namaInput.value = namaPemesan;
-        posisiInput.value = posisiPemesan;
-        sbuInput.value = sbuPemesan;
-        telpInput.value = telpPemesan;
+        set(`nik_penumpang_${pos}`,     v('nik_pemesan'));
+        set(`nama_penumpang_${pos}`,    v('nama_pemesan'));
+        set(`posisi_penumpang_${pos}`,  v('posisi_pemesan'));
+        set(`sbu_penumpang_${pos}`,     v('sbu_pemesan'));
+        set(`no_telp_penumpang_${pos}`, v('no_telp_pemesan'));
       } else {
-        nikInput.value = '';
-        namaInput.value = '';
-        posisiInput.value = '';
-        sbuInput.value = '';
-        telpInput.value = '';
+        [`nik_penumpang_${pos}`,`nama_penumpang_${pos}`,`posisi_penumpang_${pos}`,
+        `sbu_penumpang_${pos}`,`no_telp_penumpang_${pos}`].forEach(n => set(n, ''));
       }
-      
       markFormChanged();
     }
 
@@ -970,101 +1116,99 @@ card.innerHTML = `
       const nik    = document.getElementById('nik_pemesan').value.trim();
       const nama   = document.getElementById('nama_pemesan').value.trim();
       const alasan = document.getElementById('alasan').value.trim();
-      // ✏️ CHANGE: validasi atasan_langsung (menggantikan nama_penanggung_jawab)
-      const atasan_langsung = document.getElementById('atasan_langsung').value.trim();
+      const atasan = document.getElementById('atasan_langsung').value.trim();
       if (!nik || !nama) { showToast('NIK dan nama pemesan wajib diisi.'); return; }
       if (!alasan)       { showToast('Alasan / keperluan wajib diisi.'); return; }
-      if (!atasan_langsung) { showToast('Nama atasan langsung wajib diisi.'); return; }
-      const cards = document.querySelectorAll('.penumpang-card');
-      if (cards.length === 0) { showToast('Minimal 1 penumpang harus ditambahkan.'); return; }
-      const penumpang = []; let valid = true;
-      cards.forEach((card, i) => {
-        const idx    = card.id.replace('penumpang_', '');
-        const nama_p = card.querySelector(`[name="nama_penumpang_${idx}"]`)?.value.trim();
-        const sbu_p  = card.querySelector(`[name="sbu_penumpang_${idx}"]`)?.value.trim();
-        const telp_p = card.querySelector(`[name="no_telp_penumpang_${idx}"]`)?.value.trim();
-        const asal   = card.querySelector(`[name="bandara_asal_${idx}"]`)?.value.trim();
-        const tujuan = card.querySelector(`[name="bandara_tujuan_${idx}"]`)?.value.trim();
-        const maskai = card.querySelector(`[name="maskapai_${idx}"]`)?.value.trim();
-        const tgl    = card.querySelector(`[name="tanggal_penerbangan_${idx}"]`)?.value;
-        const jam    = card.querySelector(`[name="waktu_berangkat_${idx}"]`)?.value;
-        const tipe_perjalanan = card.querySelector(`[name="tipe_perjalanan_${idx}"]:checked`)?.value || 'One Way';
-        
-        if (!nama_p || !sbu_p || !telp_p || !asal || !tujuan || !maskai || !tgl || !jam) {
-          showToast(`Penumpang ${i+1}: lengkapi data penerbangan pergi yang wajib diisi.`); valid = false; return;
+      if (!atasan)       { showToast('Nama atasan langsung wajib diisi.'); return; }
+      if (penumpangData.length === 0) { showToast('Minimal 1 penumpang harus ditambahkan.'); return; }
+
+      // Snapshot semua card ke array dulu
+      saveAllSnapshots();
+
+      const penumpang = [];
+      let valid = true;
+
+      penumpangData.forEach((d, i) => {
+        if (!valid) return;
+        const displayPos = i + 1;
+
+        if (!d.nik_penumpang)     { showToast(`Penumpang ${displayPos}: NIK penumpang wajib diisi.`); valid = false; return; }
+        if (!d.nama_penumpang)    { showToast(`Penumpang ${displayPos}: nama penumpang wajib diisi.`); valid = false; return; }
+        if (!d.sbu_penumpang)     { showToast(`Penumpang ${displayPos}: SBU wajib diisi.`); valid = false; return; }
+        if (!d.no_telp_penumpang) { showToast(`Penumpang ${displayPos}: no. telepon wajib diisi.`); valid = false; return; }
+        if (!d.bandara_asal || !d.bandara_tujuan || !d.maskapai || !d.tanggal_penerbangan || !d.waktu_berangkat) {
+          showToast(`Penumpang ${displayPos}: lengkapi data penerbangan pergi yang wajib diisi.`);
+          valid = false; return;
         }
-        
-        if (tipe_perjalanan === 'Round Trip') {
-          const asal_p   = card.querySelector(`[name="bandara_asal_p_${idx}"]`)?.value.trim();
-          const tujuan_p = card.querySelector(`[name="bandara_tujuan_p_${idx}"]`)?.value.trim();
-          const maskai_p = card.querySelector(`[name="maskapai_p_${idx}"]`)?.value.trim();
-          const tgl_p    = card.querySelector(`[name="tanggal_penerbangan_p_${idx}"]`)?.value;
-          const jam_p    = card.querySelector(`[name="waktu_berangkat_p_${idx}"]`)?.value;
-          
-          if (!asal_p || !tujuan_p || !maskai_p || !tgl_p || !jam_p) {
-            showToast(`Penumpang ${i+1}: lengkapi data penerbangan pulang yang wajib diisi.`); valid = false; return;
+        if (d._roundTrip) {
+          if (!d.bandara_asal_p || !d.bandara_tujuan_p || !d.maskapai_p || !d.tanggal_penerbangan_p || !d.waktu_berangkat_p) {
+            showToast(`Penumpang ${displayPos}: lengkapi data penerbangan pulang yang wajib diisi.`);
+            valid = false; return;
           }
         }
+
         penumpang.push({
-          nik_penumpang: card.querySelector(`[name="nik_penumpang_${idx}"]`)?.value.trim(),
-          nik_ktp: card.querySelector(`[name="nik_ktp_${idx}"]`)?.value.trim(),
-          nama_penumpang: nama_p,
-          posisi_penumpang: card.querySelector(`[name="posisi_penumpang_${idx}"]`)?.value.trim(),
-          sbu_penumpang: sbu_p, no_telp_penumpang: telp_p,
-          gender: card.querySelector(`[name="gender_${idx}"]`)?.value,
-          tipe_perjalanan: tipe_perjalanan,
-          bandara_asal: asal, bandara_tujuan: tujuan, maskapai: maskai,
-          tanggal_penerbangan: tgl, waktu_berangkat: jam,
-          waktu_tiba: card.querySelector(`[name="waktu_tiba_${idx}"]`)?.value,
-          catatan_khusus: card.querySelector(`[name="catatan_khusus_${idx}"]`)?.value.trim(),
-          bandara_asal_p: card.querySelector(`[name="bandara_asal_p_${idx}"]`)?.value.trim(),
-          bandara_tujuan_p: card.querySelector(`[name="bandara_tujuan_p_${idx}"]`)?.value.trim(),
-          maskapai_p: card.querySelector(`[name="maskapai_p_${idx}"]`)?.value.trim(),
-          tanggal_penerbangan_p: card.querySelector(`[name="tanggal_penerbangan_p_${idx}"]`)?.value,
-          waktu_berangkat_p: card.querySelector(`[name="waktu_berangkat_p_${idx}"]`)?.value,
-          waktu_tiba_p: card.querySelector(`[name="waktu_tiba_p_${idx}"]`)?.value,
-          catatan_khusus_p: card.querySelector(`[name="catatan_khusus_p_${idx}"]`)?.value.trim(),
+          nik_penumpang:         d.nik_penumpang,
+          nik_ktp:               d.nik_ktp,
+          nama_penumpang:        d.nama_penumpang,
+          posisi_penumpang:      d.posisi_penumpang,
+          sbu_penumpang:         d.sbu_penumpang,
+          no_telp_penumpang:     d.no_telp_penumpang,
+          gender:                d.gender,
+          tipe_perjalanan:       d._roundTrip ? 'Round Trip' : 'One Way',
+          bandara_asal:          d.bandara_asal,
+          bandara_tujuan:        d.bandara_tujuan,
+          maskapai:              d.maskapai,
+          tanggal_penerbangan:   d.tanggal_penerbangan,
+          waktu_berangkat:       d.waktu_berangkat,
+          waktu_tiba:            d.waktu_tiba,
+          catatan_khusus:        d.catatan_khusus,
+          bandara_asal_p:        d.bandara_asal_p,
+          bandara_tujuan_p:      d.bandara_tujuan_p,
+          maskapai_p:            d.maskapai_p,
+          tanggal_penerbangan_p: d.tanggal_penerbangan_p,
+          waktu_berangkat_p:     d.waktu_berangkat_p,
+          waktu_tiba_p:          d.waktu_tiba_p,
+          catatan_khusus_p:      d.catatan_khusus_p,
         });
       });
+
       if (!valid) return;
+
       const payload = {
         header: {
-          nik_pemesan: nik, nama_pemesan: nama,
-          posisi_pemesan: document.getElementById('posisi_pemesan').value,
-          sbu_pemesan: document.getElementById('sbu_pemesan').value,
+          nik_pemesan:     nik,   nama_pemesan:   nama,
+          posisi_pemesan:  document.getElementById('posisi_pemesan').value,
+          sbu_pemesan:     document.getElementById('sbu_pemesan').value,
           no_telp_pemesan: document.getElementById('no_telp_pemesan').value,
-          email_pemesan: document.getElementById('email_pemesan').value,
-          // ✏️ CHANGE: kirim atasan_langsung (menggantikan nama_penanggung_jawab)
-          atasan_langsung: atasan_langsung,
+          email_pemesan:   document.getElementById('email_pemesan').value,
+          atasan_langsung: atasan,
           jenis_pengajuan: document.querySelector('[name="jenis_pengajuan"]:checked')?.value || 'Dinas',
-          alasan: alasan,
-          beban_sbu: document.getElementById('beban_sbu').value.trim(),
-        }, penumpang
+          alasan:          alasan,
+          beban_sbu:       document.getElementById('beban_sbu').value.trim(),
+        },
+        penumpang
       };
+
       const btn = document.getElementById('btnSubmit');
       btn.disabled = true;
       btn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> Mengirim...`;
+
       try {
-      const res  = await fetch('api-handler.php?action=submit_tiket', { 
-          method: 'POST', 
-          headers: { 'Content-Type': 'application/json' }, 
-          body: JSON.stringify(payload) 
-      });
-      const text = await res.text();           // ← text dulu
-      // console.log('RAW RESPONSE:', text);      // ← lihat di console
-      const data = JSON.parse(text);           // ← baru parse
-      if (data.success) {
+        const res  = await fetch('api-handler.php?action=submit_tiket', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
+        });
+        const data = JSON.parse(await res.text());
+        if (data.success) {
           hasChanges = false;
           document.getElementById('modalReqId').textContent = data.req_id;
           document.getElementById('modalSuccess').classList.add('show');
-      } else { 
-        showToast(data.message || 'Gagal mengirim pengajuan'); 
-      }
-      } catch (err) { 
-        console.error('Error:', err);
-        showToast('Tidak dapat terhubung ke server: ' + err.message); 
-      }
-      finally {
+        } else {
+          showToast(data.message || 'Gagal mengirim pengajuan');
+        }
+      } catch (err) {
+        showToast('Tidak dapat terhubung ke server: ' + err.message);
+      } finally {
         btn.disabled = false;
         btn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Kirim Pengajuan`;
       }
@@ -1073,8 +1217,9 @@ card.innerHTML = `
     function closeModal() {
       const reqId = document.getElementById('modalReqId').textContent;
       document.getElementById('modalSuccess').classList.remove('show');
-      window.location.href = "print_tiket.php?req_id=" + encodeURIComponent(reqId)
+      window.location.href = "print_tiket.php?req_id=" + encodeURIComponent(reqId);
     }
+
     function showToast(msg) {
       const t = document.getElementById('toast');
       t.textContent = msg; t.classList.add('show');
@@ -1082,9 +1227,9 @@ card.innerHTML = `
     }
 
     document.getElementById('formTiket').addEventListener('change', markFormChanged);
-    document.getElementById('formTiket').addEventListener('input', markFormChanged);
-    
-    addPenumpang();
+    document.getElementById('formTiket').addEventListener('input',  markFormChanged);
+
+    addPenumpang(); // inisialisasi dengan 1 penumpang
   </script>
 </body>
 </html>

@@ -820,7 +820,7 @@ if ($action === 'submit_reschedule') {
             VALUES
             ('$new_req_id', '$nik_pemesan', '$nama_pemesan', '$posisi_pemesan', '$sbu_pemesan',
             '$no_telp_pemesan', '$email_pemesan', '$atasan_langsung', '$jenis_pengajuan',
-            '$alasan', '$beban_sbu', '1', '$now', '$nik_pemesan')";
+            '$alasan', '$beban_sbu', '1', '$now', '$nama_pemesan')";
  
         if (!$conn->query($sql_hdr)) {
             throw new Exception('Gagal simpan reschedule: ' . $conn->error);

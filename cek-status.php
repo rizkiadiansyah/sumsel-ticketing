@@ -145,6 +145,8 @@ if (isset($_SESSION['UserID']) && $_SESSION['UserID'] != '') {
     .badge-approved { background: var(--green-lt); color: var(--green); }   .badge-approved .badge-dot { background: var(--green); }
     .badge-rejected { background: var(--red-lt);   color: var(--red);   }   .badge-rejected .badge-dot { background: var(--red); }
     .badge-default  { background: var(--gray-100); color: var(--gray-600); } .badge-default  .badge-dot { background: var(--gray-400); }
+    .badge-hold { background: #fff7ed; color: #ea580c; } .badge-hold .badge-dot { background: #ea580c; }
+
 
     /* ── RESULT ── */
     .result-card {
@@ -587,7 +589,7 @@ if (isset($_SESSION['UserID']) && $_SESSION['UserID'] != '') {
         label = 'Approved';
       } 
       else if (s.includes('hold')) {
-        cls = 'badge-default';
+        cls = 'badge-hold';
         label = 'Hold';
       } 
       else if (s.includes('rejected')) {

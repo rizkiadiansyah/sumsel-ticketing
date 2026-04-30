@@ -505,6 +505,12 @@
 							Approved			</a>
 </span>
 	 
+		<span data-itemtype="custom_button" data-itemid="custom_button3" {$item_custom_button3} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-primary   
+	" id="Issued" href="javascript:void(0)" typeid="ib" >
+							Hold			</a>
+</span>
+	 
 		<span data-itemtype="custom_button" data-itemid="custom_button1" {$item_custom_button1} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-danger   
 	" id="Rejected" href="javascript:void(0)" typeid="ib" >
@@ -516,22 +522,6 @@
 	" id="export" href="javascript:void(0)" typeid="ib" >
 							Export			</a>
 </span>
-	 
-		{BEGIN saveall_link}
-<span data-itemtype="inline_save_all" data-itemid="inline_save_all" {$item_inline_save_all} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="" class="btn btn-primary   
-	" {$savealllink_attrs} {$savealllink_span} >
-							Save all			</a>
-</span>
-{END saveall_link}
-	 
-		{BEGIN cancelall_link}
-<span data-itemtype="inline_cancel_all" data-itemid="inline_cancel_all" {$item_inline_cancel_all} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="" class="btn btn-default   
-	" {$cancelalllink_attrs} {$cancelalllink_span} >
-							Cancel			</a>
-</span>
-{END cancelall_link}
 		</div>			 
 				<div 
 	data-cellId="above-grid_c2" data-pageid="{$pageid}"	{$cell_above-grid_c2}
@@ -568,6 +558,37 @@
 </div>
 {END print_details}
 		</div>					</div>
+			 
+				<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c3" data-pageid="{$pageid}"	{$cell_above-grid_c3}
+	class="			col-md-6
+	
+">
+		 
+		{BEGIN saveall_link}
+<span data-itemtype="inline_save_all" data-itemid="inline_save_all" {$item_inline_save_all} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-primary   
+	" {$savealllink_attrs} {$savealllink_span} >
+							Save all			</a>
+</span>
+{END saveall_link}
+	 
+		{BEGIN cancelall_link}
+<span data-itemtype="inline_cancel_all" data-itemid="inline_cancel_all" {$item_inline_cancel_all} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" {$cancelalllink_attrs} {$cancelalllink_span} >
+							Cancel			</a>
+</span>
+{END cancelall_link}
+		</div>			 
+				<div 
+	data-cellId="above-grid_c4" data-pageid="{$pageid}"	{$cell_above-grid_c4}
+	class="r-align-right r-ori-vert			col-md-6
+	
+">
+			</div>					</div>
 			</div>		
 {END above-grid_block}
 	</div>
