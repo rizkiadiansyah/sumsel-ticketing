@@ -654,19 +654,27 @@ if ($action === 'submit_tiket') {
             if ($nik_cek) {
                 $cek = $conn->query("SELECT nik FROM tbl_data_penumpang WHERE nik = '$nik_cek' LIMIT 1");
                 if ($cek && $cek->num_rows === 0) {
-                    // Belum ada → insert otomatis
-                    $auto_nik_ktp  = $conn->real_escape_string($p['nik_ktp'] ?? '');
-                    $auto_nama     = $conn->real_escape_string($p['nama_penumpang'] ?? '');
-                    $auto_posisi   = $conn->real_escape_string($p['posisi_penumpang'] ?? '');
-                    $auto_sbu      = $conn->real_escape_string($p['sbu_penumpang'] ?? '');
-                    $auto_no_telp  = $conn->real_escape_string(preg_replace('/\D/', '', $p['no_telp_penumpang'] ?? ''));
-                    $auto_gender   = $conn->real_escape_string($p['gender'] ?? '');
+                    $auto_nik_ktp = $conn->real_escape_string($p['nik_ktp'] ?? '');
+                    $auto_nama    = $conn->real_escape_string($p['nama_penumpang'] ?? '');
+                    $auto_posisi  = $conn->real_escape_string($p['posisi_penumpang'] ?? '');
+                    $auto_sbu     = $conn->real_escape_string($p['sbu_penumpang'] ?? '');
+                    $auto_no_telp = $conn->real_escape_string(preg_replace('/\D/', '', $p['no_telp_penumpang'] ?? ''));
+
+                    // Konversi gender: "Laki-laki" → "L", "Perempuan" → "P"
+                    $gender_raw   = trim($p['gender'] ?? '');
+                    if (strtolower($gender_raw) === 'laki-laki' || $gender_raw === 'L') {
+                        $auto_gender = 'L';
+                    } elseif (strtolower($gender_raw) === 'perempuan' || $gender_raw === 'P') {
+                        $auto_gender = 'P';
+                    } else {
+                        $auto_gender = $conn->real_escape_string($gender_raw);
+                    }
 
                     $sql_auto = "INSERT INTO tbl_data_penumpang
                         (nik, nik_ktp, nama, posisi_jabatan, sbu, no_telp, gender, vip, active, create_at)
                         VALUES
                         ('$nik_cek', '$auto_nik_ktp', '$auto_nama', '$auto_posisi', '$auto_sbu',
-                         '$auto_no_telp', '$auto_gender', 0, 1, '$now')";
+                        '$auto_no_telp', '$auto_gender', 0, 1, '$now')";
 
                     if (!$conn->query($sql_auto)) {
                         throw new Exception('Gagal auto-add penumpang: ' . $conn->error);
