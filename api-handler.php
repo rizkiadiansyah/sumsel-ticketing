@@ -646,7 +646,12 @@ if ($action === 'submit_tiket') {
         if (empty($penumpang_list)) {
             throw new Exception('Minimal 1 penumpang harus diisi');
         }
-
+        $sbuMap = [];
+        $rsSbuMap = $conn->query("SELECT CODE, Description FROM tbl_code_list WHERE CatID = 'SBU'");
+        while ($rowSbuMap = $rsSbuMap->fetch_assoc()) {
+            $sbuMap[$rowSbuMap['CODE']] = $rowSbuMap['Description'];
+        }
+        
         foreach ($penumpang_list as $p) {
 
             // ── AUTO-ADD: Cek & tambah ke tbl_data_penumpang jika belum terdaftar ──
@@ -657,10 +662,13 @@ if ($action === 'submit_tiket') {
                     $auto_nik_ktp = $conn->real_escape_string($p['nik_ktp'] ?? '');
                     $auto_nama    = $conn->real_escape_string($p['nama_penumpang'] ?? '');
                     $auto_posisi  = $conn->real_escape_string($p['posisi_penumpang'] ?? '');
-                    $auto_sbu     = $conn->real_escape_string($p['sbu_penumpang'] ?? '');
-                    $auto_no_telp = $conn->real_escape_string(preg_replace('/\D/', '', $p['no_telp_penumpang'] ?? ''));
 
-                    // Konversi gender: "Laki-laki" → "L", "Perempuan" → "P"
+                    // Konversi SBU code → description untuk tbl_data_penumpang
+                    $sbu_code = trim($p['sbu_penumpang'] ?? '');
+                    $auto_sbu = $conn->real_escape_string($sbuMap[$sbu_code] ?? $sbu_code);
+                    $auto_no_telp = $conn->real_escape_string($p['no_telp_penumpang'] ?? '');
+
+                    // Konversi gender: "Laki-laki" → "L", "Perempuan" → "Ps"
                     $gender_raw   = trim($p['gender'] ?? '');
                     if (strtolower($gender_raw) === 'laki-laki' || $gender_raw === 'L') {
                         $auto_gender = 'L';
