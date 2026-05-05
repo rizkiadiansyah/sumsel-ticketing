@@ -24,29 +24,58 @@ if (!$row || $row['status'] != 5 || !$row['attachment']) {
     http_response_code(404); exit('File tidak ditemukan atau tiket belum Issued');
 }
 
-// attachment di DB adalah JSON array, ambil elemen pertama
 $attachments = json_decode($row['attachment'], true);
-if (!$attachments || !isset($attachments[0]['name'])) {
+if (!$attachments || !is_array($attachments)) {
     http_response_code(404); exit('Format attachment tidak valid');
 }
 
-$first       = $attachments[0];
-$storedName  = $first['name'];
-$displayName = $first['usrName'];
-
-$filePath = __DIR__ . '/' . ltrim($storedName, '/');
-
-if (!file_exists($filePath)) {
-    http_response_code(404); exit('File tidak ada di server');
+// Kalau cuma 1 file, langsung download tanpa ZIP
+if (count($attachments) === 1) {
+    $first      = $attachments[0];
+    $filePath   = __DIR__ . '/' . ltrim($first['name'], '/');
+    if (!file_exists($filePath)) {
+        http_response_code(404); exit('File tidak ada di server');
+    }
+    $finfo    = finfo_open(FILEINFO_MIME_TYPE);
+    $mimeType = finfo_file($finfo, $filePath);
+    finfo_close($finfo);
+    header('Content-Type: ' . $mimeType);
+    header('Content-Disposition: attachment; filename="' . rawurlencode($first['usrName']) . '"');
+    header('Content-Length: ' . filesize($filePath));
+    readfile($filePath);
+    exit;
 }
 
-// Deteksi MIME type
-$finfo    = finfo_open(FILEINFO_MIME_TYPE);
-$mimeType = finfo_file($finfo, $filePath);
-finfo_close($finfo);
+// Lebih dari 1 file → ZIP
+if (!class_exists('ZipArchive')) {
+    http_response_code(500); exit('ZipArchive tidak tersedia di server');
+}
 
-header('Content-Type: ' . $mimeType);
-header('Content-Disposition: attachment; filename="' . rawurlencode($displayName) . '"');
-header('Content-Length: ' . filesize($filePath));
-readfile($filePath);
+$zipName = 'tiket_' . $req_id . '_' . date('Ymd') . '.zip';
+$tmpZip  = sys_get_temp_dir() . '/' . $zipName;
+
+$zip = new ZipArchive();
+if ($zip->open($tmpZip, ZipArchive::CREATE | ZipArchive::OVERWRITE) !== true) {
+    http_response_code(500); exit('Gagal membuat file ZIP');
+}
+
+foreach ($attachments as $att) {
+    $filePath = __DIR__ . '/' . ltrim($att['name'], '/');
+    if (file_exists($filePath)) {
+        $zip->addFile($filePath, $att['usrName']); // nama dalam ZIP = usrName
+    }
+}
+$zip->close();
+
+if (!file_exists($tmpZip)) {
+    http_response_code(500); exit('Gagal menghasilkan ZIP');
+}
+
+header('Content-Type: application/zip');
+header('Content-Disposition: attachment; filename="' . rawurlencode($zipName) . '"');
+header('Content-Length: ' . filesize($tmpZip));
+readfile($tmpZip);
+
+// Hapus file ZIP sementara setelah dikirim
+@unlink($tmpZip);
 exit;
