@@ -410,7 +410,7 @@ while ($record = $button->getNextSelectedRecord()) {
     $cek_link         = 'http://' . $_SERVER['HTTP_HOST'] . '/cek-status.php?req_id=' . urlencode($req_id);
     $status_saat_ini  = $record['status'];
 
-    // Hanya status On Progress (1) yang bisa di-hold
+    // Hanya status On Progress (1) yang bisa di-reject
     if ($status_saat_ini != '1') {
         $skipped++;
         $details[] = $req_id . ' (' . $nama_pemesan . ') dilewati — status bukan On Progress';
@@ -424,12 +424,75 @@ while ($record = $button->getNextSelectedRecord()) {
         continue;
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | KHUSUS RESCHEDULE
+    |--------------------------------------------------------------------------
+    | Jika request ini adalah RSC dan di ket_admin ticket lama ada:
+    | "Rescheduled ke RSC-xxxx"
+    | maka ticket sebelumnya dikembalikan menjadi ISSUED
+    |--------------------------------------------------------------------------
+    */
 
-    $res = CustomQuery("UPDATE tbl_pengajuan_ticket_hdr 
-        SET status = '4', 
-            update_by = '$rejected_by', 
-            updated_at = '$now' 
-        WHERE req_id = '$req_id'");
+		$info_reschedule = '';
+		if (strpos($req_id, 'RSC-') === 0) {
+
+			 $escaped_req_id = addslashes($req_id);
+
+			 $sqlOld = "
+				  SELECT req_id
+				  FROM tbl_pengajuan_ticket_hdr
+				  WHERE ket_admin LIKE '%Rescheduled ke {$escaped_req_id}%'
+				  LIMIT 1
+			 ";
+
+			 $rsOld = CustomQuery($sqlOld);
+
+			 if ($dataOld = db_fetch_array($rsOld)) {
+
+				  $old_req_id = $dataOld['req_id'];
+
+				  CustomQuery("
+						UPDATE tbl_pengajuan_ticket_hdr
+						SET status = '5',
+							 update_by = '$rejected_by',
+							 updated_at = '$now'
+						WHERE req_id = '$old_req_id'
+				  ");
+
+				  $details[] = $old_req_id . ' dikembalikan menjadi ISSUED karena reschedule ditolak';
+
+				  $info_reschedule = "
+				  <div style='background:#ecfeff;border:1.5px solid #67e8f9;border-radius:12px;padding:16px;margin-top:24px'>
+						<div style='font-size:13px;color:#155e75;font-weight:700;margin-bottom:8px'>
+							 &#x21BA; Informasi Reschedule
+						</div>
+
+						<div style='font-size:13px;color:#164e63;line-height:1.7'>
+							 Pengajuan reschedule dengan nomor tiket
+							 <strong>$req_id</strong> telah ditolak.
+							 <br><br>
+
+							 Status tiket sebelumnya telah dikembalikan menjadi
+							 <strong>ISSUED</strong> pada nomor tiket:
+							 <br>
+
+							 <div style='margin-top:10px;font-size:16px;font-weight:700;color:#0891b2'>
+								  $old_req_id
+							 </div>
+						</div>
+				  </div>
+				  ";
+			 }
+		}
+    // Reject request RSC / request biasa
+    $res = CustomQuery("
+        UPDATE tbl_pengajuan_ticket_hdr 
+        SET status = '4',
+            update_by = '$rejected_by',
+            updated_at = '$now'
+        WHERE req_id = '$req_id'
+    ");
 
     if (!$res) {
         $has_error = true;
@@ -473,6 +536,7 @@ while ($record = $button->getNextSelectedRecord()) {
                   <td style='padding:10px 14px;font-size:13px;color:#dc2626;font-weight:600'>" . htmlspecialchars($keterangan_admin) . "</td>
                 </tr>
               </table>
+              " . $info_reschedule . "
               <div style='background:#fff7ed;border:1.5px solid #fdba74;border-radius:12px;padding:16px;margin-top:24px'>
                 <div style='font-size:13px;color:#92400e;font-weight:600;margin-bottom:6px'>&#x2139;&#xFE0F; Informasi</div>
                 <div style='font-size:13px;color:#78350f'>Jika Anda memiliki pertanyaan terkait penolakan ini, silakan hubungi admin atau ajukan tiket baru dengan melengkapi persyaratan yang diperlukan.</div>
