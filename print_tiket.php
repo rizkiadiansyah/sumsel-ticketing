@@ -16,6 +16,7 @@ SELECT
     h.alasan,
     h.jenis_pengajuan,
     d.nama_penumpang,
+    d.sbu_penumpang,
     d.bandara_asal,
     d.bandara_tujuan,
     d.tanggal_penerbangan,
@@ -297,6 +298,7 @@ if (!empty($pengajuan)) {
         <tr>
           <th>No</th>
           <th>Nama</th>
+          <th>SBU</th>
           <th>Dari</th>
           <th>Ke</th>
           <th>Tanggal Berangkat</th>
@@ -312,6 +314,7 @@ if (!empty($pengajuan)) {
 <tr>
   <td><?= $i + 1 ?></td>
   <td><?= htmlspecialchars($p['nama_penumpang']) ?></td>
+  <td><?= htmlspecialchars($p['sbu_penumpang']) ?></td>
   <td><?= htmlspecialchars($p['bandara_asal']) ?></td>
   <td><?= htmlspecialchars($p['bandara_tujuan']) ?></td>
   <td><?= date('d F Y', strtotime($p['tanggal_penerbangan'])) ?></td>

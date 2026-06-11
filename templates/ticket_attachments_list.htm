@@ -577,11 +577,11 @@
 <div data-grid-message data-pageid="{$pageid}" class="alert {$message_class}" role="alert" {$grid_message_attrs}>{$message}</div>
 {END message_block}	<style>
 @media screen and (max-width: 767px) {
-			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="req_id"]:before {
-		content: "{$label ticket_attachments req_id}";
-	}
-			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="attachment"]:before {
+		[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="attachment"]:before {
 		content: "{$label ticket_attachments attachment}";
+	}
+				[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="req_id"]:before {
+		content: "{$label ticket_attachments req_id}";
 	}
 			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="update_by"]:before {
 		content: "{$label ticket_attachments update_by}";

@@ -151,9 +151,9 @@ $tdataadmin_members[".filterFields"] = array();
 $tdataadmin_members[".requiredSearchFields"] = array();
 
 $tdataadmin_members[".googleLikeFields"] = array();
-$tdataadmin_members[".googleLikeFields"][] = "UserName";
 $tdataadmin_members[".googleLikeFields"][] = "GroupID";
 $tdataadmin_members[".googleLikeFields"][] = "Provider";
+$tdataadmin_members[".googleLikeFields"][] = "UserName";
 
 
 
@@ -187,7 +187,7 @@ $tdataadmin_members[".strOrderBy"] = $tstrOrderBy;
 $tdataadmin_members[".orderindexes"] = array();
 
 
-$tdataadmin_members[".sqlHead"] = "SELECT UserName,  	GroupID,  	Provider";
+$tdataadmin_members[".sqlHead"] = "SELECT GroupID,  	Provider,  	UserName";
 $tdataadmin_members[".sqlFrom"] = "FROM `sumsel-ticketingugmembers`";
 $tdataadmin_members[".sqlWhereExpr"] = "";
 $tdataadmin_members[".sqlTail"] = "";
@@ -237,149 +237,10 @@ $tdataadmin_members[".hideMobileList"] = array();
 
 
 
-//	UserName
-//	Custom field settings
-	$fdata = array();
-	$fdata["Index"] = 1;
-	$fdata["strName"] = "UserName";
-	$fdata["GoodName"] = "UserName";
-	$fdata["ownerTable"] = "sumsel-ticketingugmembers";
-	$fdata["Label"] = GetFieldLabel("admin_members","UserName");
-	$fdata["FieldType"] = 200;
-
-
-	
-	
-			
-
-		$fdata["strField"] = "UserName";
-
-		$fdata["sourceSingle"] = "UserName";
-
-	
-		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "UserName";
-
-	
-	
-				$fdata["UploadFolder"] = "files";
-
-//  Begin View Formats
-	$fdata["ViewFormats"] = array();
-
-	$vdata = array("ViewFormat" => "");
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-		$vdata["NeedEncode"] = true;
-
-	
-		$vdata["truncateText"] = true;
-	$vdata["NumberOfChars"] = 80;
-
-	$fdata["ViewFormats"]["view"] = $vdata;
-//  End View Formats
-
-//	Begin Edit Formats
-	$fdata["EditFormats"] = array();
-
-	$edata = array("EditFormat" => "Text field");
-
-	
-		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
-	$edata["weekdays"] = "[]";
-
-
-	
-	
-
-
-
-	
-	
-	
-	
-			$edata["acceptFileTypesHtml"] = "";
-
-		$edata["maxNumberOfFiles"] = 1;
-
-	
-	
-	
-	
-			$edata["HTML5InuptType"] = "text";
-
-		$edata["EditParams"] = "";
-			$edata["EditParams"].= " maxlength=255";
-
-		$edata["controlWidth"] = 200;
-
-//	Begin validation
-	$edata["validateAs"] = array();
-	$edata["validateAs"]["basicValidate"] = array();
-	$edata["validateAs"]["customMessages"] = array();
-	
-	
-//	End validation
-
-	
-			
-	
-	
-	
-	$fdata["EditFormats"]["edit"] = $edata;
-//	End Edit Formats
-
-
-	$fdata["isSeparate"] = false;
-
-
-
-
-// the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
-
-			// the default search options list
-				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
-// the end of search options settings
-
-
-//Filters settings
-	$fdata["filterTotals"] = 0;
-		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
-		$fdata["showCollapsed"] = false;
-
-		$fdata["sortValueType"] = 0;
-		$fdata["numberOfVisibleItems"] = 10;
-
-		$fdata["filterBy"] = 0;
-
-	
-
-	
-	
-//end of Filters settings
-
-
-	$tdataadmin_members["UserName"] = $fdata;
-		$tdataadmin_members[".searchableFields"][] = "UserName";
 //	GroupID
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 2;
+	$fdata["Index"] = 1;
 	$fdata["strName"] = "GroupID";
 	$fdata["GoodName"] = "GroupID";
 	$fdata["ownerTable"] = "sumsel-ticketingugmembers";
@@ -520,7 +381,7 @@ $tdataadmin_members[".hideMobileList"] = array();
 //	Provider
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 3;
+	$fdata["Index"] = 2;
 	$fdata["strName"] = "Provider";
 	$fdata["GoodName"] = "Provider";
 	$fdata["ownerTable"] = "sumsel-ticketingugmembers";
@@ -656,6 +517,145 @@ $tdataadmin_members[".hideMobileList"] = array();
 
 	$tdataadmin_members["Provider"] = $fdata;
 		$tdataadmin_members[".searchableFields"][] = "Provider";
+//	UserName
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 3;
+	$fdata["strName"] = "UserName";
+	$fdata["GoodName"] = "UserName";
+	$fdata["ownerTable"] = "sumsel-ticketingugmembers";
+	$fdata["Label"] = GetFieldLabel("admin_members","UserName");
+	$fdata["FieldType"] = 200;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "UserName";
+
+		$fdata["sourceSingle"] = "UserName";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "UserName";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text field");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+			$edata["EditParams"].= " maxlength=255";
+
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+	
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdataadmin_members["UserName"] = $fdata;
+		$tdataadmin_members[".searchableFields"][] = "UserName";
 
 
 $tables_data["admin_members"]=&$tdataadmin_members;
@@ -700,7 +700,7 @@ function createSqlQuery_admin_members()
 {
 $proto0=array();
 $proto0["m_strHead"] = "SELECT";
-$proto0["m_strFieldList"] = "UserName,  	GroupID,  	Provider";
+$proto0["m_strFieldList"] = "GroupID,  	Provider,  	UserName";
 $proto0["m_strFrom"] = "FROM `sumsel-ticketingugmembers`";
 $proto0["m_strWhere"] = "";
 $proto0["m_strOrderBy"] = "";
@@ -742,12 +742,12 @@ $proto0["m_having"] = $obj;
 $proto0["m_fieldlist"] = array();
 						$proto6=array();
 			$obj = new SQLField(array(
-	"m_strName" => "UserName",
+	"m_strName" => "GroupID",
 	"m_strTable" => "sumsel-ticketingugmembers",
 	"m_srcTableName" => "admin_members"
 ));
 
-$proto6["m_sql"] = "UserName";
+$proto6["m_sql"] = "GroupID";
 $proto6["m_srcTableName"] = "admin_members";
 $proto6["m_expr"]=$obj;
 $proto6["m_alias"] = "";
@@ -756,12 +756,12 @@ $obj = new SQLFieldListItem($proto6);
 $proto0["m_fieldlist"][]=$obj;
 						$proto8=array();
 			$obj = new SQLField(array(
-	"m_strName" => "GroupID",
+	"m_strName" => "Provider",
 	"m_strTable" => "sumsel-ticketingugmembers",
 	"m_srcTableName" => "admin_members"
 ));
 
-$proto8["m_sql"] = "GroupID";
+$proto8["m_sql"] = "Provider";
 $proto8["m_srcTableName"] = "admin_members";
 $proto8["m_expr"]=$obj;
 $proto8["m_alias"] = "";
@@ -770,12 +770,12 @@ $obj = new SQLFieldListItem($proto8);
 $proto0["m_fieldlist"][]=$obj;
 						$proto10=array();
 			$obj = new SQLField(array(
-	"m_strName" => "Provider",
+	"m_strName" => "UserName",
 	"m_strTable" => "sumsel-ticketingugmembers",
 	"m_srcTableName" => "admin_members"
 ));
 
-$proto10["m_sql"] = "Provider";
+$proto10["m_sql"] = "UserName";
 $proto10["m_srcTableName"] = "admin_members";
 $proto10["m_expr"]=$obj;
 $proto10["m_alias"] = "";
@@ -789,9 +789,9 @@ $proto12["m_link"] = "SQLL_MAIN";
 $proto13["m_strName"] = "sumsel-ticketingugmembers";
 $proto13["m_srcTableName"] = "admin_members";
 $proto13["m_columns"] = array();
-$proto13["m_columns"][] = "UserName";
 $proto13["m_columns"][] = "GroupID";
 $proto13["m_columns"][] = "Provider";
+$proto13["m_columns"][] = "UserName";
 $obj = new SQLTable($proto13);
 
 $proto12["m_table"] = $obj;

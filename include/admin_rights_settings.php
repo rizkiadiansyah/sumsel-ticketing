@@ -154,10 +154,10 @@ $tdataadmin_rights[".filterFields"] = array();
 $tdataadmin_rights[".requiredSearchFields"] = array();
 
 $tdataadmin_rights[".googleLikeFields"] = array();
-$tdataadmin_rights[".googleLikeFields"][] = "TableName";
-$tdataadmin_rights[".googleLikeFields"][] = "GroupID";
 $tdataadmin_rights[".googleLikeFields"][] = "AccessMask";
+$tdataadmin_rights[".googleLikeFields"][] = "GroupID";
 $tdataadmin_rights[".googleLikeFields"][] = "Page";
+$tdataadmin_rights[".googleLikeFields"][] = "TableName";
 
 
 
@@ -191,7 +191,7 @@ $tdataadmin_rights[".strOrderBy"] = $tstrOrderBy;
 $tdataadmin_rights[".orderindexes"] = array();
 
 
-$tdataadmin_rights[".sqlHead"] = "SELECT TableName,  	GroupID,  	AccessMask,  	Page";
+$tdataadmin_rights[".sqlHead"] = "SELECT AccessMask,  	GroupID,  	Page,  	TableName";
 $tdataadmin_rights[".sqlFrom"] = "FROM `sumsel-ticketingugrights`";
 $tdataadmin_rights[".sqlWhereExpr"] = "";
 $tdataadmin_rights[".sqlTail"] = "";
@@ -240,14 +240,14 @@ $tdataadmin_rights[".hideMobileList"] = array();
 
 
 
-//	TableName
+//	AccessMask
 //	Custom field settings
 	$fdata = array();
 	$fdata["Index"] = 1;
-	$fdata["strName"] = "TableName";
-	$fdata["GoodName"] = "TableName";
+	$fdata["strName"] = "AccessMask";
+	$fdata["GoodName"] = "AccessMask";
 	$fdata["ownerTable"] = "sumsel-ticketingugrights";
-	$fdata["Label"] = GetFieldLabel("admin_rights","TableName");
+	$fdata["Label"] = GetFieldLabel("admin_rights","AccessMask");
 	$fdata["FieldType"] = 200;
 
 
@@ -255,13 +255,13 @@ $tdataadmin_rights[".hideMobileList"] = array();
 	
 			
 
-		$fdata["strField"] = "TableName";
+		$fdata["strField"] = "AccessMask";
 
-		$fdata["sourceSingle"] = "TableName";
+		$fdata["sourceSingle"] = "AccessMask";
 
 	
 		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "TableName";
+	$fdata["FullName"] = "AccessMask";
 
 	
 	
@@ -325,7 +325,7 @@ $tdataadmin_rights[".hideMobileList"] = array();
 			$edata["HTML5InuptType"] = "text";
 
 		$edata["EditParams"] = "";
-			$edata["EditParams"].= " maxlength=255";
+			$edata["EditParams"].= " maxlength=10";
 
 		$edata["controlWidth"] = 200;
 
@@ -377,8 +377,8 @@ $tdataadmin_rights[".hideMobileList"] = array();
 //end of Filters settings
 
 
-	$tdataadmin_rights["TableName"] = $fdata;
-		$tdataadmin_rights[".searchableFields"][] = "TableName";
+	$tdataadmin_rights["AccessMask"] = $fdata;
+		$tdataadmin_rights[".searchableFields"][] = "AccessMask";
 //	GroupID
 //	Custom field settings
 	$fdata = array();
@@ -520,149 +520,10 @@ $tdataadmin_rights[".hideMobileList"] = array();
 
 	$tdataadmin_rights["GroupID"] = $fdata;
 		$tdataadmin_rights[".searchableFields"][] = "GroupID";
-//	AccessMask
-//	Custom field settings
-	$fdata = array();
-	$fdata["Index"] = 3;
-	$fdata["strName"] = "AccessMask";
-	$fdata["GoodName"] = "AccessMask";
-	$fdata["ownerTable"] = "sumsel-ticketingugrights";
-	$fdata["Label"] = GetFieldLabel("admin_rights","AccessMask");
-	$fdata["FieldType"] = 200;
-
-
-	
-	
-			
-
-		$fdata["strField"] = "AccessMask";
-
-		$fdata["sourceSingle"] = "AccessMask";
-
-	
-		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "AccessMask";
-
-	
-	
-				$fdata["UploadFolder"] = "files";
-
-//  Begin View Formats
-	$fdata["ViewFormats"] = array();
-
-	$vdata = array("ViewFormat" => "");
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-		$vdata["NeedEncode"] = true;
-
-	
-		$vdata["truncateText"] = true;
-	$vdata["NumberOfChars"] = 80;
-
-	$fdata["ViewFormats"]["view"] = $vdata;
-//  End View Formats
-
-//	Begin Edit Formats
-	$fdata["EditFormats"] = array();
-
-	$edata = array("EditFormat" => "Text field");
-
-	
-		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
-	$edata["weekdays"] = "[]";
-
-
-	
-	
-
-
-
-	
-	
-	
-	
-			$edata["acceptFileTypesHtml"] = "";
-
-		$edata["maxNumberOfFiles"] = 1;
-
-	
-	
-	
-	
-			$edata["HTML5InuptType"] = "text";
-
-		$edata["EditParams"] = "";
-			$edata["EditParams"].= " maxlength=10";
-
-		$edata["controlWidth"] = 200;
-
-//	Begin validation
-	$edata["validateAs"] = array();
-	$edata["validateAs"]["basicValidate"] = array();
-	$edata["validateAs"]["customMessages"] = array();
-	
-	
-//	End validation
-
-	
-			
-	
-	
-	
-	$fdata["EditFormats"]["edit"] = $edata;
-//	End Edit Formats
-
-
-	$fdata["isSeparate"] = false;
-
-
-
-
-// the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
-
-			// the default search options list
-				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
-// the end of search options settings
-
-
-//Filters settings
-	$fdata["filterTotals"] = 0;
-		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
-		$fdata["showCollapsed"] = false;
-
-		$fdata["sortValueType"] = 0;
-		$fdata["numberOfVisibleItems"] = 10;
-
-		$fdata["filterBy"] = 0;
-
-	
-
-	
-	
-//end of Filters settings
-
-
-	$tdataadmin_rights["AccessMask"] = $fdata;
-		$tdataadmin_rights[".searchableFields"][] = "AccessMask";
 //	Page
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 4;
+	$fdata["Index"] = 3;
 	$fdata["strName"] = "Page";
 	$fdata["GoodName"] = "Page";
 	$fdata["ownerTable"] = "sumsel-ticketingugrights";
@@ -800,6 +661,145 @@ $tdataadmin_rights[".hideMobileList"] = array();
 
 	$tdataadmin_rights["Page"] = $fdata;
 		$tdataadmin_rights[".searchableFields"][] = "Page";
+//	TableName
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 4;
+	$fdata["strName"] = "TableName";
+	$fdata["GoodName"] = "TableName";
+	$fdata["ownerTable"] = "sumsel-ticketingugrights";
+	$fdata["Label"] = GetFieldLabel("admin_rights","TableName");
+	$fdata["FieldType"] = 200;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "TableName";
+
+		$fdata["sourceSingle"] = "TableName";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "TableName";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text field");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+			$edata["EditParams"].= " maxlength=255";
+
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+	
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdataadmin_rights["TableName"] = $fdata;
+		$tdataadmin_rights[".searchableFields"][] = "TableName";
 
 
 $tables_data["admin_rights"]=&$tdataadmin_rights;
@@ -844,7 +844,7 @@ function createSqlQuery_admin_rights()
 {
 $proto0=array();
 $proto0["m_strHead"] = "SELECT";
-$proto0["m_strFieldList"] = "TableName,  	GroupID,  	AccessMask,  	Page";
+$proto0["m_strFieldList"] = "AccessMask,  	GroupID,  	Page,  	TableName";
 $proto0["m_strFrom"] = "FROM `sumsel-ticketingugrights`";
 $proto0["m_strWhere"] = "";
 $proto0["m_strOrderBy"] = "";
@@ -886,12 +886,12 @@ $proto0["m_having"] = $obj;
 $proto0["m_fieldlist"] = array();
 						$proto6=array();
 			$obj = new SQLField(array(
-	"m_strName" => "TableName",
+	"m_strName" => "AccessMask",
 	"m_strTable" => "sumsel-ticketingugrights",
 	"m_srcTableName" => "admin_rights"
 ));
 
-$proto6["m_sql"] = "TableName";
+$proto6["m_sql"] = "AccessMask";
 $proto6["m_srcTableName"] = "admin_rights";
 $proto6["m_expr"]=$obj;
 $proto6["m_alias"] = "";
@@ -914,12 +914,12 @@ $obj = new SQLFieldListItem($proto8);
 $proto0["m_fieldlist"][]=$obj;
 						$proto10=array();
 			$obj = new SQLField(array(
-	"m_strName" => "AccessMask",
+	"m_strName" => "Page",
 	"m_strTable" => "sumsel-ticketingugrights",
 	"m_srcTableName" => "admin_rights"
 ));
 
-$proto10["m_sql"] = "AccessMask";
+$proto10["m_sql"] = "Page";
 $proto10["m_srcTableName"] = "admin_rights";
 $proto10["m_expr"]=$obj;
 $proto10["m_alias"] = "";
@@ -928,12 +928,12 @@ $obj = new SQLFieldListItem($proto10);
 $proto0["m_fieldlist"][]=$obj;
 						$proto12=array();
 			$obj = new SQLField(array(
-	"m_strName" => "Page",
+	"m_strName" => "TableName",
 	"m_strTable" => "sumsel-ticketingugrights",
 	"m_srcTableName" => "admin_rights"
 ));
 
-$proto12["m_sql"] = "Page";
+$proto12["m_sql"] = "TableName";
 $proto12["m_srcTableName"] = "admin_rights";
 $proto12["m_expr"]=$obj;
 $proto12["m_alias"] = "";
@@ -947,10 +947,10 @@ $proto14["m_link"] = "SQLL_MAIN";
 $proto15["m_strName"] = "sumsel-ticketingugrights";
 $proto15["m_srcTableName"] = "admin_rights";
 $proto15["m_columns"] = array();
-$proto15["m_columns"][] = "TableName";
-$proto15["m_columns"][] = "GroupID";
 $proto15["m_columns"][] = "AccessMask";
+$proto15["m_columns"][] = "GroupID";
 $proto15["m_columns"][] = "Page";
+$proto15["m_columns"][] = "TableName";
 $obj = new SQLTable($proto15);
 
 $proto14["m_table"] = $obj;

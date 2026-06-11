@@ -254,6 +254,17 @@ if (isset($_SESSION['UserID']) && $_SESSION['UserID'] != '') {
       .action-buttons { flex-direction: column; }
       .btn-action { min-width: 100%; }
     }
+    .btn-edit-inline {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 5px 12px; border-radius: 20px;
+      background: #eff6ff; border: 1.5px solid #93c5fd;
+      color: #1d4ed8; font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px; font-weight: 700; cursor: pointer;
+      transition: all .2s ease;
+    }
+    .btn-edit-inline:hover {
+      background: #dbeafe; border-color: #3b82f6;
+    }
   </style>
 </head>
 <body>
@@ -308,7 +319,16 @@ if (isset($_SESSION['UserID']) && $_SESSION['UserID'] != '') {
             <div class="req-id-label">Nomor Tiket</div>
             <div class="req-id-val" id="resReqId">—</div>
           </div>
-          <div id="resBadge"></div>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div id="resBadge"></div>
+            <button id="btnEdit" style="display:none" class="btn-edit-inline">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+              </svg>
+              Edit
+            </button>
+          </div>
         </div>
         <div class="sec-label">Data Pemesan</div>
         <div class="info-grid" id="resPemesan"></div>
@@ -407,53 +427,60 @@ if (isset($_SESSION['UserID']) && $_SESSION['UserID'] != '') {
     function setupActionButtons(header, currentStatus, isSuperAdmin) {
         const btnReschedule = document.getElementById('btnReschedule');
         const btnRefund     = document.getElementById('btnRefund');
-        const btnPrint      = document.getElementById('btnPrint'); // ✅ tambah ini
+        const btnPrint      = document.getElementById('btnPrint');
+        const btnDownload   = document.getElementById('btnDownload');
+        const btnEdit       = document.getElementById('btnEdit');
 
         const pemilikNik       = (header.nik_pemesan || '').toString().trim();
         const userNik          = (loginUserNik || '').toString().trim();
         const isOwner          = (pemilikNik === userNik);
         const isUserSuperAdmin = isSuperAdmin === true;
 
-        const isStatusIssued   = (currentStatus == 5);
-        const isStatusOnProgress = (currentStatus == 1); // ✅ status 1 = On Progress
+        // Hanya owner atau superadmin yang boleh aksi apapun
+        const canAct = isOwner || isUserSuperAdmin;
 
-        const canAct   = (isOwner || isUserSuperAdmin) && isStatusIssued;
-        const canCetak = isStatusOnProgress; // ✅ cetak hanya status 1, siapapun boleh? atau perlu cek owner juga?
+        const isStatusIssued     = (currentStatus == 5);
+        const isStatusOnProgress = (currentStatus == 1);
+        const isEditable         = currentStatus >= 1 && currentStatus <= 4;
 
-        // Reschedule & Refund
-        btnReschedule.style.pointerEvents = canAct ? 'auto' : 'none';
-        btnRefund.style.pointerEvents     = canAct ? 'auto' : 'none';
-        btnReschedule.style.opacity       = canAct ? '1' : '0.5';
-        btnRefund.style.opacity           = canAct ? '1' : '0.5';
+        const canReschedule = canAct && isStatusIssued;
+        const canRefund     = canAct && isStatusIssued;
+        const canEdit       = canAct && isEditable;
+        const canPrint      = canAct && isStatusOnProgress;
+        const hasAttachment = header.attachment && header.attachment.trim() !== '';
+        const canDownload   = canAct && isStatusIssued && hasAttachment;
 
-        // ✅ Cetak
-        btnPrint.style.pointerEvents = canCetak ? 'auto' : 'none';
-        btnPrint.style.opacity       = canCetak ? '1' : '0.5';
-        btnPrint.title = canCetak ? '' : 'Cetak hanya bisa dilakukan untuk tiket dengan status On Progress';
+        // ── Edit ──
+        btnEdit.style.display = canEdit ? 'inline-flex' : 'none';
+        btnEdit.onclick = () => {
+            if (!canEdit) return;
+            window.location.href = `form-tiket.php?mode=edit&req_id=${encodeURIComponent(currentReqId)}`;
+        };
 
-        // Tooltip reschedule/refund
-        let tooltip = '';
-        if (!isStatusIssued) {
-            tooltip = 'Reschedule/Refund hanya bisa dilakukan untuk tiket yang sudah Issued (status 5)';
-        } else if (!isOwner && !isUserSuperAdmin) {
-            tooltip = 'Hanya pemilik tiket atau Superadmin yang bisa reschedule/refund';
-        }
-        btnReschedule.title = tooltip;
-        btnRefund.title     = tooltip;
-
+        // ── Reschedule ──
+        btnReschedule.style.pointerEvents = canReschedule ? 'auto' : 'none';
+        btnReschedule.style.opacity       = canReschedule ? '1' : '0.4';
+        btnReschedule.title = !canAct
+            ? 'Hanya pemilik tiket atau Superadmin yang dapat melakukan aksi ini'
+            : !isStatusIssued ? 'Reschedule hanya untuk tiket berstatus Issued' : '';
         btnReschedule.onclick = () => {
-            if (!canAct) return;
+            if (!canReschedule) return;
             window.location.href = `reschedule.php?req_id=${encodeURIComponent(currentReqId)}`;
         };
 
+        // ── Refund ──
+        btnRefund.style.pointerEvents = canRefund ? 'auto' : 'none';
+        btnRefund.style.opacity       = canRefund ? '1' : '0.4';
+        btnRefund.title = !canAct
+            ? 'Hanya pemilik tiket atau Superadmin yang dapat melakukan aksi ini'
+            : !isStatusIssued ? 'Refund hanya untuk tiket berstatus Issued' : '';
         btnRefund.onclick = async () => {
-            if (!canAct) return;
+            if (!canRefund) return;
             if (!confirm('Yakin ingin mengajukan refund untuk tiket ini? Tindakan ini tidak dapat dibatalkan.')) return;
 
-            const btn = document.getElementById('btnRefund');
-            btn.style.opacity = '0.6';
-            btn.style.pointerEvents = 'none';
-            btn.innerHTML = '⏳ Memproses...';
+            btnRefund.style.opacity       = '0.6';
+            btnRefund.style.pointerEvents = 'none';
+            btnRefund.innerHTML           = '⏳ Memproses...';
 
             try {
                 const res  = await fetch('api-handler.php?action=submit_refund', {
@@ -463,40 +490,42 @@ if (isset($_SESSION['UserID']) && $_SESSION['UserID'] != '') {
                 });
                 const data = await res.json();
                 if (data.success) {
-                    alert(`Refund berhasil diajukan. Nomor refund: ${data.req_id}`);
-                    cekStatus(); // refresh tampilan status
+                    alert(`Refund berhasil diajukan.`);
+                    cekStatus();
                 } else {
                     alert('Gagal: ' + (data.message || 'Terjadi kesalahan.'));
-                    btn.style.opacity = '1';
-                    btn.style.pointerEvents = 'auto';
-                    btn.innerHTML = `<svg .../>Ajukan Refund`;
+                    btnRefund.style.opacity       = '1';
+                    btnRefund.style.pointerEvents = 'auto';
+                    btnRefund.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Ajukan Refund`;
                 }
             } catch {
                 alert('Gagal terhubung ke server.');
-                btn.style.opacity = '1';
-                btn.style.pointerEvents = 'auto';
+                btnRefund.style.opacity       = '1';
+                btnRefund.style.pointerEvents = 'auto';
             }
         };
 
-        // ✅ onclick cetak
+        // ── Print ──
+        btnPrint.style.pointerEvents = canPrint ? 'auto' : 'none';
+        btnPrint.style.opacity       = canPrint ? '1' : '0.4';
+        btnPrint.title = !canAct
+            ? 'Hanya pemilik tiket atau Superadmin yang dapat mencetak'
+            : !isStatusOnProgress ? 'Cetak hanya untuk tiket berstatus On Progress' : '';
         btnPrint.onclick = () => {
-            if (!canCetak) return;
+            if (!canPrint) return;
             window.location.href = `print_tiket.php?req_id=${encodeURIComponent(currentReqId)}`;
         };
-        const hasAttachment  = header.attachment && header.attachment.trim() !== '';
-        const canDownload    = isStatusIssued && hasAttachment;
 
+        // ── Download ──
         btnDownload.style.pointerEvents = canDownload ? 'auto' : 'none';
-        btnDownload.style.opacity       = canDownload ? '1' : '0.5';
-        btnDownload.title = !isStatusIssued
-          ? 'Download hanya tersedia untuk tiket berstatus Issued'
-          : !hasAttachment
-          ? 'File attachment belum tersedia'
-          : '';
-
+        btnDownload.style.opacity       = canDownload ? '1' : '0.4';
+        btnDownload.title = !canAct
+            ? 'Hanya pemilik tiket atau Superadmin yang dapat mendownload'
+            : !isStatusIssued ? 'Download hanya untuk tiket berstatus Issued'
+            : !hasAttachment  ? 'File attachment belum tersedia' : '';
         btnDownload.onclick = () => {
-          if (!canDownload) return;
-          window.open(`download_attachment.php?req_id=${encodeURIComponent(currentReqId)}`, '_blank');
+            if (!canDownload) return;
+            window.open(`download_attachment.php?req_id=${encodeURIComponent(currentReqId)}`, '_blank');
         };
     }
 

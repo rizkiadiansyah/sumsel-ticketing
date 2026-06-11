@@ -157,9 +157,9 @@ $tdataticket_attachments[".filterFields"] = array();
 $tdataticket_attachments[".requiredSearchFields"] = array();
 
 $tdataticket_attachments[".googleLikeFields"] = array();
+$tdataticket_attachments[".googleLikeFields"][] = "attachment";
 $tdataticket_attachments[".googleLikeFields"][] = "id";
 $tdataticket_attachments[".googleLikeFields"][] = "req_id";
-$tdataticket_attachments[".googleLikeFields"][] = "attachment";
 $tdataticket_attachments[".googleLikeFields"][] = "update_by";
 $tdataticket_attachments[".googleLikeFields"][] = "update_date";
 
@@ -195,7 +195,7 @@ $tdataticket_attachments[".strOrderBy"] = $tstrOrderBy;
 $tdataticket_attachments[".orderindexes"] = array();
 
 
-$tdataticket_attachments[".sqlHead"] = "SELECT id,  	req_id,  	attachment,  	update_by,  	update_date";
+$tdataticket_attachments[".sqlHead"] = "SELECT attachment,  	id,  	req_id,  	update_by,  	update_date";
 $tdataticket_attachments[".sqlFrom"] = "FROM tbl_ticket_attachments";
 $tdataticket_attachments[".sqlWhereExpr"] = "";
 $tdataticket_attachments[".sqlTail"] = "";
@@ -243,10 +243,151 @@ $tdataticket_attachments[".hideMobileList"] = array();
 
 
 
-//	id
+//	attachment
 //	Custom field settings
 	$fdata = array();
 	$fdata["Index"] = 1;
+	$fdata["strName"] = "attachment";
+	$fdata["GoodName"] = "attachment";
+	$fdata["ownerTable"] = "tbl_ticket_attachments";
+	$fdata["Label"] = GetFieldLabel("ticket_attachments","attachment");
+	$fdata["FieldType"] = 201;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "attachment";
+
+		$fdata["sourceSingle"] = "attachment";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "attachment";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "Document Download");
+
+	
+	
+	
+				$vdata["ShowThumbnail"] = true;
+			$vdata["ShowFileSize"] = true;
+			$vdata["ShowIcon"] = true;
+				
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Document upload");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 0;
+
+	
+	
+	
+	
+	
+	
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+	
+	
+//	End validation
+
+		$edata["CreateThumbnail"] = true;
+	$edata["StrThumbnail"] = "th";
+			$edata["ThumbnailSize"] = 600;
+
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdataticket_attachments["attachment"] = $fdata;
+		$tdataticket_attachments[".searchableFields"][] = "attachment";
+//	id
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 2;
 	$fdata["strName"] = "id";
 	$fdata["GoodName"] = "id";
 	$fdata["ownerTable"] = "tbl_ticket_attachments";
@@ -388,7 +529,7 @@ $tdataticket_attachments[".hideMobileList"] = array();
 //	req_id
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 2;
+	$fdata["Index"] = 3;
 	$fdata["strName"] = "req_id";
 	$fdata["GoodName"] = "req_id";
 	$fdata["ownerTable"] = "tbl_ticket_attachments";
@@ -524,147 +665,6 @@ $tdataticket_attachments[".hideMobileList"] = array();
 
 	$tdataticket_attachments["req_id"] = $fdata;
 		$tdataticket_attachments[".searchableFields"][] = "req_id";
-//	attachment
-//	Custom field settings
-	$fdata = array();
-	$fdata["Index"] = 3;
-	$fdata["strName"] = "attachment";
-	$fdata["GoodName"] = "attachment";
-	$fdata["ownerTable"] = "tbl_ticket_attachments";
-	$fdata["Label"] = GetFieldLabel("ticket_attachments","attachment");
-	$fdata["FieldType"] = 201;
-
-
-	
-	
-			
-
-		$fdata["strField"] = "attachment";
-
-		$fdata["sourceSingle"] = "attachment";
-
-	
-		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "attachment";
-
-	
-	
-				$fdata["UploadFolder"] = "files";
-
-//  Begin View Formats
-	$fdata["ViewFormats"] = array();
-
-	$vdata = array("ViewFormat" => "Document Download");
-
-	
-	
-	
-				$vdata["ShowThumbnail"] = true;
-			$vdata["ShowFileSize"] = true;
-			$vdata["ShowIcon"] = true;
-				
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-		$vdata["truncateText"] = true;
-	$vdata["NumberOfChars"] = 80;
-
-	$fdata["ViewFormats"]["view"] = $vdata;
-//  End View Formats
-
-//	Begin Edit Formats
-	$fdata["EditFormats"] = array();
-
-	$edata = array("EditFormat" => "Document upload");
-
-	
-		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
-	$edata["weekdays"] = "[]";
-
-
-	
-	
-
-
-
-	
-	
-	
-	
-			$edata["acceptFileTypesHtml"] = "";
-
-		$edata["maxNumberOfFiles"] = 0;
-
-	
-	
-	
-	
-	
-	
-		$edata["controlWidth"] = 200;
-
-//	Begin validation
-	$edata["validateAs"] = array();
-	$edata["validateAs"]["basicValidate"] = array();
-	$edata["validateAs"]["customMessages"] = array();
-	
-	
-//	End validation
-
-		$edata["CreateThumbnail"] = true;
-	$edata["StrThumbnail"] = "th";
-			$edata["ThumbnailSize"] = 600;
-
-			
-	
-	
-	
-	$fdata["EditFormats"]["edit"] = $edata;
-//	End Edit Formats
-
-
-	$fdata["isSeparate"] = false;
-
-
-
-
-// the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
-
-			// the default search options list
-				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
-// the end of search options settings
-
-
-//Filters settings
-	$fdata["filterTotals"] = 0;
-		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
-		$fdata["showCollapsed"] = false;
-
-		$fdata["sortValueType"] = 0;
-		$fdata["numberOfVisibleItems"] = 10;
-
-		$fdata["filterBy"] = 0;
-
-	
-
-	
-	
-//end of Filters settings
-
-
-	$tdataticket_attachments["attachment"] = $fdata;
-		$tdataticket_attachments[".searchableFields"][] = "attachment";
 //	update_by
 //	Custom field settings
 	$fdata = array();
@@ -999,7 +999,7 @@ function createSqlQuery_ticket_attachments()
 {
 $proto0=array();
 $proto0["m_strHead"] = "SELECT";
-$proto0["m_strFieldList"] = "id,  	req_id,  	attachment,  	update_by,  	update_date";
+$proto0["m_strFieldList"] = "attachment,  	id,  	req_id,  	update_by,  	update_date";
 $proto0["m_strFrom"] = "FROM tbl_ticket_attachments";
 $proto0["m_strWhere"] = "";
 $proto0["m_strOrderBy"] = "";
@@ -1041,12 +1041,12 @@ $proto0["m_having"] = $obj;
 $proto0["m_fieldlist"] = array();
 						$proto6=array();
 			$obj = new SQLField(array(
-	"m_strName" => "id",
+	"m_strName" => "attachment",
 	"m_strTable" => "tbl_ticket_attachments",
 	"m_srcTableName" => "ticket_attachments"
 ));
 
-$proto6["m_sql"] = "id";
+$proto6["m_sql"] = "attachment";
 $proto6["m_srcTableName"] = "ticket_attachments";
 $proto6["m_expr"]=$obj;
 $proto6["m_alias"] = "";
@@ -1055,12 +1055,12 @@ $obj = new SQLFieldListItem($proto6);
 $proto0["m_fieldlist"][]=$obj;
 						$proto8=array();
 			$obj = new SQLField(array(
-	"m_strName" => "req_id",
+	"m_strName" => "id",
 	"m_strTable" => "tbl_ticket_attachments",
 	"m_srcTableName" => "ticket_attachments"
 ));
 
-$proto8["m_sql"] = "req_id";
+$proto8["m_sql"] = "id";
 $proto8["m_srcTableName"] = "ticket_attachments";
 $proto8["m_expr"]=$obj;
 $proto8["m_alias"] = "";
@@ -1069,12 +1069,12 @@ $obj = new SQLFieldListItem($proto8);
 $proto0["m_fieldlist"][]=$obj;
 						$proto10=array();
 			$obj = new SQLField(array(
-	"m_strName" => "attachment",
+	"m_strName" => "req_id",
 	"m_strTable" => "tbl_ticket_attachments",
 	"m_srcTableName" => "ticket_attachments"
 ));
 
-$proto10["m_sql"] = "attachment";
+$proto10["m_sql"] = "req_id";
 $proto10["m_srcTableName"] = "ticket_attachments";
 $proto10["m_expr"]=$obj;
 $proto10["m_alias"] = "";
@@ -1116,9 +1116,9 @@ $proto16["m_link"] = "SQLL_MAIN";
 $proto17["m_strName"] = "tbl_ticket_attachments";
 $proto17["m_srcTableName"] = "ticket_attachments";
 $proto17["m_columns"] = array();
+$proto17["m_columns"][] = "attachment";
 $proto17["m_columns"][] = "id";
 $proto17["m_columns"][] = "req_id";
-$proto17["m_columns"][] = "attachment";
 $proto17["m_columns"][] = "update_by";
 $proto17["m_columns"][] = "update_date";
 $obj = new SQLTable($proto17);

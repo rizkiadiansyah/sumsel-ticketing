@@ -178,16 +178,16 @@ $tdatatbl_code_list[".filterFields"] = array();
 $tdatatbl_code_list[".requiredSearchFields"] = array();
 
 $tdatatbl_code_list[".googleLikeFields"] = array();
+$tdatatbl_code_list[".googleLikeFields"][] = "Active";
+$tdatatbl_code_list[".googleLikeFields"][] = "AssRec";
 $tdatatbl_code_list[".googleLikeFields"][] = "CatID";
 $tdatatbl_code_list[".googleLikeFields"][] = "Code";
-$tdatatbl_code_list[".googleLikeFields"][] = "Description";
-$tdatatbl_code_list[".googleLikeFields"][] = "Description2";
-$tdatatbl_code_list[".googleLikeFields"][] = "AssRec";
-$tdatatbl_code_list[".googleLikeFields"][] = "OrderNo";
-$tdatatbl_code_list[".googleLikeFields"][] = "Active";
-$tdatatbl_code_list[".googleLikeFields"][] = "Rate";
 $tdatatbl_code_list[".googleLikeFields"][] = "CreateBy";
 $tdatatbl_code_list[".googleLikeFields"][] = "CreateDate";
+$tdatatbl_code_list[".googleLikeFields"][] = "Description";
+$tdatatbl_code_list[".googleLikeFields"][] = "Description2";
+$tdatatbl_code_list[".googleLikeFields"][] = "OrderNo";
+$tdatatbl_code_list[".googleLikeFields"][] = "Rate";
 $tdatatbl_code_list[".googleLikeFields"][] = "UpdateBy";
 $tdatatbl_code_list[".googleLikeFields"][] = "UpdateDate";
 
@@ -223,7 +223,7 @@ $tdatatbl_code_list[".strOrderBy"] = $tstrOrderBy;
 $tdatatbl_code_list[".orderindexes"] = array();
 
 
-$tdatatbl_code_list[".sqlHead"] = "SELECT CatID,  	Code,  	Description,  	Description2,  	AssRec,  	OrderNo,  	Active,  	Rate,  	CreateBy,  	CreateDate,  	UpdateBy,  	UpdateDate";
+$tdatatbl_code_list[".sqlHead"] = "SELECT Active,  	AssRec,  	CatID,  	Code,  	CreateBy,  	CreateDate,  	Description,  	Description2,  	OrderNo,  	Rate,  	UpdateBy,  	UpdateDate";
 $tdatatbl_code_list[".sqlFrom"] = "FROM tbl_code_list";
 $tdatatbl_code_list[".sqlWhereExpr"] = "";
 $tdatatbl_code_list[".sqlTail"] = "";
@@ -275,10 +275,288 @@ $tdatatbl_code_list[".hideMobileList"] = array();
 
 
 
-//	CatID
+//	Active
 //	Custom field settings
 	$fdata = array();
 	$fdata["Index"] = 1;
+	$fdata["strName"] = "Active";
+	$fdata["GoodName"] = "Active";
+	$fdata["ownerTable"] = "tbl_code_list";
+	$fdata["Label"] = GetFieldLabel("tbl_code_list","Active");
+	$fdata["FieldType"] = 16;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "Active";
+
+		$fdata["sourceSingle"] = "Active";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "Active";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text field");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+		
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
+							
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatatbl_code_list["Active"] = $fdata;
+		$tdatatbl_code_list[".searchableFields"][] = "Active";
+//	AssRec
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 2;
+	$fdata["strName"] = "AssRec";
+	$fdata["GoodName"] = "AssRec";
+	$fdata["ownerTable"] = "tbl_code_list";
+	$fdata["Label"] = GetFieldLabel("tbl_code_list","AssRec");
+	$fdata["FieldType"] = 200;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "AssRec";
+
+		$fdata["sourceSingle"] = "AssRec";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "AssRec";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text field");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+			$edata["EditParams"].= " maxlength=10";
+
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+	
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatatbl_code_list["AssRec"] = $fdata;
+		$tdatatbl_code_list[".searchableFields"][] = "AssRec";
+//	CatID
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 3;
 	$fdata["strName"] = "CatID";
 	$fdata["GoodName"] = "CatID";
 	$fdata["ownerTable"] = "tbl_code_list";
@@ -417,7 +695,7 @@ $tdatatbl_code_list[".hideMobileList"] = array();
 //	Code
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 2;
+	$fdata["Index"] = 4;
 	$fdata["strName"] = "Code";
 	$fdata["GoodName"] = "Code";
 	$fdata["ownerTable"] = "tbl_code_list";
@@ -553,845 +831,10 @@ $tdatatbl_code_list[".hideMobileList"] = array();
 
 	$tdatatbl_code_list["Code"] = $fdata;
 		$tdatatbl_code_list[".searchableFields"][] = "Code";
-//	Description
-//	Custom field settings
-	$fdata = array();
-	$fdata["Index"] = 3;
-	$fdata["strName"] = "Description";
-	$fdata["GoodName"] = "Description";
-	$fdata["ownerTable"] = "tbl_code_list";
-	$fdata["Label"] = GetFieldLabel("tbl_code_list","Description");
-	$fdata["FieldType"] = 200;
-
-
-	
-	
-			
-
-		$fdata["strField"] = "Description";
-
-		$fdata["sourceSingle"] = "Description";
-
-	
-		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "Description";
-
-	
-	
-				$fdata["UploadFolder"] = "files";
-
-//  Begin View Formats
-	$fdata["ViewFormats"] = array();
-
-	$vdata = array("ViewFormat" => "");
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-		$vdata["NeedEncode"] = true;
-
-	
-		$vdata["truncateText"] = true;
-	$vdata["NumberOfChars"] = 80;
-
-	$fdata["ViewFormats"]["view"] = $vdata;
-//  End View Formats
-
-//	Begin Edit Formats
-	$fdata["EditFormats"] = array();
-
-	$edata = array("EditFormat" => "Text field");
-
-	
-		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
-	$edata["weekdays"] = "[]";
-
-
-	
-	
-
-
-
-	
-	
-	
-	
-			$edata["acceptFileTypesHtml"] = "";
-
-		$edata["maxNumberOfFiles"] = 1;
-
-	
-	
-	
-	
-			$edata["HTML5InuptType"] = "text";
-
-		$edata["EditParams"] = "";
-			$edata["EditParams"].= " maxlength=255";
-
-		$edata["controlWidth"] = 200;
-
-//	Begin validation
-	$edata["validateAs"] = array();
-	$edata["validateAs"]["basicValidate"] = array();
-	$edata["validateAs"]["customMessages"] = array();
-	
-	
-//	End validation
-
-	
-			
-	
-	
-	
-	$fdata["EditFormats"]["edit"] = $edata;
-//	End Edit Formats
-
-
-	$fdata["isSeparate"] = false;
-
-
-
-
-// the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
-
-			// the default search options list
-				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
-// the end of search options settings
-
-
-//Filters settings
-	$fdata["filterTotals"] = 0;
-		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
-		$fdata["showCollapsed"] = false;
-
-		$fdata["sortValueType"] = 0;
-		$fdata["numberOfVisibleItems"] = 10;
-
-		$fdata["filterBy"] = 0;
-
-	
-
-	
-	
-//end of Filters settings
-
-
-	$tdatatbl_code_list["Description"] = $fdata;
-		$tdatatbl_code_list[".searchableFields"][] = "Description";
-//	Description2
-//	Custom field settings
-	$fdata = array();
-	$fdata["Index"] = 4;
-	$fdata["strName"] = "Description2";
-	$fdata["GoodName"] = "Description2";
-	$fdata["ownerTable"] = "tbl_code_list";
-	$fdata["Label"] = GetFieldLabel("tbl_code_list","Description2");
-	$fdata["FieldType"] = 200;
-
-
-	
-	
-			
-
-		$fdata["strField"] = "Description2";
-
-		$fdata["sourceSingle"] = "Description2";
-
-	
-		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "Description2";
-
-	
-	
-				$fdata["UploadFolder"] = "files";
-
-//  Begin View Formats
-	$fdata["ViewFormats"] = array();
-
-	$vdata = array("ViewFormat" => "");
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-		$vdata["NeedEncode"] = true;
-
-	
-		$vdata["truncateText"] = true;
-	$vdata["NumberOfChars"] = 80;
-
-	$fdata["ViewFormats"]["view"] = $vdata;
-//  End View Formats
-
-//	Begin Edit Formats
-	$fdata["EditFormats"] = array();
-
-	$edata = array("EditFormat" => "Text field");
-
-	
-		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
-	$edata["weekdays"] = "[]";
-
-
-	
-	
-
-
-
-	
-	
-	
-	
-			$edata["acceptFileTypesHtml"] = "";
-
-		$edata["maxNumberOfFiles"] = 1;
-
-	
-	
-	
-	
-			$edata["HTML5InuptType"] = "text";
-
-		$edata["EditParams"] = "";
-			$edata["EditParams"].= " maxlength=255";
-
-		$edata["controlWidth"] = 200;
-
-//	Begin validation
-	$edata["validateAs"] = array();
-	$edata["validateAs"]["basicValidate"] = array();
-	$edata["validateAs"]["customMessages"] = array();
-	
-	
-//	End validation
-
-	
-			
-	
-	
-	
-	$fdata["EditFormats"]["edit"] = $edata;
-//	End Edit Formats
-
-
-	$fdata["isSeparate"] = false;
-
-
-
-
-// the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
-
-			// the default search options list
-				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
-// the end of search options settings
-
-
-//Filters settings
-	$fdata["filterTotals"] = 0;
-		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
-		$fdata["showCollapsed"] = false;
-
-		$fdata["sortValueType"] = 0;
-		$fdata["numberOfVisibleItems"] = 10;
-
-		$fdata["filterBy"] = 0;
-
-	
-
-	
-	
-//end of Filters settings
-
-
-	$tdatatbl_code_list["Description2"] = $fdata;
-		$tdatatbl_code_list[".searchableFields"][] = "Description2";
-//	AssRec
-//	Custom field settings
-	$fdata = array();
-	$fdata["Index"] = 5;
-	$fdata["strName"] = "AssRec";
-	$fdata["GoodName"] = "AssRec";
-	$fdata["ownerTable"] = "tbl_code_list";
-	$fdata["Label"] = GetFieldLabel("tbl_code_list","AssRec");
-	$fdata["FieldType"] = 200;
-
-
-	
-	
-			
-
-		$fdata["strField"] = "AssRec";
-
-		$fdata["sourceSingle"] = "AssRec";
-
-	
-		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "AssRec";
-
-	
-	
-				$fdata["UploadFolder"] = "files";
-
-//  Begin View Formats
-	$fdata["ViewFormats"] = array();
-
-	$vdata = array("ViewFormat" => "");
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-		$vdata["NeedEncode"] = true;
-
-	
-		$vdata["truncateText"] = true;
-	$vdata["NumberOfChars"] = 80;
-
-	$fdata["ViewFormats"]["view"] = $vdata;
-//  End View Formats
-
-//	Begin Edit Formats
-	$fdata["EditFormats"] = array();
-
-	$edata = array("EditFormat" => "Text field");
-
-	
-		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
-	$edata["weekdays"] = "[]";
-
-
-	
-	
-
-
-
-	
-	
-	
-	
-			$edata["acceptFileTypesHtml"] = "";
-
-		$edata["maxNumberOfFiles"] = 1;
-
-	
-	
-	
-	
-			$edata["HTML5InuptType"] = "text";
-
-		$edata["EditParams"] = "";
-			$edata["EditParams"].= " maxlength=10";
-
-		$edata["controlWidth"] = 200;
-
-//	Begin validation
-	$edata["validateAs"] = array();
-	$edata["validateAs"]["basicValidate"] = array();
-	$edata["validateAs"]["customMessages"] = array();
-	
-	
-//	End validation
-
-	
-			
-	
-	
-	
-	$fdata["EditFormats"]["edit"] = $edata;
-//	End Edit Formats
-
-
-	$fdata["isSeparate"] = false;
-
-
-
-
-// the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
-
-			// the default search options list
-				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
-// the end of search options settings
-
-
-//Filters settings
-	$fdata["filterTotals"] = 0;
-		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
-		$fdata["showCollapsed"] = false;
-
-		$fdata["sortValueType"] = 0;
-		$fdata["numberOfVisibleItems"] = 10;
-
-		$fdata["filterBy"] = 0;
-
-	
-
-	
-	
-//end of Filters settings
-
-
-	$tdatatbl_code_list["AssRec"] = $fdata;
-		$tdatatbl_code_list[".searchableFields"][] = "AssRec";
-//	OrderNo
-//	Custom field settings
-	$fdata = array();
-	$fdata["Index"] = 6;
-	$fdata["strName"] = "OrderNo";
-	$fdata["GoodName"] = "OrderNo";
-	$fdata["ownerTable"] = "tbl_code_list";
-	$fdata["Label"] = GetFieldLabel("tbl_code_list","OrderNo");
-	$fdata["FieldType"] = 3;
-
-
-	
-	
-			
-
-		$fdata["strField"] = "OrderNo";
-
-		$fdata["sourceSingle"] = "OrderNo";
-
-	
-		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "OrderNo";
-
-	
-	
-				$fdata["UploadFolder"] = "files";
-
-//  Begin View Formats
-	$fdata["ViewFormats"] = array();
-
-	$vdata = array("ViewFormat" => "");
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-		$vdata["NeedEncode"] = true;
-
-	
-		$vdata["truncateText"] = true;
-	$vdata["NumberOfChars"] = 80;
-
-	$fdata["ViewFormats"]["view"] = $vdata;
-//  End View Formats
-
-//	Begin Edit Formats
-	$fdata["EditFormats"] = array();
-
-	$edata = array("EditFormat" => "Text field");
-
-	
-		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
-	$edata["weekdays"] = "[]";
-
-
-	
-	
-
-
-
-	
-	
-	
-	
-			$edata["acceptFileTypesHtml"] = "";
-
-		$edata["maxNumberOfFiles"] = 1;
-
-	
-	
-	
-	
-			$edata["HTML5InuptType"] = "text";
-
-		$edata["EditParams"] = "";
-		
-		$edata["controlWidth"] = 200;
-
-//	Begin validation
-	$edata["validateAs"] = array();
-	$edata["validateAs"]["basicValidate"] = array();
-	$edata["validateAs"]["customMessages"] = array();
-				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
-							
-	
-//	End validation
-
-	
-			
-	
-	
-	
-	$fdata["EditFormats"]["edit"] = $edata;
-//	End Edit Formats
-
-
-	$fdata["isSeparate"] = false;
-
-
-
-
-// the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
-
-			// the default search options list
-				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
-// the end of search options settings
-
-
-//Filters settings
-	$fdata["filterTotals"] = 0;
-		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
-		$fdata["showCollapsed"] = false;
-
-		$fdata["sortValueType"] = 0;
-		$fdata["numberOfVisibleItems"] = 10;
-
-		$fdata["filterBy"] = 0;
-
-	
-
-	
-	
-//end of Filters settings
-
-
-	$tdatatbl_code_list["OrderNo"] = $fdata;
-		$tdatatbl_code_list[".searchableFields"][] = "OrderNo";
-//	Active
-//	Custom field settings
-	$fdata = array();
-	$fdata["Index"] = 7;
-	$fdata["strName"] = "Active";
-	$fdata["GoodName"] = "Active";
-	$fdata["ownerTable"] = "tbl_code_list";
-	$fdata["Label"] = GetFieldLabel("tbl_code_list","Active");
-	$fdata["FieldType"] = 16;
-
-
-	
-	
-			
-
-		$fdata["strField"] = "Active";
-
-		$fdata["sourceSingle"] = "Active";
-
-	
-		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "Active";
-
-	
-	
-				$fdata["UploadFolder"] = "files";
-
-//  Begin View Formats
-	$fdata["ViewFormats"] = array();
-
-	$vdata = array("ViewFormat" => "");
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-		$vdata["NeedEncode"] = true;
-
-	
-		$vdata["truncateText"] = true;
-	$vdata["NumberOfChars"] = 80;
-
-	$fdata["ViewFormats"]["view"] = $vdata;
-//  End View Formats
-
-//	Begin Edit Formats
-	$fdata["EditFormats"] = array();
-
-	$edata = array("EditFormat" => "Text field");
-
-	
-		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
-	$edata["weekdays"] = "[]";
-
-
-	
-	
-
-
-
-	
-	
-	
-	
-			$edata["acceptFileTypesHtml"] = "";
-
-		$edata["maxNumberOfFiles"] = 1;
-
-	
-	
-	
-	
-			$edata["HTML5InuptType"] = "text";
-
-		$edata["EditParams"] = "";
-		
-		$edata["controlWidth"] = 200;
-
-//	Begin validation
-	$edata["validateAs"] = array();
-	$edata["validateAs"]["basicValidate"] = array();
-	$edata["validateAs"]["customMessages"] = array();
-				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
-							
-	
-//	End validation
-
-	
-			
-	
-	
-	
-	$fdata["EditFormats"]["edit"] = $edata;
-//	End Edit Formats
-
-
-	$fdata["isSeparate"] = false;
-
-
-
-
-// the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
-
-			// the default search options list
-				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
-// the end of search options settings
-
-
-//Filters settings
-	$fdata["filterTotals"] = 0;
-		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
-		$fdata["showCollapsed"] = false;
-
-		$fdata["sortValueType"] = 0;
-		$fdata["numberOfVisibleItems"] = 10;
-
-		$fdata["filterBy"] = 0;
-
-	
-
-	
-	
-//end of Filters settings
-
-
-	$tdatatbl_code_list["Active"] = $fdata;
-		$tdatatbl_code_list[".searchableFields"][] = "Active";
-//	Rate
-//	Custom field settings
-	$fdata = array();
-	$fdata["Index"] = 8;
-	$fdata["strName"] = "Rate";
-	$fdata["GoodName"] = "Rate";
-	$fdata["ownerTable"] = "tbl_code_list";
-	$fdata["Label"] = GetFieldLabel("tbl_code_list","Rate");
-	$fdata["FieldType"] = 14;
-
-
-	
-	
-			
-
-		$fdata["strField"] = "Rate";
-
-		$fdata["sourceSingle"] = "Rate";
-
-	
-		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "Rate";
-
-	
-	
-				$fdata["UploadFolder"] = "files";
-
-//  Begin View Formats
-	$fdata["ViewFormats"] = array();
-
-	$vdata = array("ViewFormat" => "Number");
-
-	
-	
-	
-	
-	
-	
-	
-		$vdata["DecimalDigits"] = 2;
-
-	
-	
-	
-	
-	
-	
-		$vdata["NeedEncode"] = true;
-
-	
-		$vdata["truncateText"] = true;
-	$vdata["NumberOfChars"] = 80;
-
-	$fdata["ViewFormats"]["view"] = $vdata;
-//  End View Formats
-
-//	Begin Edit Formats
-	$fdata["EditFormats"] = array();
-
-	$edata = array("EditFormat" => "Text field");
-
-	
-		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
-	$edata["weekdays"] = "[]";
-
-
-	
-	
-
-
-
-	
-	
-	
-	
-			$edata["acceptFileTypesHtml"] = "";
-
-		$edata["maxNumberOfFiles"] = 1;
-
-	
-	
-	
-	
-			$edata["HTML5InuptType"] = "text";
-
-		$edata["EditParams"] = "";
-		
-		$edata["controlWidth"] = 200;
-
-//	Begin validation
-	$edata["validateAs"] = array();
-	$edata["validateAs"]["basicValidate"] = array();
-	$edata["validateAs"]["customMessages"] = array();
-				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
-							
-	
-//	End validation
-
-	
-			
-	
-	
-	
-	$fdata["EditFormats"]["edit"] = $edata;
-//	End Edit Formats
-
-
-	$fdata["isSeparate"] = false;
-
-
-
-
-// the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
-
-			// the default search options list
-				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
-// the end of search options settings
-
-
-//Filters settings
-	$fdata["filterTotals"] = 0;
-		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
-		$fdata["showCollapsed"] = false;
-
-		$fdata["sortValueType"] = 0;
-		$fdata["numberOfVisibleItems"] = 10;
-
-		$fdata["filterBy"] = 0;
-
-	
-
-	
-	
-//end of Filters settings
-
-
-	$tdatatbl_code_list["Rate"] = $fdata;
-		$tdatatbl_code_list[".searchableFields"][] = "Rate";
 //	CreateBy
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 9;
+	$fdata["Index"] = 5;
 	$fdata["strName"] = "CreateBy";
 	$fdata["GoodName"] = "CreateBy";
 	$fdata["ownerTable"] = "tbl_code_list";
@@ -1530,7 +973,7 @@ $tdatatbl_code_list[".hideMobileList"] = array();
 //	CreateDate
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 10;
+	$fdata["Index"] = 6;
 	$fdata["strName"] = "CreateDate";
 	$fdata["GoodName"] = "CreateDate";
 	$fdata["ownerTable"] = "tbl_code_list";
@@ -1666,6 +1109,563 @@ $tdatatbl_code_list[".hideMobileList"] = array();
 
 	$tdatatbl_code_list["CreateDate"] = $fdata;
 		$tdatatbl_code_list[".searchableFields"][] = "CreateDate";
+//	Description
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 7;
+	$fdata["strName"] = "Description";
+	$fdata["GoodName"] = "Description";
+	$fdata["ownerTable"] = "tbl_code_list";
+	$fdata["Label"] = GetFieldLabel("tbl_code_list","Description");
+	$fdata["FieldType"] = 200;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "Description";
+
+		$fdata["sourceSingle"] = "Description";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "Description";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text field");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+			$edata["EditParams"].= " maxlength=255";
+
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+	
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatatbl_code_list["Description"] = $fdata;
+		$tdatatbl_code_list[".searchableFields"][] = "Description";
+//	Description2
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 8;
+	$fdata["strName"] = "Description2";
+	$fdata["GoodName"] = "Description2";
+	$fdata["ownerTable"] = "tbl_code_list";
+	$fdata["Label"] = GetFieldLabel("tbl_code_list","Description2");
+	$fdata["FieldType"] = 200;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "Description2";
+
+		$fdata["sourceSingle"] = "Description2";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "Description2";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text field");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+			$edata["EditParams"].= " maxlength=255";
+
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+	
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatatbl_code_list["Description2"] = $fdata;
+		$tdatatbl_code_list[".searchableFields"][] = "Description2";
+//	OrderNo
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 9;
+	$fdata["strName"] = "OrderNo";
+	$fdata["GoodName"] = "OrderNo";
+	$fdata["ownerTable"] = "tbl_code_list";
+	$fdata["Label"] = GetFieldLabel("tbl_code_list","OrderNo");
+	$fdata["FieldType"] = 3;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "OrderNo";
+
+		$fdata["sourceSingle"] = "OrderNo";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "OrderNo";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text field");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+		
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
+							
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatatbl_code_list["OrderNo"] = $fdata;
+		$tdatatbl_code_list[".searchableFields"][] = "OrderNo";
+//	Rate
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 10;
+	$fdata["strName"] = "Rate";
+	$fdata["GoodName"] = "Rate";
+	$fdata["ownerTable"] = "tbl_code_list";
+	$fdata["Label"] = GetFieldLabel("tbl_code_list","Rate");
+	$fdata["FieldType"] = 14;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "Rate";
+
+		$fdata["sourceSingle"] = "Rate";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "Rate";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "Number");
+
+	
+	
+	
+	
+	
+	
+	
+		$vdata["DecimalDigits"] = 2;
+
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text field");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+		
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
+							
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatatbl_code_list["Rate"] = $fdata;
+		$tdatatbl_code_list[".searchableFields"][] = "Rate";
 //	UpdateBy
 //	Custom field settings
 	$fdata = array();
@@ -1988,7 +1988,7 @@ function createSqlQuery_tbl_code_list()
 {
 $proto0=array();
 $proto0["m_strHead"] = "SELECT";
-$proto0["m_strFieldList"] = "CatID,  	Code,  	Description,  	Description2,  	AssRec,  	OrderNo,  	Active,  	Rate,  	CreateBy,  	CreateDate,  	UpdateBy,  	UpdateDate";
+$proto0["m_strFieldList"] = "Active,  	AssRec,  	CatID,  	Code,  	CreateBy,  	CreateDate,  	Description,  	Description2,  	OrderNo,  	Rate,  	UpdateBy,  	UpdateDate";
 $proto0["m_strFrom"] = "FROM tbl_code_list";
 $proto0["m_strWhere"] = "";
 $proto0["m_strOrderBy"] = "";
@@ -2030,12 +2030,12 @@ $proto0["m_having"] = $obj;
 $proto0["m_fieldlist"] = array();
 						$proto6=array();
 			$obj = new SQLField(array(
-	"m_strName" => "CatID",
+	"m_strName" => "Active",
 	"m_strTable" => "tbl_code_list",
 	"m_srcTableName" => "tbl_code_list"
 ));
 
-$proto6["m_sql"] = "CatID";
+$proto6["m_sql"] = "Active";
 $proto6["m_srcTableName"] = "tbl_code_list";
 $proto6["m_expr"]=$obj;
 $proto6["m_alias"] = "";
@@ -2044,12 +2044,12 @@ $obj = new SQLFieldListItem($proto6);
 $proto0["m_fieldlist"][]=$obj;
 						$proto8=array();
 			$obj = new SQLField(array(
-	"m_strName" => "Code",
+	"m_strName" => "AssRec",
 	"m_strTable" => "tbl_code_list",
 	"m_srcTableName" => "tbl_code_list"
 ));
 
-$proto8["m_sql"] = "Code";
+$proto8["m_sql"] = "AssRec";
 $proto8["m_srcTableName"] = "tbl_code_list";
 $proto8["m_expr"]=$obj;
 $proto8["m_alias"] = "";
@@ -2058,12 +2058,12 @@ $obj = new SQLFieldListItem($proto8);
 $proto0["m_fieldlist"][]=$obj;
 						$proto10=array();
 			$obj = new SQLField(array(
-	"m_strName" => "Description",
+	"m_strName" => "CatID",
 	"m_strTable" => "tbl_code_list",
 	"m_srcTableName" => "tbl_code_list"
 ));
 
-$proto10["m_sql"] = "Description";
+$proto10["m_sql"] = "CatID";
 $proto10["m_srcTableName"] = "tbl_code_list";
 $proto10["m_expr"]=$obj;
 $proto10["m_alias"] = "";
@@ -2072,12 +2072,12 @@ $obj = new SQLFieldListItem($proto10);
 $proto0["m_fieldlist"][]=$obj;
 						$proto12=array();
 			$obj = new SQLField(array(
-	"m_strName" => "Description2",
+	"m_strName" => "Code",
 	"m_strTable" => "tbl_code_list",
 	"m_srcTableName" => "tbl_code_list"
 ));
 
-$proto12["m_sql"] = "Description2";
+$proto12["m_sql"] = "Code";
 $proto12["m_srcTableName"] = "tbl_code_list";
 $proto12["m_expr"]=$obj;
 $proto12["m_alias"] = "";
@@ -2086,12 +2086,12 @@ $obj = new SQLFieldListItem($proto12);
 $proto0["m_fieldlist"][]=$obj;
 						$proto14=array();
 			$obj = new SQLField(array(
-	"m_strName" => "AssRec",
+	"m_strName" => "CreateBy",
 	"m_strTable" => "tbl_code_list",
 	"m_srcTableName" => "tbl_code_list"
 ));
 
-$proto14["m_sql"] = "AssRec";
+$proto14["m_sql"] = "CreateBy";
 $proto14["m_srcTableName"] = "tbl_code_list";
 $proto14["m_expr"]=$obj;
 $proto14["m_alias"] = "";
@@ -2100,12 +2100,12 @@ $obj = new SQLFieldListItem($proto14);
 $proto0["m_fieldlist"][]=$obj;
 						$proto16=array();
 			$obj = new SQLField(array(
-	"m_strName" => "OrderNo",
+	"m_strName" => "CreateDate",
 	"m_strTable" => "tbl_code_list",
 	"m_srcTableName" => "tbl_code_list"
 ));
 
-$proto16["m_sql"] = "OrderNo";
+$proto16["m_sql"] = "CreateDate";
 $proto16["m_srcTableName"] = "tbl_code_list";
 $proto16["m_expr"]=$obj;
 $proto16["m_alias"] = "";
@@ -2114,12 +2114,12 @@ $obj = new SQLFieldListItem($proto16);
 $proto0["m_fieldlist"][]=$obj;
 						$proto18=array();
 			$obj = new SQLField(array(
-	"m_strName" => "Active",
+	"m_strName" => "Description",
 	"m_strTable" => "tbl_code_list",
 	"m_srcTableName" => "tbl_code_list"
 ));
 
-$proto18["m_sql"] = "Active";
+$proto18["m_sql"] = "Description";
 $proto18["m_srcTableName"] = "tbl_code_list";
 $proto18["m_expr"]=$obj;
 $proto18["m_alias"] = "";
@@ -2128,12 +2128,12 @@ $obj = new SQLFieldListItem($proto18);
 $proto0["m_fieldlist"][]=$obj;
 						$proto20=array();
 			$obj = new SQLField(array(
-	"m_strName" => "Rate",
+	"m_strName" => "Description2",
 	"m_strTable" => "tbl_code_list",
 	"m_srcTableName" => "tbl_code_list"
 ));
 
-$proto20["m_sql"] = "Rate";
+$proto20["m_sql"] = "Description2";
 $proto20["m_srcTableName"] = "tbl_code_list";
 $proto20["m_expr"]=$obj;
 $proto20["m_alias"] = "";
@@ -2142,12 +2142,12 @@ $obj = new SQLFieldListItem($proto20);
 $proto0["m_fieldlist"][]=$obj;
 						$proto22=array();
 			$obj = new SQLField(array(
-	"m_strName" => "CreateBy",
+	"m_strName" => "OrderNo",
 	"m_strTable" => "tbl_code_list",
 	"m_srcTableName" => "tbl_code_list"
 ));
 
-$proto22["m_sql"] = "CreateBy";
+$proto22["m_sql"] = "OrderNo";
 $proto22["m_srcTableName"] = "tbl_code_list";
 $proto22["m_expr"]=$obj;
 $proto22["m_alias"] = "";
@@ -2156,12 +2156,12 @@ $obj = new SQLFieldListItem($proto22);
 $proto0["m_fieldlist"][]=$obj;
 						$proto24=array();
 			$obj = new SQLField(array(
-	"m_strName" => "CreateDate",
+	"m_strName" => "Rate",
 	"m_strTable" => "tbl_code_list",
 	"m_srcTableName" => "tbl_code_list"
 ));
 
-$proto24["m_sql"] = "CreateDate";
+$proto24["m_sql"] = "Rate";
 $proto24["m_srcTableName"] = "tbl_code_list";
 $proto24["m_expr"]=$obj;
 $proto24["m_alias"] = "";
@@ -2203,16 +2203,16 @@ $proto30["m_link"] = "SQLL_MAIN";
 $proto31["m_strName"] = "tbl_code_list";
 $proto31["m_srcTableName"] = "tbl_code_list";
 $proto31["m_columns"] = array();
+$proto31["m_columns"][] = "Active";
+$proto31["m_columns"][] = "AssRec";
 $proto31["m_columns"][] = "CatID";
 $proto31["m_columns"][] = "Code";
-$proto31["m_columns"][] = "Description";
-$proto31["m_columns"][] = "Description2";
-$proto31["m_columns"][] = "AssRec";
-$proto31["m_columns"][] = "OrderNo";
-$proto31["m_columns"][] = "Active";
-$proto31["m_columns"][] = "Rate";
 $proto31["m_columns"][] = "CreateBy";
 $proto31["m_columns"][] = "CreateDate";
+$proto31["m_columns"][] = "Description";
+$proto31["m_columns"][] = "Description2";
+$proto31["m_columns"][] = "OrderNo";
+$proto31["m_columns"][] = "Rate";
 $proto31["m_columns"][] = "UpdateBy";
 $proto31["m_columns"][] = "UpdateDate";
 $obj = new SQLTable($proto31);

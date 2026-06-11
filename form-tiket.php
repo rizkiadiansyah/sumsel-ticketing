@@ -1,6 +1,36 @@
 <?php
 require_once("include/dbcommon.php");
 
+// Deteksi mode edit
+$mode   = $_GET['mode']   ?? 'new';
+$editReqId = $_GET['req_id'] ?? '';
+$editHeader = [];
+$editPenumpang = [];
+
+$runnerConn = DB::DefaultConnection();
+$mysqli = $runnerConn ? $runnerConn->conn : null;
+
+if ($mysqli instanceof mysqli) {
+    $reqEsc = $mysqli->real_escape_string($editReqId);
+
+    $rsH = $mysqli->query("SELECT * FROM tbl_pengajuan_ticket_hdr WHERE req_id = '$reqEsc'");
+    if ($rsH && $rsH->num_rows > 0) {
+        $editHeader = $rsH->fetch_assoc();
+    } else {
+        $mode      = 'new';
+        $editReqId = '';
+    }
+
+    if ($editReqId !== '') {
+        $rsP = $mysqli->query("SELECT * FROM tbl_pengajuan_ticket_dtl WHERE req_id = '$reqEsc' ORDER BY id_detail ASC");
+        if ($rsP) {
+            while ($rowP = $rsP->fetch_assoc()) {
+                $editPenumpang[] = $rowP;
+            }
+        }
+    }
+}
+
 // Check login - redirect jika belum login
 if (!isset($_SESSION['UserID']) || $_SESSION['UserID'] == '') {
     header('Location: login.php');
@@ -119,7 +149,7 @@ while ($rowAirline = db_fetch_array($rsAirline)) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pengajuan Tiket — Sumsel Ticketing</title>
+  <title><?= $mode === 'edit' ? 'Edit Pengajuan' : 'Pengajuan Tiket' ?> — Sumsel Ticketing</title>
   <link rel="icon" type="image/png" href="images/logo_sbu/SUMSEL%20ARMY.png">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -374,8 +404,8 @@ while ($rowAirline = db_fetch_array($rsAirline)) {
 
     <div class="page-header">
       <p class="brand">Sumsel Ticketing</p>
-      <h1>Pengajuan Tiket Pesawat</h1>
-      <p>Isi data pemesan dan detail penumpang dengan lengkap</p>
+      <h1><?= $mode === 'edit' ? 'Edit Pengajuan Tiket' : 'Pengajuan Tiket Pesawat' ?></h1>
+      <p><?= $mode === 'edit' ? 'Perbarui data pengajuan — nomor tiket tetap sama' : 'Isi data pemesan dan detail penumpang dengan lengkap' ?></p>
     </div>
 
     <?php if (!$isLoggedIn): ?>
@@ -383,6 +413,13 @@ while ($rowAirline = db_fetch_array($rsAirline)) {
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
       Anda belum login. Data pemesan harus diisi manual.
       <a href="login.php" style="color:#92400e;font-weight:700;margin-left:4px">Login sekarang →</a>
+    </div>
+    <?php endif; ?>
+
+    <?php if ($mode === 'edit'): ?>
+    <div style="max-width:860px;margin:0 auto 16px;padding:12px 18px;background:#eef2ff;border:1.5px solid #c7d2fe;border-radius:12px;font-size:13px;color:#4338ca;display:flex;align-items:center;gap:8px;">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      Mode Edit — Nomor tiket: <strong><?= htmlspecialchars($editReqId) ?></strong>. Status akan direset ke <strong>On Progress</strong> setelah disimpan.
     </div>
     <?php endif; ?>
 
@@ -545,6 +582,14 @@ while ($rowAirline = db_fetch_array($rsAirline)) {
       <option value="<?= htmlspecialchars($airport['name']) ?>"></option>
     <?php endforeach; ?>
   </datalist>
+
+  <script>
+  const EDIT_MODE   = <?= json_encode($mode === 'edit') ?>;
+  const EDIT_REQ_ID = <?= json_encode($editReqId) ?>;
+  const EDIT_HEADER = <?= json_encode($editHeader) ?>;
+  const EDIT_PENUMPANG = <?= json_encode($editPenumpang) ?>;
+  </script>
+
 
   <script>
     let penumpangCount = 0;
@@ -1195,8 +1240,13 @@ while ($rowAirline = db_fetch_array($rsAirline)) {
       btn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> Mengirim...`;
 
       try {
-        const res  = await fetch('api-handler.php?action=submit_tiket', {
-          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
+        const action  = EDIT_MODE ? 'update_tiket' : 'submit_tiket';
+        if (EDIT_MODE) payload.req_id = EDIT_REQ_ID; // kirim req_id lama
+
+        const res = await fetch(`api-handler.php?action=${action}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
         });
         const data = JSON.parse(await res.text());
         if (data.success) {
@@ -1215,9 +1265,14 @@ while ($rowAirline = db_fetch_array($rsAirline)) {
     });
 
     function closeModal() {
-      const reqId = document.getElementById('modalReqId').textContent;
-      document.getElementById('modalSuccess').classList.remove('show');
-      window.location.href = "print_tiket.php?req_id=" + encodeURIComponent(reqId);
+        const reqId = document.getElementById('modalReqId').textContent;
+        document.getElementById('modalSuccess').classList.remove('show');
+        hasChanges = false;
+        if (EDIT_MODE) {
+            window.location.href = "cek-status.php?req_id=" + encodeURIComponent(reqId);
+        } else {
+            window.location.href = "print_tiket.php?req_id=" + encodeURIComponent(reqId);
+        }
     }
 
     function showToast(msg) {
@@ -1229,7 +1284,60 @@ while ($rowAirline = db_fetch_array($rsAirline)) {
     document.getElementById('formTiket').addEventListener('change', markFormChanged);
     document.getElementById('formTiket').addEventListener('input',  markFormChanged);
 
-    addPenumpang(); // inisialisasi dengan 1 penumpang
+    // Inisialisasi form
+    if (EDIT_MODE && EDIT_HEADER) {
+        // Isi field Data Pengajuan
+        const setVal = (id, val) => { const el = document.getElementById(id); if (el) el.value = val ?? ''; };
+
+        setVal('alasan', EDIT_HEADER.alasan);
+        setVal('atasan_langsung', EDIT_HEADER.atasan_langsung);
+
+        // Beban SBU
+        const bebanSel = document.getElementById('beban_sbu');
+        if (bebanSel && EDIT_HEADER.beban_sbu) bebanSel.value = EDIT_HEADER.beban_sbu;
+
+        // Jenis Pengajuan radio
+        const radioJenis = document.querySelector(`[name="jenis_pengajuan"][value="${EDIT_HEADER.jenis_pengajuan}"]`);
+        if (radioJenis) radioJenis.checked = true;
+
+        // Load penumpang dari data edit
+        if (EDIT_PENUMPANG.length > 0) {
+            EDIT_PENUMPANG.forEach(p => {
+                penumpangData.push({
+                    nik_penumpang:         p.nik_penumpang        ?? '',
+                    nik_ktp:               p.nik_ktp              ?? '',
+                    nama_penumpang:        p.nama_penumpang       ?? '',
+                    posisi_penumpang:      p.posisi_penumpang     ?? '',
+                    sbu_penumpang:         p.sbu_penumpang        ?? '',
+                    no_telp_penumpang:     p.no_telp_penumpang    ?? '',
+                    gender:                p.gender               ?? '',
+                    tipe_perjalanan:       p.tipe_perjalanan      ?? 'One Way',
+                    _roundTrip:            (p.tipe_perjalanan     ?? '') === 'Round Trip',
+                    _isVip:                false,
+                    bandara_asal:          p.bandara_asal         ?? '',
+                    bandara_tujuan:        p.bandara_tujuan       ?? '',
+                    maskapai:              p.maskapai             ?? '',
+                    tanggal_penerbangan:   p.tanggal_penerbangan  ?? '',
+                    waktu_berangkat:       p.waktu_berangkat      ?? '',
+                    waktu_tiba:            p.waktu_tiba           ?? '',
+                    catatan_khusus:        p.catatan_khusus       ?? '',
+                    bandara_asal_p:        p.bandara_asal_p       ?? '',
+                    bandara_tujuan_p:      p.bandara_tujuan_p     ?? '',
+                    maskapai_p:            p.maskapai_p           ?? '',
+                    tanggal_penerbangan_p: p.tanggal_penerbangan_p ?? '',
+                    waktu_berangkat_p:     p.waktu_berangkat_p    ?? '',
+                    waktu_tiba_p:          p.waktu_tiba_p         ?? '',
+                    catatan_khusus_p:      p.catatan_khusus_p     ?? '',
+                });
+            });
+            renderAll();
+        } else {
+            addPenumpang();
+        }
+
+    } else {
+        addPenumpang(); // mode baru, mulai kosong
+  }
   </script>
 </body>
 </html>

@@ -15,6 +15,9 @@ if (!$conn instanceof mysqli) {
 }
 $conn->set_charset('utf8mb4');
 
+date_default_timezone_set('Asia/Jakarta');
+$conn->query("SET time_zone = '+07:00'");
+
 // ── AMBIL CONFIG SMTP DARI PHPRUNNER ──────────────────────────────
 require_once __DIR__ . '/libs/phpmailer/class.phpmailer.php';
 require_once __DIR__ . '/libs/phpmailer/class.smtp.php';
@@ -744,6 +747,217 @@ if ($action === 'submit_tiket') {
             'success' => true,
             'req_id'  => $req_id,
             'message' => 'Pengajuan tiket berhasil disimpan'
+        ]);
+
+    } catch (Exception $e) {
+        $conn->rollback();
+        echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+    }
+    exit;
+}
+if ($action === 'update_tiket') {
+    $raw  = file_get_contents('php://input');
+    $data = json_decode($raw, true);
+
+    if (!$data) {
+        echo json_encode(['success' => false, 'message' => 'Data tidak valid']);
+        exit;
+    }
+
+    if (!isset($_SESSION['UserID']) || empty($_SESSION['UserID'])) {
+        echo json_encode(['success' => false, 'message' => 'Anda harus login']);
+        exit;
+    }
+
+    $req_id         = $conn->real_escape_string($data['req_id'] ?? '');
+    $hdr            = $data['header']    ?? [];
+    $penumpang_list = $data['penumpang'] ?? [];
+
+    if (empty($req_id)) {
+        echo json_encode(['success' => false, 'message' => 'req_id tidak boleh kosong']);
+        exit;
+    }
+
+    // Validasi: tiket harus ada dan status 1-4
+    $res_cek = $conn->query("SELECT * FROM tbl_pengajuan_ticket_hdr WHERE req_id = '$req_id'");
+    if (!$res_cek || $res_cek->num_rows === 0) {
+        echo json_encode(['success' => false, 'message' => 'Tiket tidak ditemukan']);
+        exit;
+    }
+    $existing = $res_cek->fetch_assoc();
+
+    if ((int)$existing['status'] >= 5) {
+        echo json_encode(['success' => false, 'message' => 'Tiket yang sudah Issued tidak dapat diedit']);
+        exit;
+    }
+
+    // Validasi hak akses: hanya owner atau superadmin
+    $userNik    = (string) $_SESSION['UserID'];
+    $pemohonNik = (string) ($existing['nik_pemesan'] ?? '');
+    if ($userNik !== $pemohonNik && !isSuperAdmin($userNik)) {
+        echo json_encode(['success' => false, 'message' => 'Anda tidak berhak mengedit tiket ini']);
+        exit;
+    }
+
+    $conn->begin_transaction();
+    try {
+        $now             = date('Y-m-d H:i:s');
+        $nik_pemesan     = $conn->real_escape_string($hdr['nik_pemesan']     ?? '');
+        $nama_pemesan    = $conn->real_escape_string($hdr['nama_pemesan']    ?? '');
+        $posisi_pemesan  = $conn->real_escape_string($hdr['posisi_pemesan']  ?? '');
+        $sbu_pemesan     = $conn->real_escape_string(resolveSbuCode($hdr['sbu_pemesan'] ?? ''));
+        $no_telp_pemesan = $conn->real_escape_string(normalizeTicketPhoneNumber($hdr['no_telp_pemesan'] ?? ''));
+        $email_pemesan   = $conn->real_escape_string($hdr['email_pemesan']   ?? '');
+        $atasan_langsung = $conn->real_escape_string($hdr['atasan_langsung'] ?? '');
+        $jenis_pengajuan = $conn->real_escape_string($hdr['jenis_pengajuan'] ?? 'Dinas');
+        $alasan          = $conn->real_escape_string($hdr['alasan']          ?? '');
+        $beban_sbu       = $conn->real_escape_string($hdr['beban_sbu']       ?? '');
+
+        // UPDATE header, reset status ke 1, kosongkan ket_admin
+        $sql_upd = "UPDATE tbl_pengajuan_ticket_hdr SET
+            nik_pemesan     = '$nik_pemesan',
+            nama_pemesan    = '$nama_pemesan',
+            posisi_pemesan  = '$posisi_pemesan',
+            sbu_pemesan     = '$sbu_pemesan',
+            no_telp_pemesan = '$no_telp_pemesan',
+            email_pemesan   = '$email_pemesan',
+            atasan_langsung = '$atasan_langsung',
+            jenis_pengajuan = '$jenis_pengajuan',
+            alasan          = '$alasan',
+            beban_sbu       = '$beban_sbu',
+            status          = '1',
+            ket_admin       = NULL,
+            updated_at      = '$now'
+        WHERE req_id = '$req_id'";
+
+        if (!$conn->query($sql_upd)) {
+            throw new Exception('Gagal update header: ' . $conn->error);
+        }
+
+        // Hapus penumpang lama
+        if (!$conn->query("DELETE FROM tbl_pengajuan_ticket_dtl WHERE req_id = '$req_id'")) {
+            throw new Exception('Gagal hapus penumpang lama: ' . $conn->error);
+        }
+
+        if (empty($penumpang_list)) {
+            throw new Exception('Minimal 1 penumpang harus diisi');
+        }
+
+        // Build sbuMap sekali di luar foreach
+        $sbuMap   = [];
+        $rsSbuMap = $conn->query("SELECT CODE, Description FROM tbl_code_list WHERE CatID = 'SBU'");
+        while ($rowSbuMap = $rsSbuMap->fetch_assoc()) {
+            $sbuMap[$rowSbuMap['CODE']] = $rowSbuMap['Description'];
+        }
+
+        foreach ($penumpang_list as $p) {
+
+            // ── AUTO-ADD: Cek & tambah ke tbl_data_penumpang jika belum terdaftar ──
+            $nik_cek = $conn->real_escape_string($p['nik_penumpang'] ?? '');
+            if ($nik_cek) {
+                $cek = $conn->query("SELECT nik FROM tbl_data_penumpang WHERE nik = '$nik_cek' LIMIT 1");
+                if ($cek && $cek->num_rows === 0) {
+                    $auto_nik_ktp = $conn->real_escape_string($p['nik_ktp'] ?? '');
+                    $auto_nama    = $conn->real_escape_string($p['nama_penumpang'] ?? '');
+                    $auto_posisi  = $conn->real_escape_string($p['posisi_penumpang'] ?? '');
+                    $sbu_code     = trim($p['sbu_penumpang'] ?? '');
+                    $auto_sbu     = $conn->real_escape_string($sbuMap[$sbu_code] ?? $sbu_code);
+                    $auto_no_telp = $conn->real_escape_string($p['no_telp_penumpang'] ?? '');
+                    $gender_raw   = trim($p['gender'] ?? '');
+                    if (strtolower($gender_raw) === 'laki-laki' || $gender_raw === 'L') {
+                        $auto_gender = 'L';
+                    } elseif (strtolower($gender_raw) === 'perempuan' || $gender_raw === 'P') {
+                        $auto_gender = 'P';
+                    } else {
+                        $auto_gender = $conn->real_escape_string($gender_raw);
+                    }
+                    $sql_auto = "INSERT INTO tbl_data_penumpang
+                        (nik, nik_ktp, nama, posisi_jabatan, sbu, no_telp, gender, vip, active, create_at)
+                        VALUES
+                        ('$nik_cek', '$auto_nik_ktp', '$auto_nama', '$auto_posisi', '$auto_sbu',
+                        '$auto_no_telp', '$auto_gender', 0, 1, '$now')";
+                    if (!$conn->query($sql_auto)) {
+                        throw new Exception('Gagal auto-add penumpang: ' . $conn->error);
+                    }
+                }
+            }
+            // ── END AUTO-ADD ──
+
+            $nik_penumpang     = $conn->real_escape_string($p['nik_penumpang']       ?? '');
+            $nik_ktp           = $conn->real_escape_string($p['nik_ktp']             ?? '');
+            $nama_penumpang    = $conn->real_escape_string($p['nama_penumpang']      ?? '');
+            $posisi_penumpang  = $conn->real_escape_string($p['posisi_penumpang']    ?? '');
+            $sbu_penumpang     = $conn->real_escape_string($p['sbu_penumpang']       ?? '');
+            $no_telp_penumpang = $conn->real_escape_string($p['no_telp_penumpang']   ?? '');
+            $gender            = $conn->real_escape_string($p['gender']              ?? '');
+            $tipe_perjalanan   = $conn->real_escape_string($p['tipe_perjalanan']     ?? 'One Way');
+            $bandara_asal      = $conn->real_escape_string($p['bandara_asal']        ?? '');
+            $bandara_tujuan    = $conn->real_escape_string($p['bandara_tujuan']      ?? '');
+            $maskapai          = $conn->real_escape_string($p['maskapai']            ?? '');
+            $tgl_penerbangan   = $conn->real_escape_string($p['tanggal_penerbangan'] ?? '');
+            $waktu_berangkat   = $conn->real_escape_string($p['waktu_berangkat']     ?? '');
+            $waktu_tiba        = $conn->real_escape_string($p['waktu_tiba']          ?? '');
+            $catatan           = $conn->real_escape_string($p['catatan_khusus']      ?? '');
+
+            $bandara_asal_p    = $conn->real_escape_string($p['bandara_asal_p']      ?? '');
+            $bandara_tujuan_p  = $conn->real_escape_string($p['bandara_tujuan_p']    ?? '');
+            $maskapai_p        = $conn->real_escape_string($p['maskapai_p']          ?? '');
+            $tgl_penerbangan_p = !empty($p['tanggal_penerbangan_p']) ? "'" . $conn->real_escape_string($p['tanggal_penerbangan_p']) . "'" : 'NULL';
+            $waktu_berangkat_p = !empty($p['waktu_berangkat_p'])     ? "'" . $conn->real_escape_string($p['waktu_berangkat_p'])     . "'" : 'NULL';
+            $waktu_tiba_p      = !empty($p['waktu_tiba_p'])          ? "'" . $conn->real_escape_string($p['waktu_tiba_p'])          . "'" : 'NULL';
+            $catatan_p         = $conn->real_escape_string($p['catatan_khusus_p']    ?? '');
+
+            $sql_dtl = "INSERT INTO tbl_pengajuan_ticket_dtl
+                (req_id, nik_penumpang, nik_ktp, nama_penumpang, posisi_penumpang, sbu_penumpang,
+                 no_telp_penumpang, gender, tipe_perjalanan, bandara_asal, bandara_tujuan, maskapai,
+                 tanggal_penerbangan, waktu_berangkat, waktu_tiba, catatan_khusus,
+                 bandara_asal_p, bandara_tujuan_p, maskapai_p,
+                 tanggal_penerbangan_p, waktu_berangkat_p, waktu_tiba_p, catatan_khusus_p)
+                VALUES
+                ('$req_id', '$nik_penumpang', '$nik_ktp', '$nama_penumpang', '$posisi_penumpang',
+                 '$sbu_penumpang', '$no_telp_penumpang', '$gender', '$tipe_perjalanan',
+                 '$bandara_asal', '$bandara_tujuan', '$maskapai',
+                 '$tgl_penerbangan', '$waktu_berangkat', '$waktu_tiba', '$catatan',
+                 '$bandara_asal_p', '$bandara_tujuan_p', '$maskapai_p',
+                 $tgl_penerbangan_p, $waktu_berangkat_p, $waktu_tiba_p, '$catatan_p')";
+
+            if (!$conn->query($sql_dtl)) {
+                throw new Exception('Gagal simpan penumpang: ' . $conn->error);
+            }
+        }
+
+        $conn->commit();
+
+        // ── Kirim email sama persis seperti submit_tiket ──
+        $requestor_data = [
+            'nik_pemesan'     => $hdr['nik_pemesan']     ?? '',
+            'nama_pemesan'    => $hdr['nama_pemesan']     ?? '',
+            'posisi_pemesan'  => $hdr['posisi_pemesan']   ?? '',
+            'sbu_pemesan'     => $hdr['sbu_pemesan']      ?? '',
+            'no_telp_pemesan' => $hdr['no_telp_pemesan']  ?? '',
+            'email_pemesan'   => $hdr['email_pemesan']    ?? '',
+            'atasan_langsung' => $hdr['atasan_langsung']  ?? '',
+            'jenis_pengajuan' => $hdr['jenis_pengajuan']  ?? '',
+            'alasan'          => $hdr['alasan']           ?? '',
+            'beban_sbu'       => $hdr['beban_sbu']        ?? '',
+        ];
+
+        // Ambil ulang penumpang dari DB yang sudah di-insert ulang
+        $req_esc         = $conn->real_escape_string($req_id);
+        $res_ptx         = $conn->query("SELECT * FROM tbl_pengajuan_ticket_dtl WHERE req_id = '$req_esc' ORDER BY id_detail ASC");
+        $penumpang_email = [];
+        if ($res_ptx) {
+            while ($row_ptx = $res_ptx->fetch_assoc()) {
+                $penumpang_email[] = $row_ptx;
+            }
+        }
+
+        sendEmailNotification($req_id, $requestor_data, $penumpang_email);
+
+        echo json_encode([
+            'success' => true,
+            'req_id'  => $req_id,
+            'message' => 'Pengajuan berhasil diperbarui'
         ]);
 
     } catch (Exception $e) {

@@ -181,18 +181,18 @@ $tdataadmin_users[".filterFields"] = array();
 $tdataadmin_users[".requiredSearchFields"] = array();
 
 $tdataadmin_users[".googleLikeFields"] = array();
-$tdataadmin_users[".googleLikeFields"][] = "id";
-$tdataadmin_users[".googleLikeFields"][] = "nik";
-$tdataadmin_users[".googleLikeFields"][] = "nama";
-$tdataadmin_users[".googleLikeFields"][] = "posisi";
-$tdataadmin_users[".googleLikeFields"][] = "sbu";
-$tdataadmin_users[".googleLikeFields"][] = "no_hp";
-$tdataadmin_users[".googleLikeFields"][] = "email";
-$tdataadmin_users[".googleLikeFields"][] = "password";
-$tdataadmin_users[".googleLikeFields"][] = "role";
-$tdataadmin_users[".googleLikeFields"][] = "is_active";
-$tdataadmin_users[".googleLikeFields"][] = "remember_token";
 $tdataadmin_users[".googleLikeFields"][] = "created_at";
+$tdataadmin_users[".googleLikeFields"][] = "email";
+$tdataadmin_users[".googleLikeFields"][] = "id";
+$tdataadmin_users[".googleLikeFields"][] = "is_active";
+$tdataadmin_users[".googleLikeFields"][] = "nama";
+$tdataadmin_users[".googleLikeFields"][] = "nik";
+$tdataadmin_users[".googleLikeFields"][] = "no_hp";
+$tdataadmin_users[".googleLikeFields"][] = "password";
+$tdataadmin_users[".googleLikeFields"][] = "posisi";
+$tdataadmin_users[".googleLikeFields"][] = "remember_token";
+$tdataadmin_users[".googleLikeFields"][] = "role";
+$tdataadmin_users[".googleLikeFields"][] = "sbu";
 $tdataadmin_users[".googleLikeFields"][] = "updated_at";
 
 
@@ -227,7 +227,7 @@ $tdataadmin_users[".strOrderBy"] = $tstrOrderBy;
 $tdataadmin_users[".orderindexes"] = array();
 
 
-$tdataadmin_users[".sqlHead"] = "SELECT id,  	nik,  	nama,  	posisi,  	sbu,  	no_hp,  	email,  	password,  	`role`,  	is_active,  	remember_token,  	created_at,  	updated_at";
+$tdataadmin_users[".sqlHead"] = "SELECT created_at,  	email,  	id,  	is_active,  	nama,  	nik,  	no_hp,  	password,  	posisi,  	remember_token,  	`role`,  	sbu,  	updated_at";
 $tdataadmin_users[".sqlFrom"] = "FROM tbl_users";
 $tdataadmin_users[".sqlWhereExpr"] = "";
 $tdataadmin_users[".sqlTail"] = "";
@@ -275,10 +275,288 @@ $tdataadmin_users[".hideMobileList"] = array();
 
 
 
-//	id
+//	created_at
 //	Custom field settings
 	$fdata = array();
 	$fdata["Index"] = 1;
+	$fdata["strName"] = "created_at";
+	$fdata["GoodName"] = "created_at";
+	$fdata["ownerTable"] = "tbl_users";
+	$fdata["Label"] = GetFieldLabel("admin_users","created_at");
+	$fdata["FieldType"] = 135;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "created_at";
+
+		$fdata["sourceSingle"] = "created_at";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "created_at";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "Short Date");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Date");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+		$edata["DateEditType"] = 13;
+	$edata["InitialYearFactor"] = 100;
+	$edata["LastYearFactor"] = 10;
+
+	
+	
+	
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+	
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Equals";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Equals", "More than", "Less than", "Between", EMPTY_SEARCH, NOT_EMPTY );
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdataadmin_users["created_at"] = $fdata;
+		$tdataadmin_users[".searchableFields"][] = "created_at";
+//	email
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 2;
+	$fdata["strName"] = "email";
+	$fdata["GoodName"] = "email";
+	$fdata["ownerTable"] = "tbl_users";
+	$fdata["Label"] = GetFieldLabel("admin_users","email");
+	$fdata["FieldType"] = 200;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "email";
+
+		$fdata["sourceSingle"] = "email";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "email";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text field");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+			$edata["EditParams"].= " maxlength=255";
+
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+	
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdataadmin_users["email"] = $fdata;
+		$tdataadmin_users[".searchableFields"][] = "email";
+//	id
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 3;
 	$fdata["strName"] = "id";
 	$fdata["GoodName"] = "id";
 	$fdata["ownerTable"] = "tbl_users";
@@ -417,28 +695,28 @@ $tdataadmin_users[".hideMobileList"] = array();
 
 	$tdataadmin_users["id"] = $fdata;
 		$tdataadmin_users[".searchableFields"][] = "id";
-//	nik
+//	is_active
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 2;
-	$fdata["strName"] = "nik";
-	$fdata["GoodName"] = "nik";
+	$fdata["Index"] = 4;
+	$fdata["strName"] = "is_active";
+	$fdata["GoodName"] = "is_active";
 	$fdata["ownerTable"] = "tbl_users";
-	$fdata["Label"] = GetFieldLabel("admin_users","nik");
-	$fdata["FieldType"] = 200;
+	$fdata["Label"] = GetFieldLabel("admin_users","is_active");
+	$fdata["FieldType"] = 16;
 
 
 	
 	
 			
 
-		$fdata["strField"] = "nik";
+		$fdata["strField"] = "is_active";
 
-		$fdata["sourceSingle"] = "nik";
+		$fdata["sourceSingle"] = "is_active";
 
 	
 		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "nik";
+	$fdata["FullName"] = "is_active";
 
 	
 	
@@ -502,15 +780,15 @@ $tdataadmin_users[".hideMobileList"] = array();
 			$edata["HTML5InuptType"] = "text";
 
 		$edata["EditParams"] = "";
-			$edata["EditParams"].= " maxlength=20";
-
+		
 		$edata["controlWidth"] = 200;
 
 //	Begin validation
 	$edata["validateAs"] = array();
 	$edata["validateAs"]["basicValidate"] = array();
 	$edata["validateAs"]["customMessages"] = array();
-	
+				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
+							
 	
 //	End validation
 
@@ -554,12 +832,12 @@ $tdataadmin_users[".hideMobileList"] = array();
 //end of Filters settings
 
 
-	$tdataadmin_users["nik"] = $fdata;
-		$tdataadmin_users[".searchableFields"][] = "nik";
+	$tdataadmin_users["is_active"] = $fdata;
+		$tdataadmin_users[".searchableFields"][] = "is_active";
 //	nama
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 3;
+	$fdata["Index"] = 5;
 	$fdata["strName"] = "nama";
 	$fdata["GoodName"] = "nama";
 	$fdata["ownerTable"] = "tbl_users";
@@ -695,288 +973,149 @@ $tdataadmin_users[".hideMobileList"] = array();
 
 	$tdataadmin_users["nama"] = $fdata;
 		$tdataadmin_users[".searchableFields"][] = "nama";
-//	posisi
-//	Custom field settings
-	$fdata = array();
-	$fdata["Index"] = 4;
-	$fdata["strName"] = "posisi";
-	$fdata["GoodName"] = "posisi";
-	$fdata["ownerTable"] = "tbl_users";
-	$fdata["Label"] = GetFieldLabel("admin_users","posisi");
-	$fdata["FieldType"] = 200;
-
-
-	
-	
-			
-
-		$fdata["strField"] = "posisi";
-
-		$fdata["sourceSingle"] = "posisi";
-
-	
-		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "posisi";
-
-	
-	
-				$fdata["UploadFolder"] = "files";
-
-//  Begin View Formats
-	$fdata["ViewFormats"] = array();
-
-	$vdata = array("ViewFormat" => "");
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-		$vdata["NeedEncode"] = true;
-
-	
-		$vdata["truncateText"] = true;
-	$vdata["NumberOfChars"] = 80;
-
-	$fdata["ViewFormats"]["view"] = $vdata;
-//  End View Formats
-
-//	Begin Edit Formats
-	$fdata["EditFormats"] = array();
-
-	$edata = array("EditFormat" => "Text field");
-
-	
-		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
-	$edata["weekdays"] = "[]";
-
-
-	
-	
-
-
-
-	
-	
-	
-	
-			$edata["acceptFileTypesHtml"] = "";
-
-		$edata["maxNumberOfFiles"] = 1;
-
-	
-	
-	
-	
-			$edata["HTML5InuptType"] = "text";
-
-		$edata["EditParams"] = "";
-			$edata["EditParams"].= " maxlength=255";
-
-		$edata["controlWidth"] = 200;
-
-//	Begin validation
-	$edata["validateAs"] = array();
-	$edata["validateAs"]["basicValidate"] = array();
-	$edata["validateAs"]["customMessages"] = array();
-	
-	
-//	End validation
-
-	
-			
-	
-	
-	
-	$fdata["EditFormats"]["edit"] = $edata;
-//	End Edit Formats
-
-
-	$fdata["isSeparate"] = false;
-
-
-
-
-// the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
-
-			// the default search options list
-				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
-// the end of search options settings
-
-
-//Filters settings
-	$fdata["filterTotals"] = 0;
-		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
-		$fdata["showCollapsed"] = false;
-
-		$fdata["sortValueType"] = 0;
-		$fdata["numberOfVisibleItems"] = 10;
-
-		$fdata["filterBy"] = 0;
-
-	
-
-	
-	
-//end of Filters settings
-
-
-	$tdataadmin_users["posisi"] = $fdata;
-		$tdataadmin_users[".searchableFields"][] = "posisi";
-//	sbu
-//	Custom field settings
-	$fdata = array();
-	$fdata["Index"] = 5;
-	$fdata["strName"] = "sbu";
-	$fdata["GoodName"] = "sbu";
-	$fdata["ownerTable"] = "tbl_users";
-	$fdata["Label"] = GetFieldLabel("admin_users","sbu");
-	$fdata["FieldType"] = 200;
-
-
-	
-	
-			
-
-		$fdata["strField"] = "sbu";
-
-		$fdata["sourceSingle"] = "sbu";
-
-	
-		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "sbu";
-
-	
-	
-				$fdata["UploadFolder"] = "files";
-
-//  Begin View Formats
-	$fdata["ViewFormats"] = array();
-
-	$vdata = array("ViewFormat" => "");
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-		$vdata["NeedEncode"] = true;
-
-	
-		$vdata["truncateText"] = true;
-	$vdata["NumberOfChars"] = 80;
-
-	$fdata["ViewFormats"]["view"] = $vdata;
-//  End View Formats
-
-//	Begin Edit Formats
-	$fdata["EditFormats"] = array();
-
-	$edata = array("EditFormat" => "Text field");
-
-	
-		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
-	$edata["weekdays"] = "[]";
-
-
-	
-	
-
-
-
-	
-	
-	
-	
-			$edata["acceptFileTypesHtml"] = "";
-
-		$edata["maxNumberOfFiles"] = 1;
-
-	
-	
-	
-	
-			$edata["HTML5InuptType"] = "text";
-
-		$edata["EditParams"] = "";
-			$edata["EditParams"].= " maxlength=255";
-
-		$edata["controlWidth"] = 200;
-
-//	Begin validation
-	$edata["validateAs"] = array();
-	$edata["validateAs"]["basicValidate"] = array();
-	$edata["validateAs"]["customMessages"] = array();
-	
-	
-//	End validation
-
-	
-			
-	
-	
-	
-	$fdata["EditFormats"]["edit"] = $edata;
-//	End Edit Formats
-
-
-	$fdata["isSeparate"] = false;
-
-
-
-
-// the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
-
-			// the default search options list
-				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
-// the end of search options settings
-
-
-//Filters settings
-	$fdata["filterTotals"] = 0;
-		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
-		$fdata["showCollapsed"] = false;
-
-		$fdata["sortValueType"] = 0;
-		$fdata["numberOfVisibleItems"] = 10;
-
-		$fdata["filterBy"] = 0;
-
-	
-
-	
-	
-//end of Filters settings
-
-
-	$tdataadmin_users["sbu"] = $fdata;
-		$tdataadmin_users[".searchableFields"][] = "sbu";
-//	no_hp
+//	nik
 //	Custom field settings
 	$fdata = array();
 	$fdata["Index"] = 6;
+	$fdata["strName"] = "nik";
+	$fdata["GoodName"] = "nik";
+	$fdata["ownerTable"] = "tbl_users";
+	$fdata["Label"] = GetFieldLabel("admin_users","nik");
+	$fdata["FieldType"] = 200;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "nik";
+
+		$fdata["sourceSingle"] = "nik";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "nik";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text field");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+			$edata["EditParams"].= " maxlength=20";
+
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+	
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdataadmin_users["nik"] = $fdata;
+		$tdataadmin_users[".searchableFields"][] = "nik";
+//	no_hp
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 7;
 	$fdata["strName"] = "no_hp";
 	$fdata["GoodName"] = "no_hp";
 	$fdata["ownerTable"] = "tbl_users";
@@ -1112,145 +1251,6 @@ $tdataadmin_users[".hideMobileList"] = array();
 
 	$tdataadmin_users["no_hp"] = $fdata;
 		$tdataadmin_users[".searchableFields"][] = "no_hp";
-//	email
-//	Custom field settings
-	$fdata = array();
-	$fdata["Index"] = 7;
-	$fdata["strName"] = "email";
-	$fdata["GoodName"] = "email";
-	$fdata["ownerTable"] = "tbl_users";
-	$fdata["Label"] = GetFieldLabel("admin_users","email");
-	$fdata["FieldType"] = 200;
-
-
-	
-	
-			
-
-		$fdata["strField"] = "email";
-
-		$fdata["sourceSingle"] = "email";
-
-	
-		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "email";
-
-	
-	
-				$fdata["UploadFolder"] = "files";
-
-//  Begin View Formats
-	$fdata["ViewFormats"] = array();
-
-	$vdata = array("ViewFormat" => "");
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-		$vdata["NeedEncode"] = true;
-
-	
-		$vdata["truncateText"] = true;
-	$vdata["NumberOfChars"] = 80;
-
-	$fdata["ViewFormats"]["view"] = $vdata;
-//  End View Formats
-
-//	Begin Edit Formats
-	$fdata["EditFormats"] = array();
-
-	$edata = array("EditFormat" => "Text field");
-
-	
-		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
-	$edata["weekdays"] = "[]";
-
-
-	
-	
-
-
-
-	
-	
-	
-	
-			$edata["acceptFileTypesHtml"] = "";
-
-		$edata["maxNumberOfFiles"] = 1;
-
-	
-	
-	
-	
-			$edata["HTML5InuptType"] = "text";
-
-		$edata["EditParams"] = "";
-			$edata["EditParams"].= " maxlength=255";
-
-		$edata["controlWidth"] = 200;
-
-//	Begin validation
-	$edata["validateAs"] = array();
-	$edata["validateAs"]["basicValidate"] = array();
-	$edata["validateAs"]["customMessages"] = array();
-	
-	
-//	End validation
-
-	
-			
-	
-	
-	
-	$fdata["EditFormats"]["edit"] = $edata;
-//	End Edit Formats
-
-
-	$fdata["isSeparate"] = false;
-
-
-
-
-// the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
-
-			// the default search options list
-				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
-// the end of search options settings
-
-
-//Filters settings
-	$fdata["filterTotals"] = 0;
-		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
-		$fdata["showCollapsed"] = false;
-
-		$fdata["sortValueType"] = 0;
-		$fdata["numberOfVisibleItems"] = 10;
-
-		$fdata["filterBy"] = 0;
-
-	
-
-	
-	
-//end of Filters settings
-
-
-	$tdataadmin_users["email"] = $fdata;
-		$tdataadmin_users[".searchableFields"][] = "email";
 //	password
 //	Custom field settings
 	$fdata = array();
@@ -1390,10 +1390,288 @@ $tdataadmin_users[".hideMobileList"] = array();
 
 	$tdataadmin_users["password"] = $fdata;
 		$tdataadmin_users[".searchableFields"][] = "password";
-//	role
+//	posisi
 //	Custom field settings
 	$fdata = array();
 	$fdata["Index"] = 9;
+	$fdata["strName"] = "posisi";
+	$fdata["GoodName"] = "posisi";
+	$fdata["ownerTable"] = "tbl_users";
+	$fdata["Label"] = GetFieldLabel("admin_users","posisi");
+	$fdata["FieldType"] = 200;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "posisi";
+
+		$fdata["sourceSingle"] = "posisi";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "posisi";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text field");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+			$edata["EditParams"].= " maxlength=255";
+
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+	
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdataadmin_users["posisi"] = $fdata;
+		$tdataadmin_users[".searchableFields"][] = "posisi";
+//	remember_token
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 10;
+	$fdata["strName"] = "remember_token";
+	$fdata["GoodName"] = "remember_token";
+	$fdata["ownerTable"] = "tbl_users";
+	$fdata["Label"] = GetFieldLabel("admin_users","remember_token");
+	$fdata["FieldType"] = 200;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "remember_token";
+
+		$fdata["sourceSingle"] = "remember_token";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "remember_token";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text field");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+			$edata["EditParams"].= " maxlength=100";
+
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+	
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdataadmin_users["remember_token"] = $fdata;
+		$tdataadmin_users[".searchableFields"][] = "remember_token";
+//	role
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 11;
 	$fdata["strName"] = "role";
 	$fdata["GoodName"] = "role";
 	$fdata["ownerTable"] = "tbl_users";
@@ -1542,153 +1820,14 @@ $tdataadmin_users[".hideMobileList"] = array();
 
 	$tdataadmin_users["role"] = $fdata;
 		$tdataadmin_users[".searchableFields"][] = "role";
-//	is_active
+//	sbu
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 10;
-	$fdata["strName"] = "is_active";
-	$fdata["GoodName"] = "is_active";
+	$fdata["Index"] = 12;
+	$fdata["strName"] = "sbu";
+	$fdata["GoodName"] = "sbu";
 	$fdata["ownerTable"] = "tbl_users";
-	$fdata["Label"] = GetFieldLabel("admin_users","is_active");
-	$fdata["FieldType"] = 16;
-
-
-	
-	
-			
-
-		$fdata["strField"] = "is_active";
-
-		$fdata["sourceSingle"] = "is_active";
-
-	
-		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "is_active";
-
-	
-	
-				$fdata["UploadFolder"] = "files";
-
-//  Begin View Formats
-	$fdata["ViewFormats"] = array();
-
-	$vdata = array("ViewFormat" => "");
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-		$vdata["NeedEncode"] = true;
-
-	
-		$vdata["truncateText"] = true;
-	$vdata["NumberOfChars"] = 80;
-
-	$fdata["ViewFormats"]["view"] = $vdata;
-//  End View Formats
-
-//	Begin Edit Formats
-	$fdata["EditFormats"] = array();
-
-	$edata = array("EditFormat" => "Text field");
-
-	
-		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
-	$edata["weekdays"] = "[]";
-
-
-	
-	
-
-
-
-	
-	
-	
-	
-			$edata["acceptFileTypesHtml"] = "";
-
-		$edata["maxNumberOfFiles"] = 1;
-
-	
-	
-	
-	
-			$edata["HTML5InuptType"] = "text";
-
-		$edata["EditParams"] = "";
-		
-		$edata["controlWidth"] = 200;
-
-//	Begin validation
-	$edata["validateAs"] = array();
-	$edata["validateAs"]["basicValidate"] = array();
-	$edata["validateAs"]["customMessages"] = array();
-				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
-							
-	
-//	End validation
-
-	
-			
-	
-	
-	
-	$fdata["EditFormats"]["edit"] = $edata;
-//	End Edit Formats
-
-
-	$fdata["isSeparate"] = false;
-
-
-
-
-// the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
-
-			// the default search options list
-				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
-// the end of search options settings
-
-
-//Filters settings
-	$fdata["filterTotals"] = 0;
-		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
-		$fdata["showCollapsed"] = false;
-
-		$fdata["sortValueType"] = 0;
-		$fdata["numberOfVisibleItems"] = 10;
-
-		$fdata["filterBy"] = 0;
-
-	
-
-	
-	
-//end of Filters settings
-
-
-	$tdataadmin_users["is_active"] = $fdata;
-		$tdataadmin_users[".searchableFields"][] = "is_active";
-//	remember_token
-//	Custom field settings
-	$fdata = array();
-	$fdata["Index"] = 11;
-	$fdata["strName"] = "remember_token";
-	$fdata["GoodName"] = "remember_token";
-	$fdata["ownerTable"] = "tbl_users";
-	$fdata["Label"] = GetFieldLabel("admin_users","remember_token");
+	$fdata["Label"] = GetFieldLabel("admin_users","sbu");
 	$fdata["FieldType"] = 200;
 
 
@@ -1696,13 +1835,13 @@ $tdataadmin_users[".hideMobileList"] = array();
 	
 			
 
-		$fdata["strField"] = "remember_token";
+		$fdata["strField"] = "sbu";
 
-		$fdata["sourceSingle"] = "remember_token";
+		$fdata["sourceSingle"] = "sbu";
 
 	
 		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "remember_token";
+	$fdata["FullName"] = "sbu";
 
 	
 	
@@ -1766,7 +1905,7 @@ $tdataadmin_users[".hideMobileList"] = array();
 			$edata["HTML5InuptType"] = "text";
 
 		$edata["EditParams"] = "";
-			$edata["EditParams"].= " maxlength=100";
+			$edata["EditParams"].= " maxlength=255";
 
 		$edata["controlWidth"] = 200;
 
@@ -1818,147 +1957,8 @@ $tdataadmin_users[".hideMobileList"] = array();
 //end of Filters settings
 
 
-	$tdataadmin_users["remember_token"] = $fdata;
-		$tdataadmin_users[".searchableFields"][] = "remember_token";
-//	created_at
-//	Custom field settings
-	$fdata = array();
-	$fdata["Index"] = 12;
-	$fdata["strName"] = "created_at";
-	$fdata["GoodName"] = "created_at";
-	$fdata["ownerTable"] = "tbl_users";
-	$fdata["Label"] = GetFieldLabel("admin_users","created_at");
-	$fdata["FieldType"] = 135;
-
-
-	
-	
-			
-
-		$fdata["strField"] = "created_at";
-
-		$fdata["sourceSingle"] = "created_at";
-
-	
-		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "created_at";
-
-	
-	
-				$fdata["UploadFolder"] = "files";
-
-//  Begin View Formats
-	$fdata["ViewFormats"] = array();
-
-	$vdata = array("ViewFormat" => "Short Date");
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-		$vdata["NeedEncode"] = true;
-
-	
-		$vdata["truncateText"] = true;
-	$vdata["NumberOfChars"] = 80;
-
-	$fdata["ViewFormats"]["view"] = $vdata;
-//  End View Formats
-
-//	Begin Edit Formats
-	$fdata["EditFormats"] = array();
-
-	$edata = array("EditFormat" => "Date");
-
-	
-		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
-	$edata["weekdays"] = "[]";
-
-
-	
-	
-
-
-
-	
-	
-	
-	
-			$edata["acceptFileTypesHtml"] = "";
-
-		$edata["maxNumberOfFiles"] = 1;
-
-	
-	
-		$edata["DateEditType"] = 13;
-	$edata["InitialYearFactor"] = 100;
-	$edata["LastYearFactor"] = 10;
-
-	
-	
-	
-		$edata["controlWidth"] = 200;
-
-//	Begin validation
-	$edata["validateAs"] = array();
-	$edata["validateAs"]["basicValidate"] = array();
-	$edata["validateAs"]["customMessages"] = array();
-	
-	
-//	End validation
-
-	
-			
-	
-	
-	
-	$fdata["EditFormats"]["edit"] = $edata;
-//	End Edit Formats
-
-
-	$fdata["isSeparate"] = false;
-
-
-
-
-// the field's search options settings
-		$fdata["defaultSearchOption"] = "Equals";
-
-			// the default search options list
-				$fdata["searchOptionsList"] = array("Equals", "More than", "Less than", "Between", EMPTY_SEARCH, NOT_EMPTY );
-// the end of search options settings
-
-
-//Filters settings
-	$fdata["filterTotals"] = 0;
-		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
-		$fdata["showCollapsed"] = false;
-
-		$fdata["sortValueType"] = 0;
-		$fdata["numberOfVisibleItems"] = 10;
-
-		$fdata["filterBy"] = 0;
-
-	
-
-	
-	
-//end of Filters settings
-
-
-	$tdataadmin_users["created_at"] = $fdata;
-		$tdataadmin_users[".searchableFields"][] = "created_at";
+	$tdataadmin_users["sbu"] = $fdata;
+		$tdataadmin_users[".searchableFields"][] = "sbu";
 //	updated_at
 //	Custom field settings
 	$fdata = array();
@@ -2142,7 +2142,7 @@ function createSqlQuery_admin_users()
 {
 $proto0=array();
 $proto0["m_strHead"] = "SELECT";
-$proto0["m_strFieldList"] = "id,  	nik,  	nama,  	posisi,  	sbu,  	no_hp,  	email,  	password,  	`role`,  	is_active,  	remember_token,  	created_at,  	updated_at";
+$proto0["m_strFieldList"] = "created_at,  	email,  	id,  	is_active,  	nama,  	nik,  	no_hp,  	password,  	posisi,  	remember_token,  	`role`,  	sbu,  	updated_at";
 $proto0["m_strFrom"] = "FROM tbl_users";
 $proto0["m_strWhere"] = "";
 $proto0["m_strOrderBy"] = "";
@@ -2184,12 +2184,12 @@ $proto0["m_having"] = $obj;
 $proto0["m_fieldlist"] = array();
 						$proto6=array();
 			$obj = new SQLField(array(
-	"m_strName" => "id",
+	"m_strName" => "created_at",
 	"m_strTable" => "tbl_users",
 	"m_srcTableName" => "admin_users"
 ));
 
-$proto6["m_sql"] = "id";
+$proto6["m_sql"] = "created_at";
 $proto6["m_srcTableName"] = "admin_users";
 $proto6["m_expr"]=$obj;
 $proto6["m_alias"] = "";
@@ -2198,12 +2198,12 @@ $obj = new SQLFieldListItem($proto6);
 $proto0["m_fieldlist"][]=$obj;
 						$proto8=array();
 			$obj = new SQLField(array(
-	"m_strName" => "nik",
+	"m_strName" => "email",
 	"m_strTable" => "tbl_users",
 	"m_srcTableName" => "admin_users"
 ));
 
-$proto8["m_sql"] = "nik";
+$proto8["m_sql"] = "email";
 $proto8["m_srcTableName"] = "admin_users";
 $proto8["m_expr"]=$obj;
 $proto8["m_alias"] = "";
@@ -2212,12 +2212,12 @@ $obj = new SQLFieldListItem($proto8);
 $proto0["m_fieldlist"][]=$obj;
 						$proto10=array();
 			$obj = new SQLField(array(
-	"m_strName" => "nama",
+	"m_strName" => "id",
 	"m_strTable" => "tbl_users",
 	"m_srcTableName" => "admin_users"
 ));
 
-$proto10["m_sql"] = "nama";
+$proto10["m_sql"] = "id";
 $proto10["m_srcTableName"] = "admin_users";
 $proto10["m_expr"]=$obj;
 $proto10["m_alias"] = "";
@@ -2226,12 +2226,12 @@ $obj = new SQLFieldListItem($proto10);
 $proto0["m_fieldlist"][]=$obj;
 						$proto12=array();
 			$obj = new SQLField(array(
-	"m_strName" => "posisi",
+	"m_strName" => "is_active",
 	"m_strTable" => "tbl_users",
 	"m_srcTableName" => "admin_users"
 ));
 
-$proto12["m_sql"] = "posisi";
+$proto12["m_sql"] = "is_active";
 $proto12["m_srcTableName"] = "admin_users";
 $proto12["m_expr"]=$obj;
 $proto12["m_alias"] = "";
@@ -2240,12 +2240,12 @@ $obj = new SQLFieldListItem($proto12);
 $proto0["m_fieldlist"][]=$obj;
 						$proto14=array();
 			$obj = new SQLField(array(
-	"m_strName" => "sbu",
+	"m_strName" => "nama",
 	"m_strTable" => "tbl_users",
 	"m_srcTableName" => "admin_users"
 ));
 
-$proto14["m_sql"] = "sbu";
+$proto14["m_sql"] = "nama";
 $proto14["m_srcTableName"] = "admin_users";
 $proto14["m_expr"]=$obj;
 $proto14["m_alias"] = "";
@@ -2254,12 +2254,12 @@ $obj = new SQLFieldListItem($proto14);
 $proto0["m_fieldlist"][]=$obj;
 						$proto16=array();
 			$obj = new SQLField(array(
-	"m_strName" => "no_hp",
+	"m_strName" => "nik",
 	"m_strTable" => "tbl_users",
 	"m_srcTableName" => "admin_users"
 ));
 
-$proto16["m_sql"] = "no_hp";
+$proto16["m_sql"] = "nik";
 $proto16["m_srcTableName"] = "admin_users";
 $proto16["m_expr"]=$obj;
 $proto16["m_alias"] = "";
@@ -2268,12 +2268,12 @@ $obj = new SQLFieldListItem($proto16);
 $proto0["m_fieldlist"][]=$obj;
 						$proto18=array();
 			$obj = new SQLField(array(
-	"m_strName" => "email",
+	"m_strName" => "no_hp",
 	"m_strTable" => "tbl_users",
 	"m_srcTableName" => "admin_users"
 ));
 
-$proto18["m_sql"] = "email";
+$proto18["m_sql"] = "no_hp";
 $proto18["m_srcTableName"] = "admin_users";
 $proto18["m_expr"]=$obj;
 $proto18["m_alias"] = "";
@@ -2296,12 +2296,12 @@ $obj = new SQLFieldListItem($proto20);
 $proto0["m_fieldlist"][]=$obj;
 						$proto22=array();
 			$obj = new SQLField(array(
-	"m_strName" => "role",
+	"m_strName" => "posisi",
 	"m_strTable" => "tbl_users",
 	"m_srcTableName" => "admin_users"
 ));
 
-$proto22["m_sql"] = "`role`";
+$proto22["m_sql"] = "posisi";
 $proto22["m_srcTableName"] = "admin_users";
 $proto22["m_expr"]=$obj;
 $proto22["m_alias"] = "";
@@ -2310,12 +2310,12 @@ $obj = new SQLFieldListItem($proto22);
 $proto0["m_fieldlist"][]=$obj;
 						$proto24=array();
 			$obj = new SQLField(array(
-	"m_strName" => "is_active",
+	"m_strName" => "remember_token",
 	"m_strTable" => "tbl_users",
 	"m_srcTableName" => "admin_users"
 ));
 
-$proto24["m_sql"] = "is_active";
+$proto24["m_sql"] = "remember_token";
 $proto24["m_srcTableName"] = "admin_users";
 $proto24["m_expr"]=$obj;
 $proto24["m_alias"] = "";
@@ -2324,12 +2324,12 @@ $obj = new SQLFieldListItem($proto24);
 $proto0["m_fieldlist"][]=$obj;
 						$proto26=array();
 			$obj = new SQLField(array(
-	"m_strName" => "remember_token",
+	"m_strName" => "role",
 	"m_strTable" => "tbl_users",
 	"m_srcTableName" => "admin_users"
 ));
 
-$proto26["m_sql"] = "remember_token";
+$proto26["m_sql"] = "`role`";
 $proto26["m_srcTableName"] = "admin_users";
 $proto26["m_expr"]=$obj;
 $proto26["m_alias"] = "";
@@ -2338,12 +2338,12 @@ $obj = new SQLFieldListItem($proto26);
 $proto0["m_fieldlist"][]=$obj;
 						$proto28=array();
 			$obj = new SQLField(array(
-	"m_strName" => "created_at",
+	"m_strName" => "sbu",
 	"m_strTable" => "tbl_users",
 	"m_srcTableName" => "admin_users"
 ));
 
-$proto28["m_sql"] = "created_at";
+$proto28["m_sql"] = "sbu";
 $proto28["m_srcTableName"] = "admin_users";
 $proto28["m_expr"]=$obj;
 $proto28["m_alias"] = "";
@@ -2371,18 +2371,18 @@ $proto32["m_link"] = "SQLL_MAIN";
 $proto33["m_strName"] = "tbl_users";
 $proto33["m_srcTableName"] = "admin_users";
 $proto33["m_columns"] = array();
-$proto33["m_columns"][] = "id";
-$proto33["m_columns"][] = "nik";
-$proto33["m_columns"][] = "nama";
-$proto33["m_columns"][] = "posisi";
-$proto33["m_columns"][] = "sbu";
-$proto33["m_columns"][] = "no_hp";
-$proto33["m_columns"][] = "email";
-$proto33["m_columns"][] = "password";
-$proto33["m_columns"][] = "role";
-$proto33["m_columns"][] = "is_active";
-$proto33["m_columns"][] = "remember_token";
 $proto33["m_columns"][] = "created_at";
+$proto33["m_columns"][] = "email";
+$proto33["m_columns"][] = "id";
+$proto33["m_columns"][] = "is_active";
+$proto33["m_columns"][] = "nama";
+$proto33["m_columns"][] = "nik";
+$proto33["m_columns"][] = "no_hp";
+$proto33["m_columns"][] = "password";
+$proto33["m_columns"][] = "posisi";
+$proto33["m_columns"][] = "remember_token";
+$proto33["m_columns"][] = "role";
+$proto33["m_columns"][] = "sbu";
 $proto33["m_columns"][] = "updated_at";
 $obj = new SQLTable($proto33);
 
